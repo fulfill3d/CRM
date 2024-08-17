@@ -4,6 +4,7 @@ import "./globals.css";
 import {Footer} from "@/components/common/footer";
 import {Header} from "@/components/common/header";
 import {Aside} from "@/components/common/aside";
+import AppNavBar from "@/components/common/app-nav-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,8 @@ export default function RootLayout({
     <html lang="en">
     <body className={inter.className}>
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-        <Aside/>
+        {/*<Aside/>*/}
+        <AppNavBar/>
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
             <Header/>
             <main className="flex-1 flex flex-col">
