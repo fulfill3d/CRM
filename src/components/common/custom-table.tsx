@@ -30,12 +30,16 @@ interface TableProps {
     }[];
 }
 
-const CustomTable: React.FC<TableProps> = ({ tabs, dropdownItems, cardTitle, cardDescription, headers, rows }) => {
+interface CustomTableProps{
+    data: TableProps;
+}
+
+const CustomTable: React.FC<CustomTableProps> = (props: CustomTableProps) => {
     return (
-        <Tabs defaultValue={tabs[0].value}>
+        <Tabs defaultValue={props.data.tabs[0].value}>
             <div className="flex items-center">
                 <TabsList>
-                    {tabs.map(tab => (
+                    {props.data.tabs.map(tab => (
                         <TabsTrigger key={tab.value} value={tab.value}>{tab.label}</TabsTrigger>
                     ))}
                 </TabsList>
@@ -50,7 +54,7 @@ const CustomTable: React.FC<TableProps> = ({ tabs, dropdownItems, cardTitle, car
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            {dropdownItems.map((item, index) => (
+                            {props.data.dropdownItems.map((item, index) => (
                                 <DropdownMenuCheckboxItem key={index} checked={item.checked}>
                                     {item.label}
                                 </DropdownMenuCheckboxItem>
@@ -63,28 +67,28 @@ const CustomTable: React.FC<TableProps> = ({ tabs, dropdownItems, cardTitle, car
                     </Button>
                 </div>
             </div>
-            {tabs.map(tab => (
+            {props.data.tabs.map(tab => (
                 <TabsContent key={tab.value} value={tab.value}>
                     <Card x-chunk="dashboard-05-chunk-3">
                         <CardHeader className="px-7">
-                            <CardTitle>{cardTitle}</CardTitle>
+                            <CardTitle>{props.data.cardTitle}</CardTitle>
                             <CardDescription>
-                                {cardDescription}
+                                {props.data.cardDescription}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        {headers.map((header, index) => (
-                                            <TableHead key={index} className={`text-left ${index === headers.length - 1 ? 'text-right' : ''}`}>
+                                        {props.data.headers.map((header, index) => (
+                                            <TableHead key={index} className={`text-left ${index === props.data.headers.length - 1 ? 'text-right' : ''}`}>
                                                 {header}
                                             </TableHead>
                                         ))}
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {rows.map((row, index) => (
+                                    {props.data.rows.map((row, index) => (
                                         <TableRow key={index} className={index % 2 === 0 ? "bg-accent" : ""}>
                                             <TableCell>
                                                 <div className="font-medium">{row.customer}</div>
