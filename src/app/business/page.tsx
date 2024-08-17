@@ -1,8 +1,11 @@
+"use client";
+
 import CustomTable from "@/components/common/custom-table";
 import CustomTabs from "@/components/common/custom-tabs";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Activity, CreditCard, DollarSign, Users} from "lucide-react";
 import ClickableCard from "@/components/common/clickable-card";
+import PageLayout from "@/components/common/page-layout";
 
 export default function Business(){
 
@@ -55,17 +58,24 @@ export default function Business(){
     ]
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 ml-4 mr-4">
-            {stores.map((store) => (
-                <ClickableCard
-                    key={store.id}
-                    href={`/business/${store.id}`}
-                    title={store.name}
-                    content={store.description}
-                    created_at={store.created_at}
-                />
-            ))}
-        </div>
+        <PageLayout>
+            <PageLayout.Public>
+                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 ml-4 mr-4">
+                    {stores.map((store) => (
+                        <ClickableCard
+                            key={store.id}
+                            href={`/business/${store.id}`}
+                            title={store.name}
+                            content={store.description}
+                            created_at={store.created_at}
+                        />
+                    ))}
+                </div>
+            </PageLayout.Public>
+            <PageLayout.Protected>
+                <>Protected Dashboard</>
+            </PageLayout.Protected>
+        </PageLayout>
     )
 
 
