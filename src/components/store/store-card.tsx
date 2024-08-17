@@ -34,6 +34,9 @@ const StoreCard = (props: StoreCardProps) => {
                 ${data.location.state}, 
                 ${data.location.zip_code}`}</p>
             <p>{data.description}</p>
+            <p>Total Number of Employees</p>
+            <p>Total Number of Services</p>
+            <p>Total Appointments Given</p>
         </CustomCard>
     );
 }
