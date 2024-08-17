@@ -4,27 +4,21 @@ import React from "react";
 
 interface ClickableCardProps {
     title: string;
-    icon?: React.ReactNode;
-    content: string;
     href: string;
-    created_at: string;
+    content?: React.ReactNode;
 }
 
 const ClickableCard = (props: ClickableCardProps) => {
     return(
         <Link href={props.href}>
             <Card x-chunk="dashboard-01-chunk-1">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-lg font-medium">
+                <CardHeader className="flex flex-row items-center justify-center space-y-0 pb-2">
+                    <CardTitle className="text-lg font-medium text-center">
                         {props.title}
                     </CardTitle>
-                    {props.icon}
                 </CardHeader>
                 <CardContent>
-                    <p className="text-md text-muted-foreground">{props.content}</p>
-                    <div className="p-2"/>
-                    <p className="text-xs text-muted-foreground text-right">Created
-                        At: {new Date(props.created_at).toLocaleDateString('en-US')}</p>
+                    {props.content}
                 </CardContent>
             </Card>
         </Link>
