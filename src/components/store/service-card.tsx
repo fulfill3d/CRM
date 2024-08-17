@@ -36,7 +36,7 @@ interface Props{
 }
 
 const ServiceCard = (props: Props) => {
-    const { toast } = useToast()
+    const { toast } = useToast();
     return(
         <CustomCard title=''>
             <div className='flex items-start justify-start'>
