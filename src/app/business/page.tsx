@@ -1,8 +1,8 @@
 "use client";
 
-import ClickableCard from "@/components/common/clickable-card";
 import PageLayout from "@/components/common/page-layout";
 import {stores} from "@/mock/business/mock-data";
+import ClickableStoreCard from "@/components/store/clickable-store-card";
 
 export default function Business(){
 
@@ -11,7 +11,7 @@ export default function Business(){
             <PageLayout.Public>
                 <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 ml-4 mr-4">
                     {stores.map((store) => (
-                        <ClickableCard
+                        <ClickableStoreCard
                             key={store.id}
                             href={`/business/${store.id}`}
                             title={store.name}
