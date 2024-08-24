@@ -7,7 +7,7 @@ export const msalConfig = {
     },
     cache: {
         cacheLocation: process.env.NEXT_PUBLIC_B2C_CACHE_LOCATION || "",
-        storeAuthStateInCookie: false,
+        storeAuthStateInCookie: true,
     }
 };
 

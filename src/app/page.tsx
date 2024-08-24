@@ -2,6 +2,7 @@
 
 import PageLayout from "@/components/common/page-layout";
 import ClickableCard from "@/components/common/clickable-card";
+import GameView from "@/components/common/game-view";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
           </div>
       </PageLayout.Public>
       <PageLayout.Protected>
-        <>Protected Dashboard</>
+          <GameView/>
       </PageLayout.Protected>
     </PageLayout>
   );
