@@ -1,21 +1,99 @@
-"use client";
+'use client';
 
-import PageLayout from "@/components/common/page-layout";
-import ClickableCard from "@/components/common/clickable-card";
-import GameView from "@/components/common/game-view";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import MsalAuthProvider from "@/msal/auth-provider";
+import {RootState} from "@/store";
+import {BusinessView, ClientView, setBusinessView, setClientView} from "@/store/slices/view-slice";
+import BusinessLogo from "@/svg/business-logo";
+import ClientLogo from "@/svg/client-logo";
+import CRMIcon from "@/svg/crm-icon";
+import ProfileIcon from "@/svg/profile-icon";
+import SvgDropdown from "@/components/svg-dropdown";
+import BreadcrumbComponent from "@/components/common/breadcrumb";
+import PublicBusinessView1 from "@/components/business/public-business-view-1";
+import PublicBusinessView2 from "@/components/business/public-business-view-2";
+import ProtectedBusinessView1 from "@/components/business/protected-business-view-1";
+import ProtectedBusinessView2 from "@/components/business/protected-business-view-2";
+import PublicClientView1 from "@/components/client/public-client-view-1";
+import PublicClientView2 from "@/components/client/public-client-view-2";
+import ProtectedClientView1 from "@/components/client/protected-client-view-1";
+import ProtectedClientView2 from "@/components/client/protected-client-view-2";
 
 export default function Home() {
-  return (
-    <PageLayout>
-      <PageLayout.Public>
-          <div className="grid gap-4 md:grid-cols-1 md:gap-8 lg:grid-cols-2 ml-4 mr-4">
-              <ClickableCard title='Business Side' href='/business'/>
-              <ClickableCard title='Client Side' href='/client'/>
-          </div>
-      </PageLayout.Public>
-      <PageLayout.Protected>
-          <GameView/>
-      </PageLayout.Protected>
-    </PageLayout>
-  );
+    const dispatch = useDispatch();
+    const businessView = useSelector((state: RootState) => state.view.businessView);
+    const clientView = useSelector((state: RootState) => state.view.clientView);
+
+    const publicBusinessViews: { [key in BusinessView]: JSX.Element } = {
+        [BusinessView.Cover]: <BusinessLogo onClick={() => dispatch(setBusinessView(BusinessView.Depth1))} />,
+        [BusinessView.Depth1]: <PublicBusinessView1 />,
+        [BusinessView.Depth2]: <PublicBusinessView2 />,
+    };
+
+    const publicClientViews: { [key in ClientView]: JSX.Element } = {
+        [ClientView.Cover]: <ClientLogo onClick={() => dispatch(setClientView(ClientView.Depth1))} />,
+        [ClientView.Depth1]: <PublicClientView1 />,
+        [ClientView.Depth2]: <PublicClientView2 />,
+    };
+
+    const protectedBusinessViews: { [key in BusinessView]: JSX.Element } = {
+        [BusinessView.Cover]: <BusinessLogo onClick={() => dispatch(setBusinessView(BusinessView.Depth1))} />,
+        [BusinessView.Depth1]: <ProtectedBusinessView1 />,
+        [BusinessView.Depth2]: <ProtectedBusinessView2 />,
+    };
+
+    const protectedClientViews: { [key in ClientView]: JSX.Element } = {
+        [ClientView.Cover]: <ClientLogo onClick={() => dispatch(setClientView(ClientView.Depth1))} />,
+        [ClientView.Depth1]: <ProtectedClientView1 />,
+        [ClientView.Depth2]: <ProtectedClientView2 />,
+    };
+
+    return (
+        <div className="relative min-h-full h-full w-full bg-blue-800">
+            <div className="flex flex-col md:flex-row w-full h-full items-center justify-center space-x-4">
+                {/* Business Container */}
+                <div className="relative w-full h-full md:w-1/2 flex items-center justify-center bg-transparent transition-all cursor-pointer z-10">
+                    <div className="relative w-full h-full">
+                        <BreadcrumbComponent view={businessView} viewType="business" />
+                        <MsalAuthProvider>
+                            <MsalAuthProvider.Public>
+                                {publicBusinessViews[businessView]}
+                            </MsalAuthProvider.Public>
+                            <MsalAuthProvider.Protected>
+                                {protectedBusinessViews[businessView]}
+                            </MsalAuthProvider.Protected>
+                        </MsalAuthProvider>
+                    </div>
+                </div>
+
+                {/* Client Container */}
+                <div className="relative w-full h-full md:w-1/2 flex items-center justify-center bg-transparent transition-all cursor-pointer z-10">
+                    <div className="relative w-full h-full">
+                        <BreadcrumbComponent view={clientView} viewType="client" />
+                        <MsalAuthProvider>
+                            <MsalAuthProvider.Public>
+                                {publicClientViews[clientView]}
+                            </MsalAuthProvider.Public>
+                            <MsalAuthProvider.Protected>
+                                {protectedClientViews[clientView]}
+                            </MsalAuthProvider.Protected>
+                        </MsalAuthProvider>
+                    </div>
+                </div>
+            </div>
+
+            {/* CRM Icon on top-left */}
+            <div className="fixed top-4 left-4 z-50 cursor-pointer">
+                <CRMIcon />
+            </div>
+
+            {/* Profile Icon on top-right */}
+            <div className="fixed top-4 right-4 z-50 cursor-pointer">
+                <SvgDropdown>
+                    <ProfileIcon />
+                </SvgDropdown>
+            </div>
+        </div>
+    );
 }

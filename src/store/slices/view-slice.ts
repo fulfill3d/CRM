@@ -1,8 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-    businessView: 'default', // 'default', 'businessView1', 'businessView2', etc.
-    clientView: 'default',   // 'default', 'clientView1', 'clientView2', etc.
+export enum BusinessView {
+    Cover = 'root',
+    Depth1 = 'depth1',
+    Depth2 = 'depth2',
+}
+
+export enum ClientView {
+    Cover = 'root',
+    Depth1 = 'depth1',
+    Depth2 = 'depth2',
+}
+
+interface ViewState {
+    businessView: BusinessView;
+    clientView: ClientView;
+}
+
+const initialState: ViewState = {
+    businessView: BusinessView.Cover,
+    clientView: ClientView.Cover,
 };
 
 const viewSlice = createSlice({
@@ -10,16 +27,16 @@ const viewSlice = createSlice({
     initialState,
     reducers: {
         setBusinessView(state, action) {
-            state.businessView = action.payload; // Set specific business view
+            state.businessView = action.payload;
         },
         setClientView(state, action) {
-            state.clientView = action.payload; // Set specific client view
+            state.clientView = action.payload;
         },
         resetBusinessView(state) {
-            state.businessView = 'default'; // Reset to default view
+            state.businessView = BusinessView.Cover;
         },
         resetClientView(state) {
-            state.clientView = 'default'; // Reset to default view
+            state.clientView = ClientView.Cover;
         },
     },
 });

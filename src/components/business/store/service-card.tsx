@@ -1,7 +1,7 @@
 import CustomCard from "@/components/common/custom-card";
 import {Button} from "@/components/ui/button";
 import {CircleMinus, EllipsisVertical} from "lucide-react";
-import {NewServiceDialog} from "@/components/store/new-service-dialog";
+import {NewServiceDialog} from "@/components/business/store/new-service-dialog";
 import {useToast} from "@/components/ui/use-toast";
 
 interface SubCategory{
