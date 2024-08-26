@@ -1,6 +1,5 @@
 import CustomCard from "@/components/common/custom-card";
-import {NewServiceDialog} from "@/components/store/new-service-dialog";
-import {NewEmployeeDialog} from "@/components/store/new-employee-dialog";
+import {NewEmployeeDialog} from "@/components/business/store/new-employee-dialog";
 import {Button} from "@/components/ui/button";
 import {CircleMinus, EllipsisVertical} from "lucide-react";
 import {useToast} from "@/components/ui/use-toast";
