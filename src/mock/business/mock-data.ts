@@ -1128,3 +1128,97 @@ export const appointments = {
     "headers": ["Customer", "Type", "Status", "Date", "Duration", "Amount"],
     "rows": []
 }
+
+export const serviceCategories = JSON.stringify({
+    "categories": [
+        {
+            "id": 1,
+            "name": "Hair",
+            "description": "Hair category"
+        },
+        {
+            "id": 2,
+            "name": "Nail",
+            "description": "Nail category"
+        },
+        {
+            "id": 3,
+            "name": "Massage",
+            "description": "Massage category"
+        },
+        {
+            "id": 4,
+            "name": "Spa",
+            "description": "Spa category"
+        },
+        {
+            "id": 5,
+            "name": "Wellness",
+            "description": "Wellness category"
+        }
+    ],
+    "sub_categories": [
+        {
+            "id": 1,
+            "name": "Women",
+            "description": "Services provided to women"
+        },
+        {
+            "id": 2,
+            "name": "Men",
+            "description": "Services provided to men"
+        },
+        {
+            "id": 3,
+            "name": "Kids",
+            "description": "Services provided to kids"
+        },
+        {
+            "id": 4,
+            "name": "Dogs",
+            "description": "Services provided to dogs"
+        },
+        {
+            "id": 5,
+            "name": "Cats",
+            "description": "Services provided to cats"
+        }
+    ]
+}, null, 4)
+
+export const newEmployeeMock = JSON.stringify({
+    "nick_name": "Johnny",
+    "first_name": "John",
+    "last_name": "Doe",
+    "e_mail": "john.doe@example.com",
+    "phone": "+1234567890"
+}, null, 4)
+
+export const updateEmployeeMock = JSON.stringify({
+    "id": 9,
+    "nick_name": "Johnny",
+    "first_name": "John",
+    "last_name": "Doe",
+    "e_mail": "john.doe@example.com",
+    "phone": "+1234567890"
+}, null, 4)
+
+export const newServiceMock = JSON.stringify({
+    "service-name": "Haircut",
+    "description": "A standard haircut.",
+    "duration": 30,
+    "price": 25.00,
+    "categories": [1],
+    "sub-categories": [1, 2]
+}, null, 4)
+
+export const updateServiceMock = JSON.stringify({
+    "store-service-id": 4,
+    "service-name": "Haircut",
+    "description": "A standard haircut.",
+    "duration": 30,
+    "price": 27.00,
+    "categories": [1],
+    "sub-categories": [1, 2, 3]
+}, null, 4)
+

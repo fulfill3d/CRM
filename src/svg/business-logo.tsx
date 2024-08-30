@@ -5,7 +5,7 @@ interface LogoProps {
 }
 
 const BusinessLogo: React.FC<LogoProps> = ({ onClick }) => (
-    <svg className="w-full h-full object-contain" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" onClick={onClick}>
+    <svg className="w-full h-full object-contain cursor-pointer" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" onClick={onClick}>
         {/* Background Shapes */}
         <rect x="20" y="20" width="60" height="60" stroke="black" fill="none" strokeWidth="5" />
         <line x1="20" y1="20" x2="80" y2="80" stroke="black" strokeWidth="5" />
