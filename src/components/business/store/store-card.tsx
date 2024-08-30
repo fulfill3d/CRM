@@ -1,5 +1,8 @@
 import CustomCard from "@/components/common/custom-card";
-import MapView from "@/components/common/map-view";
+import dynamic from "next/dynamic";
+const MapView = dynamic(() => import('@/components/common/map-view'), {
+    ssr: false, // Disable SSR for this component
+});
 
 interface Location{
     latitude: number;
