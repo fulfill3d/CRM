@@ -7,7 +7,7 @@ const PublicBusinessView1 = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 ml-4 mr-4">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 mt-24">
             {stores.map((store) => (
                 <ClickableStoreCard
                     onClick={() => dispatch(setBusinessView(BusinessView.Depth2))}

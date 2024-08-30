@@ -1,8 +1,5 @@
-import CustomCard from "@/components/common/custom-card";
-import {NewEmployeeDialog} from "@/components/business/store/new-employee-dialog";
 import {Button} from "@/components/ui/button";
-import {CircleMinus, EllipsisVertical} from "lucide-react";
-import {useToast} from "@/components/ui/use-toast";
+import {newEmployeeMock, updateEmployeeMock} from "@/mock/business/mock-data";
 
 interface EmployeeProps {
     id: number;
@@ -18,51 +15,43 @@ interface EmployeeCardProps{
 }
 
 const EmployeeCard = (props: EmployeeCardProps) => {
-    const { toast } = useToast();
+    const employees = JSON.stringify(props.data, null, 4);
     return(
-        <CustomCard title=''>
-            <div className='flex items-start justify-start'>
-                <NewEmployeeDialog/>
-            </div>
-            {props.data.map((prop) => (
-                <div key={prop.id} className='mb-4'>
-                    <hr className="border-t border-gray-300 my-4"/>
-                    <div className='flex items-end justify-end'>
-                        <Button
-                            onClick={() => {
-                                toast({
-                                    title: "Uh oh! Something went wrong.",
-                                    description: "MockUp data cannot be deleted",
-                                })
-                            }}
-                            variant="default"
-                            size="sm"
-                            className="h-4 w-4 p-0 gap-1 text-sm"
-                        >
-                            <CircleMinus className="h-4 w-4"/>
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                toast({
-                                    title: "Uh oh! Something went wrong.",
-                                    description: "MockUp data cannot be edited",
-                                })
-                            }}
-                            variant="default"
-                            size="sm"
-                            className="h-4 w-4 p-0 gap-1 text-sm"
-                        >
-                            <EllipsisVertical className="h-4 w-4"/>
+        <div>
+            <span>Store`s Employee List</span>
+            <textarea
+                className='w-full h-48 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                value={employees}/>
+            <div className='flex items-center justify-center'>
+                <div className='w-1/2'>
+                    <textarea
+                        className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                        value={newEmployeeMock}/>
+                    <div className='flex items-center justify-center'>
+                        <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
+                            <span>Add a New Employee</span>
                         </Button>
                     </div>
-                    <p>{prop.nick_name}</p>
-                    <p>{prop.first_name}</p>
-                    <p>{prop.last_name}</p>
-                    <p>{prop.e_mail}</p>
-                    <p>{prop.phone}</p>
                 </div>
-            ))}
-        </CustomCard>
+                <div className='w-1/2'>
+                    <textarea
+                        className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                        value={updateEmployeeMock}/>
+                    <div className='flex items-center justify-center'>
+                        <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
+                            <span>Update an Employee</span>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            <div className='flex items-center justify-center p-2'>
+                <span className='m-2'>Employee Id</span>
+                <textarea className='w-8 h-8 bg-transparent border border-gray-300 rounded resize-none m-2' value={1}/>
+                <Button className='bg-amber-100 rounded m-2' variant='default'>
+                    <span>Delete an Employee</span>
+                </Button>
+            </div>
+        </div>
     );
 }
 
