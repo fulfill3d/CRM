@@ -1,27 +1,45 @@
-import MapViewMultiple from "@/components/common/map-view-multiple";
-import {nearbyServices} from "@/mock/client/mock-data";
-import {useDispatch} from "react-redux";
-import {ClientView, setClientView} from "@/store/slices/view-slice";
+import {appointments, nearbyServices, newAppointmentMock, updateAppointmentMock} from "@/mock/client/mock-data";
+import {Button} from "@/components/ui/button";
 
 const PublicClientView1 = () => {
-    const dispatch = useDispatch();
-
     return(
         <div>
-            <MapViewMultiple services={nearbyServices}/>
-            <div className="space-y-4">
-                {nearbyServices.map(service => (
-                    <div
-                        onClick={() => dispatch(setClientView(ClientView.Depth2))}
-                        key={service.id} className="p-4 border rounded shadow">
-                        <h2 className="text-lg font-bold">{service.name}</h2>
-                        <p>{service.description}</p>
-                        <p>Duration: {service.duration} min</p>
-                        <p>Price: ${service.price.toFixed(2)}</p>
-                        <p>Store: {service.detail.store_name}</p>
-                        <p>Address: {service.detail.address_city}</p>
+            <span>Nearby Services</span>
+            <textarea
+                className='w-full h-52 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                value={nearbyServices}/>
+            <span>Client`s Appointment List</span>
+            <textarea
+                className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                value={appointments}/>
+            <div className='flex items-center justify-center'>
+                <div className='w-1/2'>
+                    <textarea
+                        className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                        value={newAppointmentMock}/>
+                    <div className='flex items-center justify-center'>
+                        <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
+                            <span>Make a New Appointment</span>
+                        </Button>
                     </div>
-                ))}
+                </div>
+                <div className='w-1/2'>
+                    <textarea
+                        className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
+                        value={updateAppointmentMock}/>
+                    <div className='flex items-center justify-center'>
+                        <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
+                            <span>Update an Appointment</span>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            <div className='flex items-center justify-center p-2'>
+                <span className='m-2'>Appointment Id</span>
+                <textarea className='w-8 h-8 bg-transparent border border-gray-300 rounded resize-none m-2' value={1}/>
+                <Button className='bg-amber-100 rounded m-2' variant='default'>
+                    <span>Delete an Appointment</span>
+                </Button>
             </div>
         </div>
     )

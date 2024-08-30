@@ -25,22 +25,18 @@ export default function BreadcrumbComponent({ view, viewType }: BreadcrumbCompon
         if (viewType === 'business') {
             if (view === BusinessView.Depth2) {
                 breadcrumbs.push({ label: 'Root', view: BusinessView.Cover });
-                breadcrumbs.push({ label: 'Depth1', view: BusinessView.Depth1 });
-                breadcrumbs.push({ label: 'Depth2', view: BusinessView.Depth2 });
+                breadcrumbs.push({ label: 'Stores', view: BusinessView.Depth1 });
+                breadcrumbs.push({ label: 'Management', view: BusinessView.Depth2 });
             } else if (view === BusinessView.Depth1) {
                 breadcrumbs.push({ label: 'Root', view: BusinessView.Cover });
-                breadcrumbs.push({ label: 'Depth1', view: BusinessView.Depth1 });
+                breadcrumbs.push({ label: 'Stores', view: BusinessView.Depth1 });
             } else {
                 breadcrumbs.push({ label: 'Root', view: BusinessView.Cover });
             }
         } else if (viewType === 'client') {
-            if (view === ClientView.Depth2) {
+            if (view === ClientView.Depth1) {
                 breadcrumbs.push({ label: 'Root', view: ClientView.Cover });
-                breadcrumbs.push({ label: 'Depth1', view: ClientView.Depth1 });
-                breadcrumbs.push({ label: 'Depth2', view: ClientView.Depth2 });
-            } else if (view === ClientView.Depth1) {
-                breadcrumbs.push({ label: 'Root', view: ClientView.Cover });
-                breadcrumbs.push({ label: 'Depth1', view: ClientView.Depth1 });
+                breadcrumbs.push({ label: 'Management', view: ClientView.Depth1 });
             } else {
                 breadcrumbs.push({ label: 'Root', view: ClientView.Cover });
             }

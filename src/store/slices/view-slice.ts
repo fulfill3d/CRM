@@ -8,8 +8,7 @@ export enum BusinessView {
 
 export enum ClientView {
     Cover = 'root',
-    Depth1 = 'depth1',
-    Depth2 = 'depth2',
+    Depth1 = 'manage',
 }
 
 interface ViewState {
