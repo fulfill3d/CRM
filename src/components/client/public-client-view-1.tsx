@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button";
 
 const PublicClientView1 = () => {
     return(
-        <div className="w-full h-full mt-24">
+        <div className="w-full h-full pt-24">
             <span>Nearby Services</span>
             <textarea
                 className='w-full h-52 p-2 bg-transparent border border-gray-300 rounded resize-none'
