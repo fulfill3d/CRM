@@ -1,4 +1,4 @@
-export const nearbyServices = [
+export const nearbyServices = JSON.stringify([
     {
         "id": 1,
         "duration": 60,
@@ -504,4 +504,139 @@ export const nearbyServices = [
             ]
         }
     }
-]
+], null, 4);
+
+export const appointments = JSON.stringify([
+    {
+        "appointment_id": 101,
+        "appointment_notes": "Looking forward to the session.",
+        "appointment_start_date": "2024-09-15T10:00:00Z",
+        "appointment_status": 1,
+        "appointment_address": {
+            "location_lat": 37.8024,
+            "location_lon": -122.4058,
+            "address_street1": "2500 Lombard St",
+            "address_street2": "",
+            "address_city": "San Francisco",
+            "address_state": "CA",
+            "address_country": "US",
+            "address_zip_code": "94123"
+        },
+        "appointment_service": {
+            "service_id": 1,
+            "service_duration": 60,
+            "service_price": 100.00,
+            "service_currency": "USD",
+            "service_name": "Full Body Massage",
+            "service_description": "A relaxing full body massage."
+        }
+    },
+    {
+        "appointment_id": 102,
+        "appointment_notes": "Please prepare the room for facial treatment.",
+        "appointment_start_date": "2024-09-16T14:30:00Z",
+        "appointment_status": 1,
+        "appointment_address": {
+            "location_lat": 37.7749,
+            "location_lon": -122.4194,
+            "address_street1": "789 Market St",
+            "address_street2": "Suite 200",
+            "address_city": "San Francisco",
+            "address_state": "CA",
+            "address_country": "US",
+            "address_zip_code": "94103"
+        },
+        "appointment_service": {
+            "service_id": 2,
+            "service_duration": 30,
+            "service_price": 50.00,
+            "service_currency": "USD",
+            "service_name": "Facial Treatment",
+            "service_description": "A rejuvenating facial treatment."
+        }
+    },
+    {
+        "appointment_id": 103,
+        "appointment_notes": "Need focus on lower back area.",
+        "appointment_start_date": "2024-09-17T09:00:00Z",
+        "appointment_status": 1,
+        "appointment_address": {
+            "location_lat": 37.7749,
+            "location_lon": -122.4194,
+            "address_street1": "456 W El Camino Real",
+            "address_street2": "",
+            "address_city": "Mountain View",
+            "address_state": "CA",
+            "address_country": "US",
+            "address_zip_code": "94040"
+        },
+        "appointment_service": {
+            "service_id": 3,
+            "service_duration": 45,
+            "service_price": 75.00,
+            "service_currency": "USD",
+            "service_name": "Deep Tissue Massage",
+            "service_description": "A deep tissue massage for pain relief."
+        }
+    },
+    {
+        "appointment_id": 104,
+        "appointment_notes": "First time experiencing hot stone massage.",
+        "appointment_start_date": "2024-09-18T11:00:00Z",
+        "appointment_status": 1,
+        "appointment_address": {
+            "location_lat": 37.7944,
+            "location_lon": -122.2711,
+            "address_street1": "1234 Broadway",
+            "address_street2": "",
+            "address_city": "Oakland",
+            "address_state": "CA",
+            "address_country": "US",
+            "address_zip_code": "94612"
+        },
+        "appointment_service": {
+            "service_id": 4,
+            "service_duration": 60,
+            "service_price": 120.00,
+            "service_currency": "USD",
+            "service_name": "Hot Stone Massage",
+            "service_description": "A hot stone massage for ultimate relaxation."
+        }
+    },
+    {
+        "appointment_id": 105,
+        "appointment_notes": "Looking forward to a relaxing foot massage.",
+        "appointment_start_date": "2024-09-19T13:00:00Z",
+        "appointment_status": 1,
+        "appointment_address": {
+            "location_lat": 37.4419,
+            "location_lon": -122.1430,
+            "address_street1": "567 University Ave",
+            "address_street2": "",
+            "address_city": "Palo Alto",
+            "address_state": "CA",
+            "address_country": "US",
+            "address_zip_code": "94301"
+        },
+        "appointment_service": {
+            "service_id": 5,
+            "service_duration": 30,
+            "service_price": 75.00,
+            "service_currency": "USD",
+            "service_name": "Reflexology",
+            "service_description": "A foot reflexology session."
+        }
+    }
+], null, 4);
+
+export const newAppointmentMock = JSON.stringify({
+    "store_service_id": 3,
+    "start_date": "2024-08-15T10:00:00Z",
+    "note": "This is a sample note."
+}, null, 4);
+
+export const updateAppointmentMock = JSON.stringify({
+    "appointment_id": 1,
+    "start_date": "2024-09-15T10:00:00Z",
+    "note": "This note is again updated."
+}, null, 4);

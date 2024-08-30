@@ -16,9 +16,7 @@ import PublicBusinessView2 from "@/components/business/public-business-view-2";
 import ProtectedBusinessView1 from "@/components/business/protected-business-view-1";
 import ProtectedBusinessView2 from "@/components/business/protected-business-view-2";
 import PublicClientView1 from "@/components/client/public-client-view-1";
-import PublicClientView2 from "@/components/client/public-client-view-2";
 import ProtectedClientView1 from "@/components/client/protected-client-view-1";
-import ProtectedClientView2 from "@/components/client/protected-client-view-2";
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -33,8 +31,7 @@ export default function Home() {
 
     const publicClientViews: { [key in ClientView]: JSX.Element } = {
         [ClientView.Cover]: <ClientLogo onClick={() => dispatch(setClientView(ClientView.Depth1))} />,
-        [ClientView.Depth1]: <PublicClientView1 />,
-        [ClientView.Depth2]: <PublicClientView2 />,
+        [ClientView.Depth1]: <PublicClientView1 />
     };
 
     const protectedBusinessViews: { [key in BusinessView]: JSX.Element } = {
@@ -45,8 +42,7 @@ export default function Home() {
 
     const protectedClientViews: { [key in ClientView]: JSX.Element } = {
         [ClientView.Cover]: <ClientLogo onClick={() => dispatch(setClientView(ClientView.Depth1))} />,
-        [ClientView.Depth1]: <ProtectedClientView1 />,
-        [ClientView.Depth2]: <ProtectedClientView2 />,
+        [ClientView.Depth1]: <ProtectedClientView1 />
     };
 
     return (
