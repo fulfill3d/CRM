@@ -1,12 +1,14 @@
-import {appointments, storeAppointments, stores, storeServices} from "@/mock/business/mock-data";
+import {storeAppointments, stores, storeServices} from "@/mock/business/mock-data";
 import StoreCard from "@/components/business/store/store-card";
 import EmployeeCard from "@/components/business/store/employee-card";
 import ServiceCard from "@/components/business/store/service-card";
 import CustomTabs from "@/components/common/custom-tabs";
 import AppointmentCard from "@/components/business/store/appointment-card";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
 
 const PublicBusinessView2 = () => {
-    const storeId = 1;
+    const storeId = useSelector((state: RootState) => state.store.storeId);
     const currentStore= stores.find(store => store.id === storeId);
     const currentService = storeServices.find(service => service.store_id === storeId)
 
@@ -40,7 +42,7 @@ const PublicBusinessView2 = () => {
     ];
 
     return (
-        <div className="w-full h-full overflow-y-scroll items-center justify-center mt-24">
+        <div className="w-full h-full overflow-y-scroll items-center justify-center pt-24">
             <CustomTabs tabs={tabsData}/>
         </div>
     );
