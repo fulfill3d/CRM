@@ -11,12 +11,10 @@ import CRMIcon from "@/svg/crm-icon";
 import ProfileIcon from "@/svg/profile-icon";
 import SvgDropdown from "@/components/svg-dropdown";
 import BreadcrumbComponent from "@/components/common/breadcrumb";
-import PublicBusinessView1 from "@/components/business/public-business-view-1";
-import PublicBusinessView2 from "@/components/business/public-business-view-2";
-import ProtectedBusinessView1 from "@/components/business/protected-business-view-1";
-import ProtectedBusinessView2 from "@/components/business/protected-business-view-2";
 import PublicClientView1 from "@/components/client/public-client-view-1";
 import ProtectedClientView1 from "@/components/client/protected-client-view-1";
+import BusinessView1 from "@/components/business/business-view-1";
+import BusinessView2 from "@/components/business/business-view-2";
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -25,8 +23,8 @@ export default function Home() {
 
     const publicBusinessViews: { [key in BusinessView]: JSX.Element } = {
         [BusinessView.Cover]: <BusinessLogo onClick={() => dispatch(setBusinessView(BusinessView.Depth1))} />,
-        [BusinessView.Depth1]: <PublicBusinessView1 />,
-        [BusinessView.Depth2]: <PublicBusinessView2 />,
+        [BusinessView.Depth1]: <BusinessView1 isProtected={false}/>,
+        [BusinessView.Depth2]: <BusinessView2 isProtected={false}/>,
     };
 
     const publicClientViews: { [key in ClientView]: JSX.Element } = {
@@ -36,8 +34,8 @@ export default function Home() {
 
     const protectedBusinessViews: { [key in BusinessView]: JSX.Element } = {
         [BusinessView.Cover]: <BusinessLogo onClick={() => dispatch(setBusinessView(BusinessView.Depth1))} />,
-        [BusinessView.Depth1]: <ProtectedBusinessView1 />,
-        [BusinessView.Depth2]: <ProtectedBusinessView2 />,
+        [BusinessView.Depth1]: <BusinessView1 isProtected={true} />,
+        [BusinessView.Depth2]: <BusinessView2 isProtected={true}/>,
     };
 
     const protectedClientViews: { [key in ClientView]: JSX.Element } = {
