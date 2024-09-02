@@ -76,3 +76,56 @@ export class Store {
     }
 }
 
+export class SubCategory {
+    id: number;
+    name: string;
+    description: string;
+
+    constructor(data: any) {
+        this.id = data.id;
+        this.name = data.name;
+        this.description = data.description;
+    }
+}
+
+export class Category {
+    id: number;
+    name: string;
+    description: string;
+    sub_categories: SubCategory[];
+
+    constructor(data: any) {
+        this.id = data.id;
+        this.name = data.name;
+        this.description = data.description;
+        this.sub_categories = data.sub_categories ? data.sub_categories.map((sub: any) => new SubCategory(sub)) : [];
+    }
+}
+
+export class Service {
+    id: number;
+    duration: number;
+    price: number;
+    name: string;
+    description: string;
+    categories: Category[];
+
+    constructor(data: any) {
+        this.id = data.id;
+        this.duration = data.duration;
+        this.price = data.price;
+        this.name = data.name;
+        this.description = data.description;
+        this.categories = data.categories ? data.categories.map((cat: any) => new Category(cat)) : [];
+    }
+}
+
+export class StoreService {
+    store_id: number;
+    services: Service[];
+
+    constructor(data: any) {
+        this.store_id = data.store_id;
+        this.services = data.services ? data.services.map((service: any) => new Service(service)) : [];
+    }
+}
