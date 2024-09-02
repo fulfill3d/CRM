@@ -4,36 +4,10 @@ import {
     serviceCategories,
     updateServiceMock
 } from "@/mock/business/mock-data";
-
-interface SubCategory{
-    id: number
-    name: string
-    description: string
-}
-
-interface Category{
-    id: number
-    name: string
-    description: string
-    sub_categories: SubCategory[]
-}
-
-interface ServiceProps {
-    id: number
-    name: string
-    description: string
-    duration: number
-    price: number
-    categories: Category[]
-}
-
-interface ServiceCardProps{
-    store_id: number
-    services: ServiceProps[]
-}
+import {StoreService} from "@/models/business/models";
 
 interface Props{
-    data: ServiceCardProps
+    data: StoreService
 }
 
 const ServiceCard = (props: Props) => {
