@@ -1,4 +1,4 @@
-export const nearbyServices = JSON.stringify([
+export const nearbyServices = [
     {
         "id": 1,
         "duration": 60,
@@ -504,9 +504,9 @@ export const nearbyServices = JSON.stringify([
             ]
         }
     }
-], null, 4);
+];
 
-export const appointments = JSON.stringify([
+export const appointments = [
     {
         "appointment_id": 101,
         "appointment_notes": "Looking forward to the session.",
@@ -627,16 +627,16 @@ export const appointments = JSON.stringify([
             "service_description": "A foot reflexology session."
         }
     }
-], null, 4);
+];
 
-export const newAppointmentMock = JSON.stringify({
+export const newAppointmentMock = {
     "store_service_id": 3,
     "start_date": "2024-08-15T10:00:00Z",
     "note": "This is a sample note."
-}, null, 4);
+};
 
-export const updateAppointmentMock = JSON.stringify({
+export const updateAppointmentMock = {
     "appointment_id": 1,
     "start_date": "2024-09-15T10:00:00Z",
     "note": "This note is again updated."
-}, null, 4);
+};

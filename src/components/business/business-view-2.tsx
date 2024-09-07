@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { Store, StoreService } from "@/models/business/models";
 import { useAccessToken } from "@/msal/use-access-token";
 import { BusinessManagement } from "@/utils/endpoints";
+import {SkeletonCard} from "@/components/common/skeleton-card";
 
 interface BusinessViewComponent2Props {
     isProtected: boolean;
@@ -63,16 +64,25 @@ const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) =
 
     if (loading) {
         return (
-            <div className="w-full h-full flex items-center justify-center">
-                Loading...
+            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
+                <div className="flex w-full h-full items-center justify-center">
+                    <div className="grid gap-4 md:grid-cols-1 md:gap-8 lg:grid-cols-2">
+                        <SkeletonCard/>
+                        <SkeletonCard/>
+                        <SkeletonCard/>
+                        <SkeletonCard/>
+                    </div>
+                </div>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="w-full h-full flex items-center justify-center">
-                Error: {error}
+            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
+                <div className="flex w-full h-full items-center justify-center">
+                    Error: {error}
+                </div>
             </div>
         );
     }

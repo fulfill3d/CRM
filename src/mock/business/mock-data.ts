@@ -1129,7 +1129,7 @@ export const appointments = {
     "rows": []
 }
 
-export const serviceCategories = JSON.stringify({
+export const serviceCategories = {
     "categories": [
         {
             "id": 1,
@@ -1184,35 +1184,35 @@ export const serviceCategories = JSON.stringify({
             "description": "Services provided to cats"
         }
     ]
-}, null, 4)
+};
 
-export const newEmployeeMock = JSON.stringify({
+export const newEmployeeMock = {
     "nick_name": "Johnny",
     "first_name": "John",
     "last_name": "Doe",
     "e_mail": "john.doe@example.com",
     "phone": "+1234567890"
-}, null, 4)
+};
 
-export const updateEmployeeMock = JSON.stringify({
+export const updateEmployeeMock = {
     "id": 9,
     "nick_name": "Johnny",
     "first_name": "John",
     "last_name": "Doe",
     "e_mail": "john.doe@example.com",
     "phone": "+1234567890"
-}, null, 4)
+};
 
-export const newServiceMock = JSON.stringify({
+export const newServiceMock = {
     "service-name": "Haircut",
     "description": "A standard haircut.",
     "duration": 30,
     "price": 25.00,
     "categories": [1],
     "sub-categories": [1, 2]
-}, null, 4)
+};
 
-export const updateServiceMock = JSON.stringify({
+export const updateServiceMock = {
     "store-service-id": 4,
     "service-name": "Haircut",
     "description": "A standard haircut.",
@@ -1220,5 +1220,5 @@ export const updateServiceMock = JSON.stringify({
     "price": 27.00,
     "categories": [1],
     "sub-categories": [1, 2, 3]
-}, null, 4)
+};
 
