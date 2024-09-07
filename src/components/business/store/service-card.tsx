@@ -4,36 +4,10 @@ import {
     serviceCategories,
     updateServiceMock
 } from "@/mock/business/mock-data";
-
-interface SubCategory{
-    id: number
-    name: string
-    description: string
-}
-
-interface Category{
-    id: number
-    name: string
-    description: string
-    sub_categories: SubCategory[]
-}
-
-interface ServiceProps {
-    id: number
-    name: string
-    description: string
-    duration: number
-    price: number
-    categories: Category[]
-}
-
-interface ServiceCardProps{
-    store_id: number
-    services: ServiceProps[]
-}
+import {StoreService} from "@/models/business/models";
 
 interface Props{
-    data: ServiceCardProps
+    data: StoreService
 }
 
 const ServiceCard = (props: Props) => {
@@ -43,7 +17,7 @@ const ServiceCard = (props: Props) => {
             <span>Service Categories</span>
             <textarea
                 className='w-full h-32 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                value={serviceCategories}/>
+                value={JSON.stringify(serviceCategories, null, 4)}/>
             <span>Store`s Service List</span>
             <textarea
                 className='w-full h-48 p-2 bg-transparent border border-gray-300 rounded resize-none'
@@ -52,7 +26,7 @@ const ServiceCard = (props: Props) => {
                 <div className='w-1/2'>
                     <textarea
                         className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                        value={newServiceMock}/>
+                        value={JSON.stringify(newServiceMock, null, 4)}/>
                     <div className='flex items-center justify-center'>
                         <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
                             <span>Add a New Service</span>
@@ -62,7 +36,7 @@ const ServiceCard = (props: Props) => {
                 <div className='w-1/2'>
                     <textarea
                         className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                        value={updateServiceMock}/>
+                        value={JSON.stringify(updateServiceMock, null, 4)}/>
                     <div className='flex items-center justify-center'>
                         <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
                             <span>Update a Service</span>

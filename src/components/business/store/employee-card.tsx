@@ -26,7 +26,7 @@ const EmployeeCard = (props: EmployeeCardProps) => {
                 <div className='w-1/2'>
                     <textarea
                         className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                        value={newEmployeeMock}/>
+                        value={JSON.stringify(newEmployeeMock, null, 4)}/>
                     <div className='flex items-center justify-center'>
                         <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
                             <span>Add a New Employee</span>
@@ -36,7 +36,7 @@ const EmployeeCard = (props: EmployeeCardProps) => {
                 <div className='w-1/2'>
                     <textarea
                         className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                        value={updateEmployeeMock}/>
+                        value={JSON.stringify(updateEmployeeMock, null, 4)}/>
                     <div className='flex items-center justify-center'>
                         <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
                             <span>Update an Employee</span>
