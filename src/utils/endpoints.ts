@@ -1,4 +1,4 @@
-import {HttpMethod} from "@/types/common/http-method";
+import {HttpMethod} from "@/hooks/common/use-http";
 
 interface Endpoint {
     Uri: string;
