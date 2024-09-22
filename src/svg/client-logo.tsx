@@ -25,9 +25,9 @@ const ClientLogo: React.FC<LogoProps> = ({ onClick }) => (
         </text>
 
         {/* Foreground Intersecting Shapes */}
-        <circle cx="30" cy="50" r="10" fill="#FF7F50" clipPath="url(#client-clip)"/>
-        <circle cx="70" cy="50" r="10" fill="#FF7F50" clipPath="url(#client-clip)"/>
-        <line x1="10" y1="50" x2="90" y2="50" stroke="#FF7F50" strokeWidth="5" clipPath="url(#client-clip)"/>
+        <circle cx="30" cy="50" r="10" fill="#1E40AF" clipPath="url(#client-clip)"/>
+        <circle cx="70" cy="50" r="10" fill="#1E40AF" clipPath="url(#client-clip)"/>
+        <line x1="10" y1="50" x2="90" y2="50" stroke="#1E40AF" strokeWidth="5" clipPath="url(#client-clip)"/>
 
         {/* Clipping Path */}
         <clipPath id="client-clip">
