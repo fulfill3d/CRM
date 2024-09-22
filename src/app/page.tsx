@@ -43,11 +43,11 @@ export default function Home() {
     };
 
     return (
-        <div className="relative min-h-full h-full w-full bg-blue-800">
+        <div className="relative min-h-full h-full w-full bg-coral">
             <div className="flex flex-col md:flex-row w-full h-full items-center justify-center space-x-4">
                 {/* Business Container */}
                 <div className="relative w-full h-full md:w-1/2 flex items-center justify-center bg-transparent transition-all z-10">
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full h-full bg-blue-800">
                         <BreadcrumbComponent view={businessView} viewType="business" />
                         <MsalAuthProvider>
                             <MsalAuthProvider.Public>
@@ -62,7 +62,7 @@ export default function Home() {
 
                 {/* Client Container */}
                 <div className="relative w-full h-full md:w-1/2 flex items-center justify-center bg-transparent transition-all z-10">
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full h-full bg-coral">
                         <BreadcrumbComponent view={clientView} viewType="client" />
                         <MsalAuthProvider>
                             <MsalAuthProvider.Public>
