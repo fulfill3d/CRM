@@ -1,8 +1,30 @@
 'use client';
 
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Home() {
+
+    // PING to Wake Up Azure Functions Simultaneously
+    useEffect(() => {
+        (async () => {
+            try {
+                const endpoints = [
+                    process.env.NEXT_PUBLIC_BUSINESS_IDENTITY_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_CLIENT_IDENTITY_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_CLIENT_SERVICE_BASE_URL || ''
+                ];
+
+                // Use Promise.all to send all requests at once
+                await Promise.all(endpoints.map(endpoint => fetch(endpoint)));
+
+            } catch (error) {
+                console.error('Error pinging Azure Functions:', error);
+            }
+        })();
+    }, []);
+
     return (
         <div className="h-full w-full flex items-center justify-center px-6 py-10 bg-gray-100">
             <div className="max-w-4xl text-center space-y-8">

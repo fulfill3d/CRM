@@ -32,7 +32,7 @@ const PortalInfoDialog: React.FC = () => {
                         In the <span className="text-blue-600 font-semibold">Business Portal</span>, you can manage stores, employees, and appointments in real time. In the <span className="text-green-600 font-semibold">Client Portal</span>, you can find nearby services, book appointments, and manage your bookings.
                     </p>
                     <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-4">
-                        Once logged in, the app connects to our <span className="text-blue-600 font-semibold">microservices</span> hosted on <span className="text-green-600 font-semibold">Microsoft Azure</span>, ensuring that all data changes are persistent and saved in the database.
+                        Once logged in, the app connects to the <span className="text-blue-600 font-semibold">microservices</span> hosted on <span className="text-green-600 font-semibold">Microsoft Azure</span>, ensuring that all data changes are persistent and saved in the database.
                     </p>
                 </div>
 
