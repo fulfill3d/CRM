@@ -11,13 +11,13 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({ appointment }) => {
     const getStatusDetails = (status: number) => {
         switch (status) {
             case AppointmentStatus.SCHEDULED:
-                return { label: "Scheduled", color: "bg-green-200 text-green-700" };
+                return { label: "SCHEDULED", color: "bg-blue-100 text-blue-600" };
             case AppointmentStatus.CANCELED:
-                return { label: "Canceled", color: "bg-red-200 text-red-700" };
+                return { label: "CANCELED", color: "bg-red-100 text-red-600" };
             case AppointmentStatus.COMPLETED:
-                return { label: "Completed", color: "bg-blue-200 text-blue-700" };
+                return { label: "COMPLETED", color: "bg-green-100 text-green-600" };
             default:
-                return { label: "Unknown", color: "bg-gray-200 text-gray-700" };
+                return { label: "Unknown", color: "bg-gray-100 text-gray-600" };
         }
     };
 
