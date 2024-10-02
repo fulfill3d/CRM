@@ -1,17 +1,17 @@
 import React from "react";
 import MsalAuthProvider from "@/msal/auth-provider";
-import {LogIn} from "@/msal/log-in";
-import {LogOut} from "@/msal/log-out";
+import { LogIn } from "@/msal/log-in";
+import { LogOut } from "@/msal/log-out";
 
-export const IdentityControl = () => {
-    return(
+export const IdentityControl = ({ isMobile = false }: { isMobile?: boolean }) => {
+    return (
         <MsalAuthProvider>
             <MsalAuthProvider.Public>
-                <LogIn/>
+                <LogIn isMobile={isMobile} /> {/* Pass isMobile as a prop */}
             </MsalAuthProvider.Public>
             <MsalAuthProvider.Protected>
-                <LogOut/>
+                <LogOut isMobile={isMobile} /> {/* Pass isMobile as a prop */}
             </MsalAuthProvider.Protected>
         </MsalAuthProvider>
-    )
-}
+    );
+};

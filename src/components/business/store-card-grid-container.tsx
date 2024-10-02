@@ -1,21 +1,21 @@
-import { useDispatch } from "react-redux";
-import React, { useCallback, useEffect, useState } from "react";
-import { BusinessView, setBusinessView } from "@/store/slices/view-slice";
-import { setStoreId } from "@/store/slices/store-slice";
-import ClickableStoreCard from "@/components/business/store/clickable-store-card";
+'use client'
+
+import React, { useEffect, useState } from "react";
+import StoreCard from "@/components/business/store-card";
 import useHttp from "@/hooks/common/use-http";
 import { BusinessManagement } from "@/utils/endpoints";
 import { useAccessToken } from "@/msal/use-access-token";
 import { Store } from "@/models/business/models";
 import { SkeletonCard } from "@/components/common/skeleton-card";
 import { stores as mockStores } from "@/mock/business/mock-data";
+import {useRouter} from "next/navigation";
 
 interface BusinessViewProps {
     isProtected: boolean;
 }
 
-const BusinessView1: React.FC<BusinessViewProps> = ({ isProtected }) => {
-    const dispatch = useDispatch();
+const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) => {
+    const router = useRouter();
     const { loading, error, request } = useHttp();
     const [stores, setStores] = useState<Store[]>([]);
 
@@ -43,14 +43,13 @@ const BusinessView1: React.FC<BusinessViewProps> = ({ isProtected }) => {
         }
     }, [accessToken, isProtected, request]);
 
-    const cardClick = useCallback((id: number) => {
-        dispatch(setBusinessView(BusinessView.Depth2));
-        dispatch(setStoreId(id));
-    }, [dispatch]);
+    const handleClick = (id: number) => {
+        router.push(`/business/${id}`);
+    };
 
     if (loading) {
         return (
-            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
+            <div className="min-h-screen flex flex-col items-center justify-center">
                 <div className="flex w-full h-full items-center justify-center">
                     <div className="grid gap-4 md:grid-cols-1 md:gap-8 lg:grid-cols-2">
                         <SkeletonCard/>
@@ -65,7 +64,7 @@ const BusinessView1: React.FC<BusinessViewProps> = ({ isProtected }) => {
 
     if (error) {
         return (
-            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
+            <div className="min-h-screen flex flex-col items-center justify-center">
                 <div className="flex w-full h-full items-center justify-center">
                     Error: {error}
                 </div>
@@ -74,20 +73,22 @@ const BusinessView1: React.FC<BusinessViewProps> = ({ isProtected }) => {
     }
 
     return (
-        <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
-            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-                {stores.map((store) => (
-                    <ClickableStoreCard
-                        onClick={() => cardClick(store.id)}
-                        key={store.id}
-                        title={store.name}
-                        content={store.description}
-                        created_at={store.created_at}
-                    />
-                ))}
+        <div className="w-full h-full">
+            <div className="container mx-auto mt-10">
+                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                    {stores.map((store) => (
+                        <StoreCard
+                            onClick={() => handleClick(store.id)}
+                            key={store.id}
+                            title={store.name}
+                            content={store.description}
+                            created_at={store.created_at}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );
 };
 
-export default BusinessView1;
+export default StoreCardGridContainer;

@@ -642,7 +642,7 @@ export const storeAppointments = [
                 "customer": "Liam Johnson",
                 "email": "liam.johnson@example.com",
                 "service": "Full Body Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-23 14:30",
                 "duration": "60 min",
                 "amount": "$100.00"
@@ -651,7 +651,7 @@ export const storeAppointments = [
                 "customer": "Emma Wilson",
                 "email": "emma.wilson@example.com",
                 "service": "Facial Treatment",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-02 10:00",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -660,7 +660,7 @@ export const storeAppointments = [
                 "customer": "Oliver Brown",
                 "email": "oliver.brown@example.com",
                 "service": "Full Body Massage",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-07-05 16:00",
                 "duration": "60 min",
                 "amount": "$100.00"
@@ -669,7 +669,7 @@ export const storeAppointments = [
                 "customer": "Ava Davis",
                 "email": "ava.davis@example.com",
                 "service": "Facial Treatment",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-07 11:30",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -678,7 +678,7 @@ export const storeAppointments = [
                 "customer": "Ethan Martinez",
                 "email": "ethan.martinez@example.com",
                 "service": "Full Body Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-10 14:00",
                 "duration": "60 min",
                 "amount": "$100.00"
@@ -687,7 +687,7 @@ export const storeAppointments = [
                 "customer": "Sophia Garcia",
                 "email": "sophia.garcia@example.com",
                 "service": "Facial Treatment",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-15 09:30",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -696,7 +696,7 @@ export const storeAppointments = [
                 "customer": "Noah Lee",
                 "email": "noah.lee@example.com",
                 "service": "Full Body Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-18 12:00",
                 "duration": "60 min",
                 "amount": "$100.00"
@@ -705,7 +705,7 @@ export const storeAppointments = [
                 "customer": "Mia Thomas",
                 "email": "mia.thomas@example.com",
                 "service": "Facial Treatment",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-20 15:30",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -714,7 +714,7 @@ export const storeAppointments = [
                 "customer": "James Hernandez",
                 "email": "james.hernandez@example.com",
                 "service": "Full Body Massage",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-07-22 14:00",
                 "duration": "60 min",
                 "amount": "$100.00"
@@ -723,7 +723,7 @@ export const storeAppointments = [
                 "customer": "Amelia Lewis",
                 "email": "amelia.lewis@example.com",
                 "service": "Facial Treatment",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-25 13:00",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -737,7 +737,7 @@ export const storeAppointments = [
                 "customer": "Lucas Martinez",
                 "email": "lucas.martinez@example.com",
                 "service": "Deep Tissue Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-20 10:00",
                 "duration": "45 min",
                 "amount": "$75.00"
@@ -746,7 +746,7 @@ export const storeAppointments = [
                 "customer": "Isabella Rodriguez",
                 "email": "isabella.rodriguez@example.com",
                 "service": "Hot Stone Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-06-25 12:00",
                 "duration": "60 min",
                 "amount": "$120.00"
@@ -755,7 +755,7 @@ export const storeAppointments = [
                 "customer": "Mason Walker",
                 "email": "mason.walker@example.com",
                 "service": "Deep Tissue Massage",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-06-30 15:00",
                 "duration": "45 min",
                 "amount": "$75.00"
@@ -764,7 +764,7 @@ export const storeAppointments = [
                 "customer": "Harper Hall",
                 "email": "harper.hall@example.com",
                 "service": "Hot Stone Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-03 14:30",
                 "duration": "60 min",
                 "amount": "$120.00"
@@ -773,7 +773,7 @@ export const storeAppointments = [
                 "customer": "Elijah Scott",
                 "email": "elijah.scott@example.com",
                 "service": "Deep Tissue Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-05 11:00",
                 "duration": "45 min",
                 "amount": "$75.00"
@@ -782,7 +782,7 @@ export const storeAppointments = [
                 "customer": "Emily Young",
                 "email": "emily.young@example.com",
                 "service": "Hot Stone Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-08 09:30",
                 "duration": "60 min",
                 "amount": "$120.00"
@@ -791,7 +791,7 @@ export const storeAppointments = [
                 "customer": "Jackson King",
                 "email": "jackson.king@example.com",
                 "service": "Deep Tissue Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-10 14:30",
                 "duration": "45 min",
                 "amount": "$75.00"
@@ -800,7 +800,7 @@ export const storeAppointments = [
                 "customer": "Avery Wright",
                 "email": "avery.wright@example.com",
                 "service": "Hot Stone Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-12 13:00",
                 "duration": "60 min",
                 "amount": "$120.00"
@@ -809,7 +809,7 @@ export const storeAppointments = [
                 "customer": "Aiden Baker",
                 "email": "aiden.baker@example.com",
                 "service": "Deep Tissue Massage",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-07-15 16:00",
                 "duration": "45 min",
                 "amount": "$75.00"
@@ -818,7 +818,7 @@ export const storeAppointments = [
                 "customer": "Scarlett Harris",
                 "email": "scarlett.harris@example.com",
                 "service": "Hot Stone Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-18 10:30",
                 "duration": "60 min",
                 "amount": "$120.00"
@@ -832,7 +832,7 @@ export const storeAppointments = [
                 "customer": "William Robinson",
                 "email": "william.robinson@example.com",
                 "service": "Reflexology",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-19 14:00",
                 "duration": "30 min",
                 "amount": "$75.00"
@@ -841,7 +841,7 @@ export const storeAppointments = [
                 "customer": "Mia Clark",
                 "email": "mia.clark@example.com",
                 "service": "Couples Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-06-22 11:30",
                 "duration": "90 min",
                 "amount": "$150.00"
@@ -850,7 +850,7 @@ export const storeAppointments = [
                 "customer": "James Lewis",
                 "email": "james.lewis@example.com",
                 "service": "Reflexology",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-06-24 10:00",
                 "duration": "30 min",
                 "amount": "$75.00"
@@ -859,7 +859,7 @@ export const storeAppointments = [
                 "customer": "Sophia Perez",
                 "email": "sophia.perez@example.com",
                 "service": "Couples Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-26 16:00",
                 "duration": "90 min",
                 "amount": "$150.00"
@@ -868,7 +868,7 @@ export const storeAppointments = [
                 "customer": "Benjamin Martinez",
                 "email": "benjamin.martinez@example.com",
                 "service": "Reflexology",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-06-28 13:30",
                 "duration": "30 min",
                 "amount": "$75.00"
@@ -877,7 +877,7 @@ export const storeAppointments = [
                 "customer": "Charlotte Walker",
                 "email": "charlotte.walker@example.com",
                 "service": "Couples Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-01 09:00",
                 "duration": "90 min",
                 "amount": "$150.00"
@@ -886,7 +886,7 @@ export const storeAppointments = [
                 "customer": "Henry Hall",
                 "email": "henry.hall@example.com",
                 "service": "Reflexology",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-04 15:00",
                 "duration": "30 min",
                 "amount": "$75.00"
@@ -895,7 +895,7 @@ export const storeAppointments = [
                 "customer": "Amelia King",
                 "email": "amelia.king@example.com",
                 "service": "Couples Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-07 12:30",
                 "duration": "90 min",
                 "amount": "$150.00"
@@ -904,7 +904,7 @@ export const storeAppointments = [
                 "customer": "Liam Robinson",
                 "email": "liam.robinson@example.com",
                 "service": "Reflexology",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-07-10 14:30",
                 "duration": "30 min",
                 "amount": "$75.00"
@@ -913,7 +913,7 @@ export const storeAppointments = [
                 "customer": "Ava Clark",
                 "email": "ava.clark@example.com",
                 "service": "Couples Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-13 11:00",
                 "duration": "90 min",
                 "amount": "$150.00"
@@ -927,7 +927,7 @@ export const storeAppointments = [
                 "customer": "Lily Martinez",
                 "email": "lily.martinez@example.com",
                 "service": "Haircut",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-20 09:30",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -936,7 +936,7 @@ export const storeAppointments = [
                 "customer": "Lucas Harris",
                 "email": "lucas.harris@example.com",
                 "service": "Hair Coloring",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-06-22 14:00",
                 "duration": "60 min",
                 "amount": "$90.00"
@@ -945,7 +945,7 @@ export const storeAppointments = [
                 "customer": "Evelyn White",
                 "email": "evelyn.white@example.com",
                 "service": "Haircut",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-06-25 13:00",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -954,7 +954,7 @@ export const storeAppointments = [
                 "customer": "Mason Robinson",
                 "email": "mason.robinson@example.com",
                 "service": "Hair Coloring",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-28 16:00",
                 "duration": "60 min",
                 "amount": "$90.00"
@@ -963,7 +963,7 @@ export const storeAppointments = [
                 "customer": "Ella Lewis",
                 "email": "ella.lewis@example.com",
                 "service": "Haircut",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-01 10:30",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -972,7 +972,7 @@ export const storeAppointments = [
                 "customer": "Jackson Walker",
                 "email": "jackson.walker@example.com",
                 "service": "Hair Coloring",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-03 12:00",
                 "duration": "60 min",
                 "amount": "$90.00"
@@ -981,7 +981,7 @@ export const storeAppointments = [
                 "customer": "Sofia Young",
                 "email": "sofia.young@example.com",
                 "service": "Haircut",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-05 14:30",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -990,7 +990,7 @@ export const storeAppointments = [
                 "customer": "Alexander Hall",
                 "email": "alexander.hall@example.com",
                 "service": "Hair Coloring",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-08 09:00",
                 "duration": "60 min",
                 "amount": "$90.00"
@@ -999,7 +999,7 @@ export const storeAppointments = [
                 "customer": "Emily Scott",
                 "email": "emily.scott@example.com",
                 "service": "Haircut",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-07-10 11:00",
                 "duration": "30 min",
                 "amount": "$50.00"
@@ -1008,7 +1008,7 @@ export const storeAppointments = [
                 "customer": "Henry King",
                 "email": "henry.king@example.com",
                 "service": "Hair Coloring",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-12 13:30",
                 "duration": "60 min",
                 "amount": "$90.00"
@@ -1022,7 +1022,7 @@ export const storeAppointments = [
                 "customer": "Grace White",
                 "email": "grace.white@example.com",
                 "service": "Zen Meditation Session",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-21 09:00",
                 "duration": "30 min",
                 "amount": "$70.00"
@@ -1031,7 +1031,7 @@ export const storeAppointments = [
                 "customer": "Benjamin Young",
                 "email": "benjamin.young@example.com",
                 "service": "Aromatherapy Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-06-23 14:30",
                 "duration": "60 min",
                 "amount": "$110.00"
@@ -1040,7 +1040,7 @@ export const storeAppointments = [
                 "customer": "Victoria Martinez",
                 "email": "victoria.martinez@example.com",
                 "service": "Zen Meditation Session",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-06-25 10:00",
                 "duration": "30 min",
                 "amount": "$70.00"
@@ -1049,7 +1049,7 @@ export const storeAppointments = [
                 "customer": "Daniel Hernandez",
                 "email": "daniel.hernandez@example.com",
                 "service": "Aromatherapy Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-06-27 16:00",
                 "duration": "60 min",
                 "amount": "$110.00"
@@ -1058,7 +1058,7 @@ export const storeAppointments = [
                 "customer": "Scarlett Moore",
                 "email": "scarlett.moore@example.com",
                 "service": "Zen Meditation Session",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-06-29 13:30",
                 "duration": "30 min",
                 "amount": "$70.00"
@@ -1067,7 +1067,7 @@ export const storeAppointments = [
                 "customer": "David Lee",
                 "email": "david.lee@example.com",
                 "service": "Aromatherapy Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-01 11:00",
                 "duration": "60 min",
                 "amount": "$110.00"
@@ -1076,7 +1076,7 @@ export const storeAppointments = [
                 "customer": "Ella Wilson",
                 "email": "ella.wilson@example.com",
                 "service": "Zen Meditation Session",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-03 15:00",
                 "duration": "30 min",
                 "amount": "$70.00"
@@ -1085,7 +1085,7 @@ export const storeAppointments = [
                 "customer": "Logan Thomas",
                 "email": "logan.thomas@example.com",
                 "service": "Aromatherapy Massage",
-                "status": "Scheduled",
+                "status": 1, // Scheduled
                 "date": "2023-07-05 09:00",
                 "duration": "60 min",
                 "amount": "$110.00"
@@ -1094,7 +1094,7 @@ export const storeAppointments = [
                 "customer": "Mia Anderson",
                 "email": "mia.anderson@example.com",
                 "service": "Zen Meditation Session",
-                "status": "Canceled",
+                "status": 2, // Canceled
                 "date": "2023-07-07 12:30",
                 "duration": "30 min",
                 "amount": "$70.00"
@@ -1103,14 +1103,14 @@ export const storeAppointments = [
                 "customer": "Alexander Robinson",
                 "email": "alexander.robinson@example.com",
                 "service": "Aromatherapy Massage",
-                "status": "Completed",
+                "status": 3, // Completed
                 "date": "2023-07-10 14:00",
                 "duration": "60 min",
                 "amount": "$110.00"
             }
         ]
     }
-]
+];
 
 export const appointments = {
     "tabs": [

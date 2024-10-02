@@ -1,8 +1,9 @@
 import React from "react";
 import { useMsal } from "@azure/msal-react";
-import {loginRequest} from "@/msal/config";
+import { loginRequest } from "@/msal/config";
 
-export const LogIn = () => {
+// Add isMobile prop to conditionally style the button
+export const LogIn = ({ isMobile }: { isMobile?: boolean }) => {
     const { instance } = useMsal();
 
     const handleLogin = () => {
@@ -11,7 +12,16 @@ export const LogIn = () => {
 
     return (
         <div>
-            <button onClick={handleLogin}>Log In</button>
+            <button
+                onClick={handleLogin}
+                className={
+                    isMobile
+                        ? "block text-gray-800 hover:text-gray-400 px-3 py-2 rounded-md text-base font-medium"
+                        : "text-gray-800 hover:text-gray-400 px-3 py-2 rounded-md text-sm font-extrabold"
+                }
+            >
+                Log In
+            </button>
         </div>
     );
 };

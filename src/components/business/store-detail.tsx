@@ -1,10 +1,7 @@
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import { storeAppointments, stores, storeServices } from "@/mock/business/mock-data";
-import StoreCard from "@/components/business/store/store-card";
-import EmployeeCard from "@/components/business/store/employee-card";
-import ServiceCard from "@/components/business/store/service-card";
-import AppointmentCard from "@/components/business/store/appointment-card";
+import EmployeeTab from "@/components/business/store/employee-tab";
+import ServiceTab from "@/components/business/store/service-tab";
+import AppointmentTab from "@/components/business/store/appointment-tab";
 import CustomTabs from "@/components/common/custom-tabs";
 import useHttp from "@/hooks/common/use-http";
 import React, { useEffect, useState } from "react";
@@ -13,12 +10,12 @@ import { useAccessToken } from "@/msal/use-access-token";
 import { BusinessManagement } from "@/utils/endpoints";
 import {SkeletonCard} from "@/components/common/skeleton-card";
 
-interface BusinessViewComponent2Props {
+interface StoreDetailProps {
     isProtected: boolean;
+    storeId: number;
 }
 
-const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) => {
-    const storeId = useSelector((state: RootState) => state.store.storeId);
+const StoreDetail: React.FC<StoreDetailProps> = (params) => {
     const [store, setStore] = useState<Store | null>(null);
     const [storeService, setStoreService] = useState<StoreService | null>(null);
     const { loading, error, request } = useHttp();
@@ -28,13 +25,13 @@ const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) =
         process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_WRITE || ""
     ];
 
-    const accessToken = useAccessToken(isProtected ? scopes : []);
+    const accessToken = useAccessToken(params.isProtected ? scopes : []);
 
     useEffect(() => {
-        if (isProtected && accessToken && storeId) {
+        if (params.isProtected && accessToken && params.storeId) {
             request(
-                BusinessManagement.GetStore(storeId).Uri,
-                BusinessManagement.GetStore(storeId).Method,
+                BusinessManagement.GetStore(params.storeId).Uri,
+                BusinessManagement.GetStore(params.storeId).Method,
                 null,
                 undefined,
                 accessToken
@@ -43,8 +40,8 @@ const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) =
                 setStore(mappedStore);
             });
             request(
-                BusinessManagement.GetServices(storeId).Uri,
-                BusinessManagement.GetServices(storeId).Method,
+                BusinessManagement.GetServices(params.storeId).Uri,
+                BusinessManagement.GetServices(params.storeId).Method,
                 null,
                 undefined,
                 accessToken
@@ -52,19 +49,19 @@ const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) =
                 const mappedServices = new StoreService(response);
                 setStoreService(mappedServices);
             });
-        } else if (!isProtected && storeId) {
-            const currentStore = stores.find(store => store.id === storeId);
-            const currentService = storeServices.find(service => service.store_id === storeId);
+        } else if (!params.isProtected && params.storeId) {
+            const currentStore = stores.find(store => store.id === params.storeId);
+            const currentService = storeServices.find(service => service.store_id === params.storeId);
             if (currentStore) setStore(new Store(currentStore));
             if (currentService) setStoreService(new StoreService(currentService));
         }
-    }, [accessToken, request, storeId, isProtected]);
+    }, [accessToken, request, params]);
 
-    const currentAppointments = storeAppointments.find(app => app.store_id === storeId);
+    const currentAppointments = storeAppointments.find(app => app.store_id === params.storeId);
 
     if (loading) {
         return (
-            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
+            <div className="min-h-screen flex flex-col items-center justify-center">
                 <div className="flex w-full h-full items-center justify-center">
                     <div className="grid gap-4 md:grid-cols-1 md:gap-8 lg:grid-cols-2">
                         <SkeletonCard/>
@@ -79,7 +76,7 @@ const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) =
 
     if (error) {
         return (
-            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
+            <div className="min-h-screen flex flex-col items-center justify-center">
                 <div className="flex w-full h-full items-center justify-center">
                     Error: {error}
                 </div>
@@ -93,32 +90,27 @@ const BusinessView2: React.FC<BusinessViewComponent2Props> = ({ isProtected }) =
 
     const tabsData = [
         {
-            value: "store",
-            label: "Store",
-            tab_content: <StoreCard data={store} />,
-        },
-        {
             value: "employees",
             label: "Employees",
-            tab_content: <EmployeeCard data={store.employees} />
+            tab_content: <EmployeeTab data={store.employees} />
         },
         {
             value: "services",
             label: "Services",
-            tab_content: <ServiceCard data={storeService} />
+            tab_content: <ServiceTab data={storeService} />
         },
         {
             value: "appointments",
             label: "Appointments",
-            tab_content: <AppointmentCard data={currentAppointments} />
+            tab_content: <AppointmentTab data={currentAppointments} />
         }
     ];
 
     return (
-        <div className="w-full h-full overflow-y-scroll items-center justify-center pt-24">
+        <div className="w-full h-full overflow-y-scroll items-center justify-center">
             <CustomTabs tabs={tabsData} />
         </div>
     );
 };
 
-export default BusinessView2;
+export default StoreDetail;
