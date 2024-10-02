@@ -10,11 +10,16 @@ export const metadata: Metadata = {
     description: "CRM demo with business/client side together",
 };
 
+const links = [
+    {name: 'Business', href: '/business'},
+    {name: 'Client', href: '/client'},
+]
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
         <body className="h-screen flex flex-col">
-        <NavBar brandName="CRM" logoSvg={Fulfill3d} />
+        <NavBar brandName="CRM" logoSvg={Fulfill3d} links={links}/>
         <main className="flex-1 pt-16 overflow-hidden">
             <StoreProvider>{children}</StoreProvider>
         </main>

@@ -107,7 +107,7 @@ const StoreDetail: React.FC<StoreDetailProps> = (params) => {
     ];
 
     return (
-        <div className="w-full h-full overflow-y-scroll items-center justify-center">
+        <div className="w-full h-full pt-4 overflow-y-scroll items-center justify-center">
             <CustomTabs tabs={tabsData} />
         </div>
     );

@@ -6,7 +6,7 @@ import { FC } from 'react';
 import {IdentityControl} from "@/msal/identity-control";
 
 // Define the props for the NavBar component
-interface NavBarProps {
+export interface NavBarProps {
     brandName: string;
     logoSvg: React.ReactNode;
     links?: Array<{ name: string; href: string }>; // links is now optional

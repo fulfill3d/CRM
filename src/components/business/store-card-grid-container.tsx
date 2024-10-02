@@ -8,7 +8,10 @@ import { useAccessToken } from "@/msal/use-access-token";
 import { Store } from "@/models/business/models";
 import { SkeletonCard } from "@/components/common/skeleton-card";
 import { stores as mockStores } from "@/mock/business/mock-data";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
+import AddCard from "@/components/common/add-card";
+import AddStoreDialog from "@/components/business/add-store-dialog";
+import PortalInfoDialog from "@/components/common/portal-info-dialog"; // Import the AddStoreDialog
 
 interface BusinessViewProps {
     isProtected: boolean;
@@ -18,6 +21,7 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
     const router = useRouter();
     const { loading, error, request } = useHttp();
     const [stores, setStores] = useState<Store[]>([]);
+    const [showAddStoreDialog, setShowAddStoreDialog] = useState(false); // Manage AddStoreDialog visibility
 
     const scopes = [
         process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_READ || "",
@@ -47,6 +51,21 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
         router.push(`/business/${id}`);
     };
 
+    const handleAddStore = (newStore: { name: string; description: string }) => {
+        // Example: Add the new store to the stores list
+        const newStoreObject = new Store({
+            id: Date.now(), // Generate a mock ID
+            name: newStore.name,
+            description: newStore.description,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            location: null,
+            employees: []
+        });
+        setStores([...stores, newStoreObject]); // Add the new store to the list
+        setShowAddStoreDialog(false); // Close dialog after adding
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center">
@@ -73,9 +92,10 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
     }
 
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full overflow-y-scroll items-center justify-center">
             <div className="container mx-auto mt-10">
-                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                <text className="text-xl font-semibold">Select a store to manage</text>
+                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 mt-4 mb-8 md:mb-0">
                     {stores.map((store) => (
                         <StoreCard
                             onClick={() => handleClick(store.id)}
@@ -85,8 +105,19 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
                             created_at={store.created_at}
                         />
                     ))}
+                    <AddCard onClick={() => setShowAddStoreDialog(true)} /> {/* Open AddStoreDialog */}
                 </div>
             </div>
+
+            {/* Add Store Dialog */}
+            <AddStoreDialog
+                isOpen={showAddStoreDialog}
+                onAdd={handleAddStore}
+                onCancel={() => setShowAddStoreDialog(false)}
+            />
+
+            {/* Portal Info Dialog */}
+            <PortalInfoDialog />
         </div>
     );
 };

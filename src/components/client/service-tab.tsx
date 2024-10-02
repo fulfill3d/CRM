@@ -2,7 +2,6 @@ import {Service} from "@/models/client/models";
 import React from "react";
 import ServiceGrid from "@/components/client/service-grid";
 
-
 interface ServiceListProps {
     services: Service[];
 }
