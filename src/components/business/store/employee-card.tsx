@@ -1,5 +1,4 @@
-import {Button} from "@/components/ui/button";
-import {newEmployeeMock, updateEmployeeMock} from "@/mock/business/mock-data";
+import React from 'react';
 
 interface EmployeeProps {
     id: number;
@@ -8,51 +7,55 @@ interface EmployeeProps {
     last_name: string;
     e_mail: string;
     phone: string;
+    onDelete: (id: number) => void;
+    onEdit: (id: number) => void;
 }
 
-interface EmployeeCardProps{
-    data: EmployeeProps[]
-}
+const EmployeeCard: React.FC<EmployeeProps> = ({ id, nick_name, first_name, last_name, e_mail, phone, onDelete, onEdit }) => {
+    return (
+        <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-4">
+                {/* Nickname */}
+                <h2 className="text-xl font-bold text-gray-800">{nick_name}</h2>
 
-const EmployeeCard = (props: EmployeeCardProps) => {
-    const employees = JSON.stringify(props.data, null, 4);
-    return(
-        <div>
-            <span>Store`s Employee List</span>
-            <textarea
-                className='w-full h-48 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                value={employees}/>
-            <div className='flex items-center justify-center'>
-                <div className='w-1/2'>
-                    <textarea
-                        className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                        value={JSON.stringify(newEmployeeMock, null, 4)}/>
-                    <div className='flex items-center justify-center'>
-                        <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
-                            <span>Add a New Employee</span>
-                        </Button>
-                    </div>
+                {/* Full Name */}
+                <p className="text-gray-600 mt-1">
+                    {first_name} {last_name}
+                </p>
+
+                {/* Email */}
+                <div className="mt-3">
+                    <span className="block text-sm font-medium text-gray-500">Email</span>
+                    <p className="text-gray-800">{e_mail}</p>
                 </div>
-                <div className='w-1/2'>
-                    <textarea
-                        className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-                        value={JSON.stringify(updateEmployeeMock, null, 4)}/>
-                    <div className='flex items-center justify-center'>
-                        <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
-                            <span>Update an Employee</span>
-                        </Button>
-                    </div>
+
+                {/* Phone */}
+                <div className="mt-3">
+                    <span className="block text-sm font-medium text-gray-500">Phone</span>
+                    <p className="text-gray-800">{phone}</p>
                 </div>
-            </div>
-            <div className='flex items-center justify-center p-2'>
-                <span className='m-2'>Employee Id</span>
-                <textarea className='w-8 h-8 bg-transparent border border-gray-300 rounded resize-none m-2' value={1}/>
-                <Button className='bg-amber-100 rounded m-2' variant='default'>
-                    <span>Delete an Employee</span>
-                </Button>
+
+                {/* Buttons */}
+                <div className="flex justify-between mt-4">
+                    {/* Edit Button */}
+                    <button
+                        onClick={() => onEdit(id)}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+                    >
+                        Edit
+                    </button>
+
+                    {/* Delete Button */}
+                    <button
+                        onClick={() => onDelete(id)}
+                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none"
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
     );
-}
+};
 
 export default EmployeeCard;
