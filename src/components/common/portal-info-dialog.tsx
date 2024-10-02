@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const PortalInfoDialog: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(true); // State to control visibility
+interface PortalInfoDialogProps {
+    onClose: () => void; // Use a prop to control closing the dialog
+}
 
-    if (!isVisible) return null; // If not visible, return nothing
-
+const PortalInfoDialog: React.FC<PortalInfoDialogProps> = ({ onClose }) => {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 md:p-6">
             <div className="bg-white rounded-lg shadow-lg w-full max-w-lg md:max-w-xl lg:max-w-2xl h-auto md:max-h-[90%] lg:max-h-[75%] flex flex-col">
@@ -40,7 +40,7 @@ const PortalInfoDialog: React.FC = () => {
                 <div className="p-4 bg-gray-100 flex justify-end rounded-lg">
                     <button
                         className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all"
-                        onClick={() => setIsVisible(false)} // Set visibility to false on click
+                        onClick={onClose} // Close dialog via prop
                     >
                         OK
                     </button>

@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import PortalInfoDialog from "@/components/common/portal-info-dialog";
 
 export default function Home() {
+    const [showPortalInfo, setShowPortalInfo] = useState(false);
 
     // PING to Wake Up Azure Functions Simultaneously
     useEffect(() => {
@@ -24,6 +26,20 @@ export default function Home() {
             }
         })();
     }, []);
+
+    // Check sessionStorage to see if the dialog has already been shown
+    useEffect(() => {
+        const hasSeenPortalInfo = sessionStorage.getItem('hasSeenPortalInfo');
+        if (!hasSeenPortalInfo) {
+            setShowPortalInfo(true);
+        }
+    }, []);
+
+    // Function to handle closing the dialog
+    const handleClosePortalInfo = () => {
+        sessionStorage.setItem('hasSeenPortalInfo', 'true'); // Set the flag in sessionStorage
+        setShowPortalInfo(false); // Close the dialog
+    };
 
     return (
         <div className="h-full w-full flex items-center justify-center px-6 py-10 bg-gray-100">
@@ -63,6 +79,9 @@ export default function Home() {
                     </a>
                 </div>
             </div>
+
+            {/* Portal Info Dialog - Only show if not seen */}
+            {showPortalInfo && <PortalInfoDialog onClose={handleClosePortalInfo} />}
         </div>
     );
 }

@@ -11,7 +11,6 @@ import { stores as mockStores } from "@/mock/business/mock-data";
 import { useRouter } from "next/navigation";
 import AddCard from "@/components/common/add-card";
 import AddStoreDialog from "@/components/business/add-store-dialog";
-import PortalInfoDialog from "@/components/common/portal-info-dialog"; // Import the AddStoreDialog
 
 interface BusinessViewProps {
     isProtected: boolean;
@@ -115,9 +114,6 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
                 onAdd={handleAddStore}
                 onCancel={() => setShowAddStoreDialog(false)}
             />
-
-            {/* Portal Info Dialog */}
-            <PortalInfoDialog />
         </div>
     );
 };

@@ -8,7 +8,6 @@ import { SkeletonCard } from '@/components/common/skeleton-card';
 import ServiceTab from "@/components/client/service-tab";
 import HistoryTab from "@/components/client/history-tab";
 import CustomTabs from "@/components/common/custom-tabs";
-import PortalInfoDialog from "@/components/common/portal-info-dialog";
 
 interface ClientViewProps {
     isProtected: boolean;
@@ -98,9 +97,6 @@ const ClientView: React.FC<ClientViewProps> = ({ isProtected }) => {
     return (
         <div className="w-full h-full pt-4 overflow-y-scroll items-center justify-center">
             <CustomTabs tabs={tabsData}/>
-
-            {/* Portal Info Dialog */}
-            <PortalInfoDialog />
         </div>
     );
 }
