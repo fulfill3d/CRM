@@ -583,7 +583,7 @@ export const appointments = [
         "appointment_id": 104,
         "appointment_notes": "First time experiencing hot stone massage.",
         "appointment_start_date": "2024-09-18T11:00:00Z",
-        "appointment_status": 1,
+        "appointment_status": 2,
         "appointment_address": {
             "location_lat": 37.7944,
             "location_lon": -122.2711,
@@ -607,7 +607,7 @@ export const appointments = [
         "appointment_id": 105,
         "appointment_notes": "Looking forward to a relaxing foot massage.",
         "appointment_start_date": "2024-09-19T13:00:00Z",
-        "appointment_status": 1,
+        "appointment_status": 3,
         "appointment_address": {
             "location_lat": 37.4419,
             "location_lon": -122.1430,
