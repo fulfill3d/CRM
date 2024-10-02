@@ -87,13 +87,13 @@ const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, on
                 </form>
                 <div className="flex justify-end space-x-4 mt-6">
                     <button
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
                         onClick={handleCancelClick}
                     >
                         Cancel
                     </button>
                     <button
-                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
                         onClick={handleAddEmployee}
                     >
                         {isEditMode ? 'Update Employee' : 'Add Employee'}

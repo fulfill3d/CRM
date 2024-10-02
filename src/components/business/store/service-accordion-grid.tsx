@@ -128,7 +128,7 @@ const ServiceAccordion: React.FC<{ service: Service, onDelete: () => void, onEdi
             <div className="flex justify-between mt-4">
                 {/* Edit Button */}
                 <button
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
                     onClick={onEdit}
                 >
                     Edit
@@ -137,7 +137,7 @@ const ServiceAccordion: React.FC<{ service: Service, onDelete: () => void, onEdi
                 {/* Delete Button */}
                 <button
                     onClick={onDelete} // Trigger delete confirmation dialog
-                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none"
+                    className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none"
                 >
                     Delete
                 </button>
