@@ -36,7 +36,7 @@ const HistoryTab: React.FC<AppointmentListProps> = ({ appointments }) => {
 
     return (
         <div className="w-full h-full">
-            <text className="container mx-auto text-xl font-semibold">You appointment history</text>
+            <text className="container mx-auto text-xl font-semibold">Your appointment history</text>
             <div className="container mx-auto mt-4 md:mt-0">
                 {/* Button-like options to Filter by Status */}
                 <div className="mb-8 flex flex-wrap justify-center items-center gap-4">

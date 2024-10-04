@@ -70,16 +70,19 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ customer, email, service,
             </div>
 
             {/* Cancel Button (visible only if status is SCHEDULED) */}
-            {status === AppointmentStatus.SCHEDULED && (
-                <div className="absolute bottom-4 right-4">
-                    <button
-                        className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-colors focus:outline-none"
-                        onClick={handleCancel}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            )}
+            <div className="absolute bottom-4 right-4">
+                <button
+                    disabled={status !== AppointmentStatus.SCHEDULED} // Disable if not scheduled
+                    className={`px-4 py-2 rounded-lg transition-all ${
+                        status === AppointmentStatus.SCHEDULED
+                            ? 'bg-red-500 text-white hover:bg-red-600'
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
+                    onClick={handleCancel}
+                >
+                    Cancel
+                </button>
+            </div>
         </div>
     );
 };
