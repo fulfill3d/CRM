@@ -8,9 +8,10 @@ interface ServiceDetailDialogProps {
     isOpen: boolean;
     serviceDetail: ServiceDetail | null;
     onClose: () => void;
+    onBook: () => void; // New prop to handle booking
 }
 
-const ServiceDetailDialog: React.FC<ServiceDetailDialogProps> = ({ isOpen, serviceDetail, onClose }) => {
+const ServiceDetailDialog: React.FC<ServiceDetailDialogProps> = ({ isOpen, serviceDetail, onClose, onBook }) => {
     if (!isOpen || !serviceDetail) return null;
 
     return (
@@ -65,8 +66,8 @@ const ServiceDetailDialog: React.FC<ServiceDetailDialogProps> = ({ isOpen, servi
                     {/* Book Button */}
                     <div className="flex justify-end mt-6">
                         <button
-                            className="px-6 py-3 bg-green-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all"
-                            onClick={onClose}
+                            className="px-6 py-3 bg-green-600 text-white rounded-lg text-lg font-semibold hover:bg-green-700 transition-all"
+                            onClick={onBook} // Handle book click
                         >
                             Book
                         </button>
