@@ -8,6 +8,7 @@ import { SkeletonCard } from '@/components/common/skeleton-card';
 import ServiceTab from "@/components/client/service-tab";
 import HistoryTab from "@/components/client/history-tab";
 import CustomTabs from "@/components/common/custom-tabs";
+import ErrorPage from "@/app/error";
 
 interface ClientViewProps {
     isProtected: boolean;
@@ -72,12 +73,9 @@ const ClientView: React.FC<ClientViewProps> = ({ isProtected }) => {
     }
 
     if (error) {
+        const err = new Error(error)
         return (
-            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
-                <div className="flex w-full h-full items-center justify-center">
-                    Error: {error}
-                </div>
-            </div>
+            <ErrorPage error={err} reset={() => window.location.reload()}/>
         );
     }
 

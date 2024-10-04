@@ -9,6 +9,8 @@ import { Store, StoreService } from "@/models/business/models";
 import { useAccessToken } from "@/msal/use-access-token";
 import { BusinessManagement } from "@/utils/endpoints";
 import {SkeletonCard} from "@/components/common/skeleton-card";
+import NotFound from "@/app/not-found";
+import ErrorPage from "@/app/error";
 
 interface StoreDetailProps {
     isProtected: boolean;
@@ -75,17 +77,14 @@ const StoreDetail: React.FC<StoreDetailProps> = (params) => {
     }
 
     if (error) {
+        const err = new Error(error)
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center">
-                <div className="flex w-full h-full items-center justify-center">
-                    Error: {error}
-                </div>
-            </div>
+            <ErrorPage error={err} reset={() => window.location.reload()}/>
         );
     }
 
     if (!store || !storeService) {
-        return null;
+        return <NotFound />;
     }
 
     const tabsData = [

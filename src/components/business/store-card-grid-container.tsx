@@ -11,6 +11,7 @@ import { stores as mockStores } from "@/mock/business/mock-data";
 import { useRouter } from "next/navigation";
 import AddCard from "@/components/common/add-card";
 import AddStoreDialog from "@/components/business/add-store-dialog";
+import ErrorPage from "@/app/error";
 
 interface BusinessViewProps {
     isProtected: boolean;
@@ -81,12 +82,9 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
     }
 
     if (error) {
+        const err = new Error(error)
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center">
-                <div className="flex w-full h-full items-center justify-center">
-                    Error: {error}
-                </div>
-            </div>
+            <ErrorPage error={err} reset={() => window.location.reload()}/>
         );
     }
 
