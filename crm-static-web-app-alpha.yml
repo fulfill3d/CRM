@@ -16,17 +16,33 @@ jobs:
   pool:
     vmImage: ubuntu-latest
   variables:
-  - group: Azure-Static-Web-Apps-victorious-dune-033bb4f1e-variable-group
+  - group: crm-alpha-variable-group
   steps:
   - checkout: self
     submodules: true
   - task: AzureStaticWebApp@0
     inputs:
       azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_DUNE_033BB4F1E)
-###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-# For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
       app_location: "/" # App source code path
       api_location: "" # Api source code path - optional
       output_location: "" # Built app content directory - optional
-###### End of Repository/Build Configurations ######
+    env:
+      NEXT_PUBLIC_B2C_CLIENT_ID: $(NEXT_PUBLIC_B2C_CLIENT_ID)
+      NEXT_PUBLIC_B2C_AUTHORITY: $(NEXT_PUBLIC_B2C_AUTHORITY)
+      NEXT_PUBLIC_B2C_REDIRECT_URI: $(NEXT_PUBLIC_B2C_REDIRECT_URI)
+      NEXT_PUBLIC_B2C_INSTANCE: $(NEXT_PUBLIC_B2C_INSTANCE)
+      NEXT_PUBLIC_B2C_CACHE_LOCATION: $(NEXT_PUBLIC_B2C_CACHE_LOCATION)
+
+      NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_READ: $(NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_READ)
+      NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_WRITE: $(NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_WRITE)
+      NEXT_PUBLIC_B2C_SCOPE_CLIENT_SERVICE_READ: $(NEXT_PUBLIC_B2C_SCOPE_CLIENT_SERVICE_READ)
+      NEXT_PUBLIC_B2C_SCOPE_CLIENT_SERVICE_WRITE: $(NEXT_PUBLIC_B2C_SCOPE_CLIENT_SERVICE_WRITE)
+      NEXT_PUBLIC_B2C_SCOPE_CLIENT_APPOINTMENT_READ: $(NEXT_PUBLIC_B2C_SCOPE_CLIENT_APPOINTMENT_READ)
+      NEXT_PUBLIC_B2C_SCOPE_CLIENT_APPOINTMENT_WRITE: $(NEXT_PUBLIC_B2C_SCOPE_CLIENT_APPOINTMENT_WRITE)
+
+      NEXT_PUBLIC_BUSINESS_IDENTITY_BASE_URL: $(NEXT_PUBLIC_BUSINESS_IDENTITY_BASE_URL)
+      NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL: $(NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL)
+      NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL: $(NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL)
+      NEXT_PUBLIC_CLIENT_IDENTITY_BASE_URL: $(NEXT_PUBLIC_CLIENT_IDENTITY_BASE_URL)
+      NEXT_PUBLIC_CLIENT_SERVICE_BASE_URL: $(NEXT_PUBLIC_CLIENT_SERVICE_BASE_URL)
 
