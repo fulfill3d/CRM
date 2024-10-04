@@ -103,3 +103,53 @@ export class Service {
             : [];
     }
 }
+
+export class Employee {
+    employee_id: number;
+    employee_nick_name: string;
+
+    constructor(data: any) {
+        this.employee_id = data.employee_id;
+        this.employee_nick_name = data.employee_nick_name;
+    }
+}
+
+export class ServiceDetail {
+    service_id: number;
+    service_duration: number;
+    service_price: number;
+    service_name: string;
+    service_description: string;
+    store_id: number;
+    store_name: string;
+    store_description: string;
+    location_lat: number;
+    location_lon: number;
+    address_street1: string;
+    address_street2: string;
+    address_city: string;
+    address_state: string;
+    address_country: string;
+    address_zip_code: string;
+    store_employees: Employee[];
+
+    constructor(data: any) {
+        this.service_id = data.service_id;
+        this.service_duration = data.service_duration;
+        this.service_price = data.service_price;
+        this.service_name = data.service_name;
+        this.service_description = data.service_description;
+        this.store_id = data.store_id;
+        this.store_name = data.store_name;
+        this.store_description = data.store_description;
+        this.location_lat = data.location_lat;
+        this.location_lon = data.location_lon;
+        this.address_street1 = data.address_street1;
+        this.address_street2 = data.address_street2 || ''; // Optional field
+        this.address_city = data.address_city;
+        this.address_state = data.address_state;
+        this.address_country = data.address_country;
+        this.address_zip_code = data.address_zip_code;
+        this.store_employees = data.store_employees.map((employee: any) => new Employee(employee));
+    }
+}

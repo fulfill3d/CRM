@@ -2,16 +2,16 @@
 
 import MsalAuthProvider from "@/msal/auth-provider";
 import React from "react";
-import ClientView1 from "@/components/client/client-view-1";
+import ClientView from "@/components/client/client-view";
 
 export default function Client(){
     return(
         <MsalAuthProvider>
             <MsalAuthProvider.Public>
-                <ClientView1 isProtected={false}/>
+                <ClientView isProtected={false}/>
             </MsalAuthProvider.Public>
             <MsalAuthProvider.Protected>
-                <ClientView1 isProtected={true}/>
+                <ClientView isProtected={true}/>
             </MsalAuthProvider.Protected>
         </MsalAuthProvider>
     )

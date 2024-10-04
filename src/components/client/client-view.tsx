@@ -8,12 +8,13 @@ import { SkeletonCard } from '@/components/common/skeleton-card';
 import ServiceTab from "@/components/client/service-tab";
 import HistoryTab from "@/components/client/history-tab";
 import CustomTabs from "@/components/common/custom-tabs";
+import ErrorPage from "@/app/error";
 
 interface ClientViewProps {
     isProtected: boolean;
 }
 
-const ClientView1: React.FC<ClientViewProps> = ({ isProtected }) => {
+const ClientView: React.FC<ClientViewProps> = ({ isProtected }) => {
     const { loading, error, request } = useHttp();
     const [appointments, setAppointments] = useState<Appointment[]>([]);
     const [nearbyServices, setNearbyServices] = useState<Service[]>([]);
@@ -72,77 +73,30 @@ const ClientView1: React.FC<ClientViewProps> = ({ isProtected }) => {
     }
 
     if (error) {
+        const err = new Error(error)
         return (
-            <div className="pt-24 min-h-screen flex flex-col items-center justify-center">
-                <div className="flex w-full h-full items-center justify-center">
-                    Error: {error}
-                </div>
-            </div>
+            <ErrorPage error={err} reset={() => window.location.reload()}/>
         );
     }
 
     const tabsData = [
         {
             value: "nearby",
-            label: "Nearby",
+            label: "Nearby Services",
             tab_content: <ServiceTab services={nearbyServices} />
         },
         {
             value: "history",
-            label: "History",
+            label: "My Appointments",
             tab_content: <HistoryTab appointments={appointments}/>
         }
     ]
 
     return (
-        <div className="w-full h-full overflow-y-scroll items-center justify-center">
+        <div className="w-full h-full pt-4 overflow-y-scroll items-center justify-center">
             <CustomTabs tabs={tabsData}/>
         </div>
-        // <div className="w-full h-full">
-        //     <div className="container mx-auto mt-10">
-        //         <ServiceGrid services={nearbyServices}/>
-        //     </div>
-        //     <span>Client`s Appointment List</span>
-        //     <textarea
-        //         className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-        //         value={JSON.stringify(appointments, null, 4)}
-        //         readOnly
-        //     />
-        //     <div className='flex items-center justify-center'>
-        //         <div className='w-1/2'>
-        //             <textarea
-        //                 className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-        //                 value={JSON.stringify(newAppointmentMock, null, 4)}
-        //                 readOnly
-        //             />
-        //             <div className='flex items-center justify-center'>
-        //                 <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
-        //                     <span>Make a New Appointment</span>
-        //                 </Button>
-        //             </div>
-        //         </div>
-        //         <div className='w-1/2'>
-        //             <textarea
-        //                 className='w-full h-36 p-2 bg-transparent border border-gray-300 rounded resize-none'
-        //                 value={JSON.stringify(updateAppointmentMock, null, 4)}
-        //                 readOnly
-        //             />
-        //             <div className='flex items-center justify-center'>
-        //                 <Button className='flex items-center justify-center bg-amber-100 rounded' variant='default'>
-        //                     <span>Update an Appointment</span>
-        //                 </Button>
-        //             </div>
-        //         </div>
-        //     </div>
-        //     <div className='flex items-center justify-center p-2'>
-        //         <span className='m-2'>Appointment Id</span>
-        //         <textarea className='w-8 h-8 bg-transparent border border-gray-300 rounded resize-none m-2' value="1" readOnly />
-        //         <Button className='bg-amber-100 rounded m-2' variant='default'>
-        //             <span>Delete an Appointment</span>
-        //         </Button>
-        //     </div>
-        // </div>
     );
 }
 
-export default ClientView1;
+export default ClientView;

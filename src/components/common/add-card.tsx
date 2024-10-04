@@ -1,14 +1,14 @@
 import React from 'react';
 
 interface AddCardProps {
-    onAdd?: () => void; // Function to handle adding a new item
+    onClick?: () => void; // Function to handle adding a new item
 }
 
-const AddCard: React.FC<AddCardProps> = ({ onAdd }) => {
+const AddCard: React.FC<AddCardProps> = ({ onClick }) => {
     return (
         <div
             className="max-w-sm w-full h-full bg-gray-100 shadow-lg rounded-lg overflow-hidden flex justify-center items-center cursor-pointer hover:bg-gray-200"
-            onClick={onAdd}
+            onClick={onClick}
         >
             {/* Add Icon (SVG) */}
             <svg

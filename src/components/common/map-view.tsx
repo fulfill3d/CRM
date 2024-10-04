@@ -1,4 +1,17 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import dynamic from 'next/dynamic';
+
+const MapView = dynamic(() => import('react-leaflet').then((module) => ({
+    default: module.MapContainer,
+})), { ssr: false });
+
+const TileLayer = dynamic(() => import('react-leaflet').then((module) => ({
+    default: module.TileLayer,
+})), { ssr: false });
+
+const Marker = dynamic(() => import('react-leaflet').then((module) => ({
+    default: module.Marker,
+})), { ssr: false });
+
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import React from 'react';
@@ -18,9 +31,9 @@ const customIcon = new L.Icon({
     shadowSize: [41, 41],
 });
 
-const MapView: React.FC<MapViewProps> = ({ latitude, longitude }) => {
+const MapComponent: React.FC<MapViewProps> = ({ latitude, longitude }) => {
     return (
-        <MapContainer
+        <MapView
             center={[latitude, longitude]}
             zoom={13}
             className="w-full h-48 rounded-lg shadow-lg"
@@ -36,9 +49,9 @@ const MapView: React.FC<MapViewProps> = ({ latitude, longitude }) => {
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[latitude, longitude]} icon={customIcon}/>
-        </MapContainer>
+            <Marker position={[latitude, longitude]} icon={customIcon} />
+        </MapView>
     );
 };
 
-export default MapView;
+export default MapComponent;

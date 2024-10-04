@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppointmentProps, AppointmentStatus} from "@/components/business/store/appointment-tab";
+import { AppointmentProps, AppointmentStatus } from "@/components/business/store/appointment-tab";
 
 const AppointmentCard: React.FC<AppointmentProps> = ({ customer, email, service, status, date, duration }) => {
     // Define a color for each status
@@ -20,39 +20,34 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ customer, email, service,
     const getStatusText = () => {
         switch (status) {
             case AppointmentStatus.SCHEDULED:
-                return 'Scheduled';
+                return 'SCHEDULED';
             case AppointmentStatus.CANCELED:
-                return 'Canceled';
+                return 'CANCELED';
             case AppointmentStatus.COMPLETED:
-                return 'Completed';
+                return 'COMPLETED';
             default:
                 return 'Unknown';
         }
     };
 
+    const handleCancel = () => {
+        // Add your cancel logic here
+        console.log("Canceling appointment for", customer);
+    };
+
     return (
-        <div className="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="relative max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="p-4">
                 {/* Customer Name */}
                 <h2 className="text-xl font-bold text-gray-800">{customer}</h2>
 
                 {/* Service Name */}
-                <p className="text-gray-600 mt-1">
-                    Service: {service}
-                </p>
+                <p className="text-gray-600 mt-1">Service: {service}</p>
 
                 {/* Email */}
                 <div className="mt-3">
                     <span className="block text-sm font-medium text-gray-500">Email</span>
                     <p className="text-gray-800">{email}</p>
-                </div>
-
-                {/* Status */}
-                <div className="mt-3">
-                    <span className="block text-sm font-medium text-gray-500">Status</span>
-                    <p className={`text-sm ${getStatusColor()}`}>
-                        {getStatusText()}
-                    </p>
                 </div>
 
                 {/* Date */}
@@ -66,6 +61,27 @@ const AppointmentCard: React.FC<AppointmentProps> = ({ customer, email, service,
                     <span className="block text-sm font-medium text-gray-500">Duration</span>
                     <p className="text-gray-800">{duration}</p>
                 </div>
+
+                {/* Status */}
+                <div className="mt-3">
+                    <span className="block text-sm font-medium text-gray-500">Status</span>
+                    <p className={`text-md font-bold ${getStatusColor()}`}>{getStatusText()}</p>
+                </div>
+            </div>
+
+            {/* Cancel Button (visible only if status is SCHEDULED) */}
+            <div className="absolute bottom-4 right-4">
+                <button
+                    disabled={status !== AppointmentStatus.SCHEDULED} // Disable if not scheduled
+                    className={`px-4 py-2 rounded-lg transition-all ${
+                        status === AppointmentStatus.SCHEDULED
+                            ? 'bg-red-500 text-white hover:bg-red-600'
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
+                    onClick={handleCancel}
+                >
+                    Cancel
+                </button>
             </div>
         </div>
     );
