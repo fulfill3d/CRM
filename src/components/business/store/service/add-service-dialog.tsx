@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Category, SubCategory, Service } from "@/models/business/models";
-import { serviceCategories } from "@/mock/business/mock-data"; // Assuming you have serviceCategories available
+import { serviceCategories } from "@/mock/business/mock-data";
+import Toast from "@/components/common/toast"; // Assuming you have serviceCategories available
 
 interface AddServiceDialogProps {
     isOpen: boolean;
@@ -11,6 +12,7 @@ interface AddServiceDialogProps {
 }
 
 const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCancel, initialValues, isEditMode }) => {
+    const [showToast, setShowToast] = useState(false);
     const emptyState = new Service({
         name: '',
         description: '',
@@ -79,6 +81,9 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
             };
             onAdd(newService);
             setFormData(emptyState);
+        }
+        else {
+            setShowToast(true);
         }
     };
 
@@ -209,6 +214,15 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
                     </button>
                 </div>
             </div>
+
+            {showToast && (
+                <Toast
+                    message="Input values cannot be empty!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { Category, Service } from "@/models/business/models";
 import AddCard from "@/components/common/add-card";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
-import AddServiceDialog from "@/components/business/store/add-service-dialog"; // Import the reusable confirmation dialog
+import AddServiceDialog from "@/components/business/store/service/add-service-dialog";
+import Toast from "@/components/common/toast"; // Import the reusable confirmation dialog
 
 // Assuming you have the Service class and related data structures
 interface ServiceListProps {
     services: Service[];
+    isProtected: boolean;
 }
 
-const ServiceAccordionGrid: React.FC<ServiceListProps> = ({ services }) => {
+const ServiceAccordionGrid: React.FC<ServiceListProps> = ({ services, isProtected }) => {
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
+    const [showToast, setShowToast] = useState(false);
     const [targetServiceId, setTargetServiceId] = useState<number | null>(null); // Track service to delete
     const [showAddServiceDialog, setShowAddServiceDialog] = useState(false); // Manage AddServiceDialog visibility
     const [selectedService, setSelectedService] = useState<Service | null>(null); // Track service to edit
@@ -24,12 +27,13 @@ const ServiceAccordionGrid: React.FC<ServiceListProps> = ({ services }) => {
 
     // Handle actual delete logic after confirmation
     const handleDelete = () => {
-        if (targetServiceId !== null) {
-            console.log(`Deleting service with id: ${targetServiceId}`);
-            // Add your delete logic here, such as:
-            // props.services = props.services.filter(service => service.id !== targetServiceId);
+        if (isProtected){
+            setShowDialog(false); // Close dialog after deletion
         }
-        setShowDialog(false); // Close dialog after deletion
+        else {
+            setShowDialog(false); // Close dialog after deletion
+            setShowToast(true);
+        }
     };
 
     const handleCancel = () => {
@@ -38,10 +42,16 @@ const ServiceAccordionGrid: React.FC<ServiceListProps> = ({ services }) => {
     };
     // Handle adding or editing a service
     const handleAddOrEditService = (newService: Omit<Service, 'id'>) => {
-        setShowAddServiceDialog(false); // Close the dialog after adding or editing
-        setSelectedService(null); // Reset selected service
-        setIsEditMode(false); // Reset mode
-        console.log(newService);
+        if (isProtected){
+            setShowAddServiceDialog(false); // Close the dialog after adding or editing
+            setSelectedService(null); // Reset selected service
+            setIsEditMode(false); // Reset mode
+        }else {
+            setShowAddServiceDialog(false); // Close the dialog after adding or editing
+            setSelectedService(null); // Reset selected service
+            setIsEditMode(false); // Reset mode
+            setShowToast(true);
+        }
     };
 
     // Open Add Service Dialog for adding a new service
@@ -93,6 +103,15 @@ const ServiceAccordionGrid: React.FC<ServiceListProps> = ({ services }) => {
                 onConfirm={handleDelete}
                 onCancel={handleCancel}
             />
+
+            {showToast && (
+                <Toast
+                    message="You have to login to use that feature!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

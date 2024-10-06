@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AppointmentGrid from "@/components/business/store/appointment-grid";
+import AppointmentGrid from "@/components/business/store/appointment/appointment-grid";
 
 export enum AppointmentStatus {
     SCHEDULED = 1,
@@ -8,6 +8,7 @@ export enum AppointmentStatus {
 }
 
 export interface AppointmentProps {
+    id: number
     customer: string;
     email: string;
     service: string;
@@ -16,13 +17,14 @@ export interface AppointmentProps {
     duration: string;
 }
 
-interface StoreAppointmentProps {
+export interface StoreAppointmentProps {
     store_id: number;
     appointments: AppointmentProps[];
 }
 
 interface AppointmentCardProps {
-    data: StoreAppointmentProps | undefined;
+    data: StoreAppointmentProps | null;
+    isProtected: boolean;
 }
 
 // Function to dynamically determine the color based on the status
@@ -79,7 +81,7 @@ const AppointmentTab: React.FC<AppointmentCardProps> = (props) => {
                 </div>
 
                 {/* Appointment Grid */}
-                <AppointmentGrid appointments={filteredAppointments()}/>
+                <AppointmentGrid isProtected={props.isProtected} appointments={filteredAppointments()}/>
             </div>
         </div>
     );

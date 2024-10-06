@@ -1,5 +1,6 @@
-export const stores = [
+export const mockStores = [
         {
+
             "id": 1,
             "name": "Golden Gate Spa",
             "description": "A relaxing spa experience near the iconic Golden Gate Bridge.",
@@ -381,7 +382,7 @@ export const stores = [
         }
     ];
 
-export const storeServices = [
+export const mockStoreServices = [
     {
         "store_id": 1,
         "services": [
@@ -634,11 +635,12 @@ export const storeServices = [
     }
 ];
 
-export const storeAppointments = [
+export const mockStoreAppointments = [
     {
         "store_id": 1,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Liam Johnson",
                 "email": "liam.johnson@example.com",
                 "service": "Full Body Massage",
@@ -648,6 +650,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Emma Wilson",
                 "email": "emma.wilson@example.com",
                 "service": "Facial Treatment",
@@ -657,6 +660,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Oliver Brown",
                 "email": "oliver.brown@example.com",
                 "service": "Full Body Massage",
@@ -666,6 +670,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Ava Davis",
                 "email": "ava.davis@example.com",
                 "service": "Facial Treatment",
@@ -675,6 +680,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Ethan Martinez",
                 "email": "ethan.martinez@example.com",
                 "service": "Full Body Massage",
@@ -684,6 +690,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Sophia Garcia",
                 "email": "sophia.garcia@example.com",
                 "service": "Facial Treatment",
@@ -693,6 +700,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Noah Lee",
                 "email": "noah.lee@example.com",
                 "service": "Full Body Massage",
@@ -702,6 +710,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Mia Thomas",
                 "email": "mia.thomas@example.com",
                 "service": "Facial Treatment",
@@ -711,6 +720,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "James Hernandez",
                 "email": "james.hernandez@example.com",
                 "service": "Full Body Massage",
@@ -720,6 +730,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Amelia Lewis",
                 "email": "amelia.lewis@example.com",
                 "service": "Facial Treatment",
@@ -734,6 +745,7 @@ export const storeAppointments = [
         "store_id": 2,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Lucas Martinez",
                 "email": "lucas.martinez@example.com",
                 "service": "Deep Tissue Massage",
@@ -743,6 +755,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Isabella Rodriguez",
                 "email": "isabella.rodriguez@example.com",
                 "service": "Hot Stone Massage",
@@ -752,6 +765,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Mason Walker",
                 "email": "mason.walker@example.com",
                 "service": "Deep Tissue Massage",
@@ -761,6 +775,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Harper Hall",
                 "email": "harper.hall@example.com",
                 "service": "Hot Stone Massage",
@@ -770,6 +785,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Elijah Scott",
                 "email": "elijah.scott@example.com",
                 "service": "Deep Tissue Massage",
@@ -779,6 +795,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Emily Young",
                 "email": "emily.young@example.com",
                 "service": "Hot Stone Massage",
@@ -788,6 +805,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Jackson King",
                 "email": "jackson.king@example.com",
                 "service": "Deep Tissue Massage",
@@ -797,6 +815,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Avery Wright",
                 "email": "avery.wright@example.com",
                 "service": "Hot Stone Massage",
@@ -806,6 +825,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Aiden Baker",
                 "email": "aiden.baker@example.com",
                 "service": "Deep Tissue Massage",
@@ -815,6 +835,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Scarlett Harris",
                 "email": "scarlett.harris@example.com",
                 "service": "Hot Stone Massage",
@@ -829,6 +850,7 @@ export const storeAppointments = [
         "store_id": 3,
         "appointments": [
             {
+                "id": 1,
                 "customer": "William Robinson",
                 "email": "william.robinson@example.com",
                 "service": "Reflexology",
@@ -838,6 +860,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Mia Clark",
                 "email": "mia.clark@example.com",
                 "service": "Couples Massage",
@@ -847,6 +870,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "James Lewis",
                 "email": "james.lewis@example.com",
                 "service": "Reflexology",
@@ -856,6 +880,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Sophia Perez",
                 "email": "sophia.perez@example.com",
                 "service": "Couples Massage",
@@ -865,6 +890,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "Benjamin Martinez",
                 "email": "benjamin.martinez@example.com",
                 "service": "Reflexology",
@@ -874,6 +900,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Charlotte Walker",
                 "email": "charlotte.walker@example.com",
                 "service": "Couples Massage",
@@ -883,6 +910,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "Henry Hall",
                 "email": "henry.hall@example.com",
                 "service": "Reflexology",
@@ -892,6 +920,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Amelia King",
                 "email": "amelia.king@example.com",
                 "service": "Couples Massage",
@@ -901,6 +930,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "Liam Robinson",
                 "email": "liam.robinson@example.com",
                 "service": "Reflexology",
@@ -910,6 +940,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Ava Clark",
                 "email": "ava.clark@example.com",
                 "service": "Couples Massage",
@@ -924,6 +955,7 @@ export const storeAppointments = [
         "store_id": 4,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Lily Martinez",
                 "email": "lily.martinez@example.com",
                 "service": "Haircut",
@@ -933,6 +965,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Lucas Harris",
                 "email": "lucas.harris@example.com",
                 "service": "Hair Coloring",
@@ -942,6 +975,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Evelyn White",
                 "email": "evelyn.white@example.com",
                 "service": "Haircut",
@@ -951,6 +985,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Mason Robinson",
                 "email": "mason.robinson@example.com",
                 "service": "Hair Coloring",
@@ -960,6 +995,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Ella Lewis",
                 "email": "ella.lewis@example.com",
                 "service": "Haircut",
@@ -969,6 +1005,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Jackson Walker",
                 "email": "jackson.walker@example.com",
                 "service": "Hair Coloring",
@@ -978,6 +1015,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Sofia Young",
                 "email": "sofia.young@example.com",
                 "service": "Haircut",
@@ -987,6 +1025,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Alexander Hall",
                 "email": "alexander.hall@example.com",
                 "service": "Hair Coloring",
@@ -996,6 +1035,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Emily Scott",
                 "email": "emily.scott@example.com",
                 "service": "Haircut",
@@ -1005,6 +1045,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Henry King",
                 "email": "henry.king@example.com",
                 "service": "Hair Coloring",
@@ -1019,6 +1060,7 @@ export const storeAppointments = [
         "store_id": 5,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Grace White",
                 "email": "grace.white@example.com",
                 "service": "Zen Meditation Session",
@@ -1028,6 +1070,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Benjamin Young",
                 "email": "benjamin.young@example.com",
                 "service": "Aromatherapy Massage",
@@ -1037,6 +1080,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Victoria Martinez",
                 "email": "victoria.martinez@example.com",
                 "service": "Zen Meditation Session",
@@ -1046,6 +1090,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Daniel Hernandez",
                 "email": "daniel.hernandez@example.com",
                 "service": "Aromatherapy Massage",
@@ -1055,6 +1100,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Scarlett Moore",
                 "email": "scarlett.moore@example.com",
                 "service": "Zen Meditation Session",
@@ -1064,6 +1110,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "David Lee",
                 "email": "david.lee@example.com",
                 "service": "Aromatherapy Massage",
@@ -1073,6 +1120,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Ella Wilson",
                 "email": "ella.wilson@example.com",
                 "service": "Zen Meditation Session",
@@ -1082,6 +1130,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Logan Thomas",
                 "email": "logan.thomas@example.com",
                 "service": "Aromatherapy Massage",
@@ -1091,6 +1140,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Mia Anderson",
                 "email": "mia.anderson@example.com",
                 "service": "Zen Meditation Session",
@@ -1100,6 +1150,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Alexander Robinson",
                 "email": "alexander.robinson@example.com",
                 "service": "Aromatherapy Massage",
@@ -1111,23 +1162,6 @@ export const storeAppointments = [
         ]
     }
 ];
-
-export const appointments = {
-    "tabs": [
-        { "value": "week", "label": "Week" },
-        { "value": "month", "label": "Month" },
-        { "value": "year", "label": "Year" }
-    ],
-    "dropdownItems": [
-        { "label": "Scheduled", "checked": true },
-        { "label": "Canceled" },
-        { "label": "Completed" }
-    ],
-    "cardTitle": "Appointments",
-    "cardDescription": "Recent appointments from your store.",
-    "headers": ["Customer", "Type", "Status", "Date", "Duration", "Amount"],
-    "rows": []
-}
 
 export const serviceCategories = {
     "categories": [
@@ -1185,40 +1219,3 @@ export const serviceCategories = {
         }
     ]
 };
-
-export const newEmployeeMock = {
-    "nick_name": "Johnny",
-    "first_name": "John",
-    "last_name": "Doe",
-    "e_mail": "john.doe@example.com",
-    "phone": "+1234567890"
-};
-
-export const updateEmployeeMock = {
-    "id": 9,
-    "nick_name": "Johnny",
-    "first_name": "John",
-    "last_name": "Doe",
-    "e_mail": "john.doe@example.com",
-    "phone": "+1234567890"
-};
-
-export const newServiceMock = {
-    "service-name": "Haircut",
-    "description": "A standard haircut.",
-    "duration": 30,
-    "price": 25.00,
-    "categories": [1],
-    "sub-categories": [1, 2]
-};
-
-export const updateServiceMock = {
-    "store-service-id": 4,
-    "service-name": "Haircut",
-    "description": "A standard haircut.",
-    "duration": 30,
-    "price": 27.00,
-    "categories": [1],
-    "sub-categories": [1, 2, 3]
-};
-

@@ -7,11 +7,12 @@ import { BusinessManagement } from "@/utils/endpoints";
 import { useAccessToken } from "@/msal/use-access-token";
 import { Store } from "@/models/business/models";
 import { SkeletonCard } from "@/components/common/skeleton-card";
-import { stores as mockStores } from "@/mock/business/mock-data";
 import { useRouter } from "next/navigation";
 import AddCard from "@/components/common/add-card";
 import AddStoreDialog from "@/components/business/add-store-dialog";
 import ErrorPage from "@/app/error";
+import {mockStores} from "@/mock/business/mock-data";
+import Toast from "@/components/common/toast";
 
 interface BusinessViewProps {
     isProtected: boolean;
@@ -19,6 +20,7 @@ interface BusinessViewProps {
 
 const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) => {
     const router = useRouter();
+    const [showToast, setShowToast] = useState(false);
     const { loading, error, request } = useHttp();
     const [stores, setStores] = useState<Store[]>([]);
     const [showAddStoreDialog, setShowAddStoreDialog] = useState(false); // Manage AddStoreDialog visibility
@@ -62,8 +64,13 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
             location: null,
             employees: []
         });
-        setStores([...stores, newStoreObject]); // Add the new store to the list
-        setShowAddStoreDialog(false); // Close dialog after adding
+        console.log('handleAddStore');
+        if (isProtected){
+            console.log('isProtected');
+        }else {
+            setShowAddStoreDialog(false);
+            setShowToast(true);
+        }
     };
 
     if (loading) {
@@ -112,6 +119,15 @@ const StoreCardGridContainer: React.FC<BusinessViewProps> = ({ isProtected }) =>
                 onAdd={handleAddStore}
                 onCancel={() => setShowAddStoreDialog(false)}
             />
+
+            {showToast && (
+                <Toast
+                    message="You have to login to use that feature!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

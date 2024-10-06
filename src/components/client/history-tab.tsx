@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import AppointmentGrid, {AppointmentListProps} from "@/components/client/appointment-grid";
-import {AppointmentStatus} from "@/components/business/store/appointment-tab";
+import {AppointmentStatus} from "@/components/business/store/appointment/appointment-tab";
 
 
 // Function to dynamically determine the color based on the status

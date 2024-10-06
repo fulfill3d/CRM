@@ -1,10 +1,11 @@
 import {serviceCategories,} from "@/mock/business/mock-data";
 import {StoreService} from "@/models/business/models";
-import ServiceAccordionGrid from "@/components/business/store/service-accordion-grid";
-import ServiceCategoriesDropdown from "@/components/business/store/service-categories-dropdown";
+import ServiceAccordionGrid from "@/components/business/store/service/service-accordion-grid";
+import ServiceCategoriesDropdown from "@/components/business/store/service/service-categories-dropdown";
 import React from "react";
 
 interface Props{
+    isProtected: boolean;
     data: StoreService
 }
 
@@ -17,7 +18,7 @@ const ServiceTab = (props: Props) => {
                 <ServiceCategoriesDropdown data={serviceCategories}/>
             </div>
             <div className="container mx-auto mt-10">
-                <ServiceAccordionGrid services={props.data.services}/>
+                <ServiceAccordionGrid isProtected={props.isProtected} services={props.data.services}/>
             </div>
         </div>
     )

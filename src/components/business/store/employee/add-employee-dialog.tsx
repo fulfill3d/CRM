@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Toast from "@/components/common/toast";
 
 interface EmployeeProps {
     nick_name: string;
@@ -17,6 +18,7 @@ interface AddEmployeeDialogProps {
 }
 
 const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, onCancel, initialValues, isEditMode }) => {
+    const [showToast, setShowToast] = useState(false);
     const emptyState = {
         nick_name: '',
         first_name: '',
@@ -52,6 +54,9 @@ const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, on
         const { nick_name, first_name, last_name, e_mail, phone } = formData;
         if (nick_name && first_name && last_name && e_mail && phone) {
             onAdd(formData);
+        }
+        else {
+            setShowToast(true);
         }
     };
 
@@ -100,6 +105,15 @@ const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, on
                     </button>
                 </div>
             </div>
+
+            {showToast && (
+                <Toast
+                    message="Input values cannot be empty!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

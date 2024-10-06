@@ -1,8 +1,9 @@
-import EmployeeCard from "@/components/business/store/employee-card";
+import EmployeeCard from "@/components/business/store/employee/employee-card";
 import AddCard from "@/components/common/add-card";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
 import React, { useState } from "react";
-import AddEmployeeDialog from "@/components/business/store/add-employee-dialog";
+import AddEmployeeDialog from "@/components/business/store/employee/add-employee-dialog";
+import Toast from "@/components/common/toast";
 
 interface EmployeeProps {
     id: number;
@@ -14,22 +15,31 @@ interface EmployeeProps {
 }
 
 interface EmployeeCardProps {
+    isProtected: boolean;
     data: EmployeeProps[];
 }
 
 const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
+    const [showToast, setShowToast] = useState(false);
     const [targetEmployeeId, setTargetEmployeeId] = useState<number | null>(null); // Track employee to delete
     const [showAddDialog, setShowAddDialog] = useState(false); // Manage add dialog visibility
     const [selectedEmployee, setSelectedEmployee] = useState<EmployeeProps | null>(null); // Track employee to edit
     const [isEditMode, setIsEditMode] = useState(false); // Manage dialog mode (add or edit)
 
     // Handle adding a new employee
-    const handleAddEmployee = () => {
-        // Reset state after adding/editing
+    const handleAddEditEmployee = () => {
         setShowAddDialog(false);
-        setSelectedEmployee(null); // Reset selected employee after adding/editing
-        setIsEditMode(false); // Reset mode after completion
+        if (props.isProtected){
+            // Logic in backend
+            setSelectedEmployee(null); // Reset selected employee after adding/editing
+            setIsEditMode(false); // Reset mode after completion
+        }else {
+            // Logic in backend
+            setSelectedEmployee(null); // Reset selected employee after adding/editing
+            setIsEditMode(false); // Reset mode after completion
+            setShowToast(true);
+        }
     };
 
     // Show the delete confirmation dialog
@@ -40,11 +50,12 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
 
     // Handle delete logic after confirmation
     const handleDelete = () => {
-        if (targetEmployeeId !== null) {
-            console.log(`Deleting employee with id: ${targetEmployeeId}`);
-            // Add your delete logic here
+        if (props.isProtected){
+            setShowDialog(false);
+        }else {
+            setShowDialog(false);
+            setShowToast(true)
         }
-        setShowDialog(false); // Close the dialog after deletion
     };
 
     const handleCancel = () => {
@@ -90,7 +101,7 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
             {/* Add Employee Dialog */}
             <AddEmployeeDialog
                 isOpen={showAddDialog}
-                onAdd={handleAddEmployee}
+                onAdd={handleAddEditEmployee}
                 onCancel={() => {
                     setShowAddDialog(false);
                     setSelectedEmployee(null); // Reset selected employee when canceled
@@ -99,6 +110,15 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
                 initialValues={selectedEmployee || undefined} // Pass selected employee for editing
                 isEditMode={isEditMode} // Control mode (add or edit)
             />
+
+            {showToast && (
+                <Toast
+                    message="You have to login to use that feature!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

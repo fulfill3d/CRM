@@ -1,6 +1,6 @@
 import React from "react";
 import { Appointment } from "@/models/client/models";
-import { AppointmentStatus } from "@/components/business/store/appointment-tab";
+import { AppointmentStatus } from "@/components/business/store/appointment/appointment-tab";
 
 export interface AppointmentCardProps {
     appointment: Appointment;

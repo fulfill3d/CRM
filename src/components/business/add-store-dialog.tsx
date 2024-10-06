@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Toast from "@/components/common/toast";
 
 interface AddStoreDialogProps {
     isOpen: boolean;
@@ -7,6 +8,7 @@ interface AddStoreDialogProps {
 }
 
 const AddStoreDialog: React.FC<AddStoreDialogProps> = ({ isOpen, onAdd, onCancel }) => {
+    const [showToast, setShowToast] = useState(false);
     const [storeData, setStoreData] = useState({ name: "", description: "" });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -20,6 +22,9 @@ const AddStoreDialog: React.FC<AddStoreDialogProps> = ({ isOpen, onAdd, onCancel
     const handleAddStore = () => {
         if (storeData.name && storeData.description) {
             onAdd(storeData);
+        }
+        else {
+            setShowToast(true);
         }
     };
 
@@ -71,6 +76,15 @@ const AddStoreDialog: React.FC<AddStoreDialogProps> = ({ isOpen, onAdd, onCancel
                     </button>
                 </div>
             </div>
+
+            {showToast && (
+                <Toast
+                    message="Input values cannot be empty!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

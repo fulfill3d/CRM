@@ -12,7 +12,7 @@ interface SubCategory {
     description: string;
 }
 
-interface ServiceCategoriesProps {
+export interface ServiceCategoriesProps {
     categories: Category[];
     sub_categories: SubCategory[];
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import StoreProvider from "@/components/store-provider";
 import React from "react";
 import NavBar from "@/components/common/nav-bar";
 import Fulfill3d from "@/svg/fulfill3d";
@@ -21,7 +20,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <body className="h-screen flex flex-col">
         <NavBar brandName="CRM" logoSvg={Fulfill3d} links={links}/>
         <main className="flex-1 pt-16 overflow-hidden">
-            <StoreProvider>{children}</StoreProvider>
+            {children}
         </main>
         </body>
         </html>

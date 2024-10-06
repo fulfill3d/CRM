@@ -1,7 +1,6 @@
-import { storeAppointments, stores, storeServices } from "@/mock/business/mock-data";
-import EmployeeTab from "@/components/business/store/employee-tab";
-import ServiceTab from "@/components/business/store/service-tab";
-import AppointmentTab from "@/components/business/store/appointment-tab";
+import EmployeeTab from "@/components/business/store/employee/employee-tab";
+import ServiceTab from "@/components/business/store/service/service-tab";
+import AppointmentTab, {StoreAppointmentProps} from "@/components/business/store/appointment/appointment-tab";
 import CustomTabs from "@/components/common/custom-tabs";
 import useHttp from "@/hooks/common/use-http";
 import React, { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import { BusinessManagement } from "@/utils/endpoints";
 import {SkeletonCard} from "@/components/common/skeleton-card";
 import NotFound from "@/app/not-found";
 import ErrorPage from "@/app/error";
+import {mockStoreAppointments, mockStores, mockStoreServices} from "@/mock/business/mock-data";
 
 interface StoreDetailProps {
     isProtected: boolean;
@@ -20,6 +20,7 @@ interface StoreDetailProps {
 const StoreDetail: React.FC<StoreDetailProps> = (params) => {
     const [store, setStore] = useState<Store | null>(null);
     const [storeService, setStoreService] = useState<StoreService | null>(null);
+    const [storeAppointments, setStoreAppointments] = useState<StoreAppointmentProps | null>(null);
     const { loading, error, request } = useHttp();
 
     const scopes = [
@@ -52,14 +53,15 @@ const StoreDetail: React.FC<StoreDetailProps> = (params) => {
                 setStoreService(mappedServices);
             });
         } else if (!params.isProtected && params.storeId) {
-            const currentStore = stores.find(store => store.id === params.storeId);
-            const currentService = storeServices.find(service => service.store_id === params.storeId);
+            const currentStore = mockStores.find(store => store.id === params.storeId);
+            const currentService = mockStoreServices.find(service => service.store_id === params.storeId);
+            const currentAppointments = mockStoreAppointments.find(app => app.store_id === params.storeId);
             if (currentStore) setStore(new Store(currentStore));
             if (currentService) setStoreService(new StoreService(currentService));
+            if (currentAppointments) setStoreAppointments(currentAppointments);
         }
     }, [accessToken, request, params]);
 
-    const currentAppointments = storeAppointments.find(app => app.store_id === params.storeId);
 
     if (loading) {
         return (
@@ -91,17 +93,17 @@ const StoreDetail: React.FC<StoreDetailProps> = (params) => {
         {
             value: "employees",
             label: "Employees",
-            tab_content: <EmployeeTab data={store.employees} />
+            tab_content: <EmployeeTab isProtected={params.isProtected} data={store.employees} />
         },
         {
             value: "services",
             label: "Services",
-            tab_content: <ServiceTab data={storeService} />
+            tab_content: <ServiceTab isProtected={params.isProtected} data={storeService} />
         },
         {
             value: "appointments",
             label: "Appointments",
-            tab_content: <AppointmentTab data={currentAppointments} />
+            tab_content: <AppointmentTab isProtected={params.isProtected} data={storeAppointments} />
         }
     ];
 
