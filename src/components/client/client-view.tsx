@@ -5,8 +5,8 @@ import { useAccessToken } from '@/msal/use-access-token';
 import { ClientAppointment, ClientService } from '@/utils/endpoints';
 import { Appointment, Service } from '@/models/client/models';
 import { SkeletonCard } from '@/components/common/skeleton-card';
-import ServiceTab from "@/components/client/service-tab";
-import HistoryTab from "@/components/client/history-tab";
+import ServiceTab from "@/components/client/nearby/service-tab";
+import HistoryTab from "@/components/client/history/history-tab";
 import CustomTabs from "@/components/common/custom-tabs";
 import ErrorPage from "@/app/error";
 
@@ -83,12 +83,12 @@ const ClientView: React.FC<ClientViewProps> = ({ isProtected }) => {
         {
             value: "nearby",
             label: "Nearby Services",
-            tab_content: <ServiceTab services={nearbyServices} />
+            tab_content: <ServiceTab isProtected={isProtected} services={nearbyServices} />
         },
         {
             value: "history",
             label: "My Appointments",
-            tab_content: <HistoryTab appointments={appointments}/>
+            tab_content: <HistoryTab isProtected={isProtected} appointments={appointments}/>
         }
     ]
 

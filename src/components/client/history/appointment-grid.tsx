@@ -1,14 +1,17 @@
-import AppointmentCard from "@/components/client/appointment-card";
+import AppointmentCard from "@/components/client/history/appointment-card";
 import React, { useState } from "react";
 import { Appointment } from "@/models/client/models";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
-import AppointmentDialog from "@/components/client/appointment-dialog";
+import AppointmentDialog from "@/components/client/history/appointment-dialog";
+import Toast from "@/components/common/toast";
 
 export interface AppointmentListProps {
     appointments?: Appointment[];
+    isProtected: boolean;
 }
 
-const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments }) => {
+const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments, isProtected }) => {
+    const [showToast, setShowToast] = useState(false);
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false); // Manage confirmation dialog visibility
     const [showUpdateDialog, setShowUpdateDialog] = useState(false); // Manage update dialog visibility
     const [appointmentId, setAppointmentId] = useState<number | null>(null);
@@ -30,7 +33,12 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments }) => {
 
     const handleConfirmCancel = () => {
         setShowConfirmationDialog(false);
-        console.log('Cancel appointment id: ', appointmentId);
+        if (isProtected){
+            console.log('Cancel appointment id: ', appointmentId);
+        }else {
+            console.log('Cancel appointment id: ', appointmentId);
+            setShowToast(true);
+        }
     }
 
     const handleNotConfirmCancel = () => {
@@ -40,7 +48,12 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments }) => {
 
     const handleSaveUpdatedAppointment = (updatedData: { start_date: string; note: string }) => {
         setShowUpdateDialog(false);
-        console.log('Updated appointment id: ', appointmentId, ' with data: ', updatedData);
+        if (isProtected){
+            console.log('Updated appointment id: ', appointmentId, ' with data: ', updatedData);
+        }else {
+            console.log('Updated appointment id: ', appointmentId, ' with data: ', updatedData);
+            setShowToast(true);
+        }
     };
 
     return (
@@ -77,6 +90,15 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments }) => {
                     initialData={appointmentToEdit}
                     onClose={() => setShowUpdateDialog(false)}
                     onSave={handleSaveUpdatedAppointment}
+                />
+            )}
+
+            {showToast && (
+                <Toast
+                    message="You have to login to use that feature!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
                 />
             )}
         </div>

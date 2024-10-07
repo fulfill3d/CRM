@@ -1,12 +1,13 @@
 import { Service } from "@/models/client/models";
 import React from "react";
-import ServiceGrid from "@/components/client/service-grid";
+import ServiceGrid from "@/components/client/nearby/service-grid";
 
 interface ServiceListProps {
     services: Service[];
+    isProtected: boolean;
 }
 
-const ServiceTab: React.FC<ServiceListProps> = ({ services }) => {
+const ServiceTab: React.FC<ServiceListProps> = ({ services, isProtected }) => {
     return (
         <div className="w-full h-full">
             {/* Filter Section */}
@@ -44,7 +45,7 @@ const ServiceTab: React.FC<ServiceListProps> = ({ services }) => {
 
             {/* Service Grid Section */}
             <div className="container mx-auto">
-                <ServiceGrid services={services}/>
+                <ServiceGrid isProtected={isProtected} services={services}/>
             </div>
         </div>
     );

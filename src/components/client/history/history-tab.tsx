@@ -1,7 +1,12 @@
 import React, {useState} from "react";
-import AppointmentGrid, {AppointmentListProps} from "@/components/client/appointment-grid";
+import AppointmentGrid from "@/components/client/history/appointment-grid";
 import {AppointmentStatus} from "@/components/business/store/appointment/appointment-tab";
+import {Appointment} from "@/models/client/models";
 
+interface HistoryTabProps {
+    appointments: Appointment[];
+    isProtected: boolean;
+}
 
 // Function to dynamically determine the color based on the status
 const getStatusColor = (status: AppointmentStatus | 'all') => {
@@ -17,7 +22,7 @@ const getStatusColor = (status: AppointmentStatus | 'all') => {
     }
 };
 
-const HistoryTab: React.FC<AppointmentListProps> = ({ appointments }) => {
+const HistoryTab: React.FC<HistoryTabProps> = ({ appointments, isProtected }) => {
     const [selectedStatus, setSelectedStatus] = useState<AppointmentStatus | 'all'>('all');
 
     // List of filter options including 'all'
@@ -55,7 +60,7 @@ const HistoryTab: React.FC<AppointmentListProps> = ({ appointments }) => {
                         );
                     })}
                 </div>
-                <AppointmentGrid appointments={filteredAppointments()}/>
+                <AppointmentGrid isProtected={isProtected} appointments={filteredAppointments()}/>
             </div>
         </div>
     );

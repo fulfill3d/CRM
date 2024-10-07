@@ -1,15 +1,18 @@
-import ServiceCard from "@/components/client/service-card";
+import ServiceCard from "@/components/client/nearby/service-card";
 import { Service, ServiceDetail } from "@/models/client/models";
 import React, { useState } from "react";
 import { nearbyServices } from "@/mock/client/mock-data";
-import ServiceDetailDialog from "@/components/client/service-detail-dialog";
-import AppointmentDialog from "@/components/client/appointment-dialog"; // Import the AppointmentDialog
+import ServiceDetailDialog from "@/components/client/nearby/service-detail-dialog";
+import AppointmentDialog from "@/components/client/history/appointment-dialog";
+import Toast from "@/components/common/toast"; // Import the AppointmentDialog
 
 interface ServiceListProps {
     services: Service[];
+    isProtected: boolean;
 }
 
-const ServiceGrid: React.FC<ServiceListProps> = ({ services }) => {
+const ServiceGrid: React.FC<ServiceListProps> = ({ services, isProtected }) => {
+    const [showToast, setShowToast] = useState(false);
     const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null); // Track selected service for dialog
     const [isDialogOpen, setIsDialogOpen] = useState(false); // Track ServiceDetailDialog visibility
     const [isAppointmentDialogOpen, setIsAppointmentDialogOpen] = useState(false); // Track AppointmentDialog visibility
@@ -40,8 +43,13 @@ const ServiceGrid: React.FC<ServiceListProps> = ({ services }) => {
     };
 
     const handleAppointmentSave = (updatedData: { start_date: string; note: string }) => {
-        console.log('Appointment data:', updatedData);
         setIsAppointmentDialogOpen(false); // Close the dialog after saving
+        if (isProtected){
+            console.log('Appointment data:', updatedData);
+        }else {
+            console.log('Appointment data:', updatedData);
+            setShowToast(true);
+        }
     };
 
     return (
@@ -71,6 +79,15 @@ const ServiceGrid: React.FC<ServiceListProps> = ({ services }) => {
                     isEditMode={false} // Not edit mode, this is for booking
                     onClose={closeAppointmentDialog}
                     onSave={handleAppointmentSave}
+                />
+            )}
+
+            {showToast && (
+                <Toast
+                    message="You have to login to use that feature!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
                 />
             )}
         </div>
