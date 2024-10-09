@@ -1,18 +1,24 @@
 'use client'
 
-import StoreCardGridContainer from "@/components/business/store-card-grid-container";
+import BusinessView from "@/components/business/business-view";
 import MsalAuthProvider from "@/msal/auth-provider";
 import React from "react";
+import {useAcquireBusinessAccessToken} from "@/hooks/common/use-acquire-access-token";
 
-export default function Business(){
+const Business = () => {
+
+    useAcquireBusinessAccessToken();
+
     return(
         <MsalAuthProvider>
             <MsalAuthProvider.Public>
-                <StoreCardGridContainer isProtected={false}/>
+                <BusinessView />
             </MsalAuthProvider.Public>
             <MsalAuthProvider.Protected>
-                <StoreCardGridContainer isProtected={true}/>
+                <BusinessView />
             </MsalAuthProvider.Protected>
         </MsalAuthProvider>
     )
 }
+
+export default Business;

@@ -1,52 +1,75 @@
-import { Service } from "@/models/client/models";
-import React from "react";
+import React, {useState} from "react";
+import ServiceDetailDialog from "@/components/client/nearby/service-detail-dialog";
+import AppointmentDialog from "@/components/client/common/appointment-dialog";
+import Toast from "@/components/common/toast";
 import ServiceGrid from "@/components/client/nearby/service-grid";
+import ServiceFilter from "@/components/client/nearby/service-filter";
 
-interface ServiceListProps {
-    services: Service[];
-    isProtected: boolean;
-}
+interface ServiceListProps {}
 
-const ServiceTab: React.FC<ServiceListProps> = ({ services, isProtected }) => {
+const ServiceTab: React.FC<ServiceListProps> = () => {
+    const [showToast, setShowToast] = useState(false);
+    const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null); // Track selected serviceId for dialog
+    const [detailDialogOpen, setDetailDialogOpen] = useState(false); // Track ServiceDetailDialog visibility
+    const [isAppointmentDialogOpen, setIsAppointmentDialogOpen] = useState(false); // Track AppointmentDialog visibility
+
     return (
         <div className="w-full h-full">
             {/* Filter Section */}
-            <div className="flex items-center justify-center bg-white p-4 mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* ZipCode Input */}
-                    <div className="flex flex-col">
-                        <label htmlFor="zipcode" className="text-gray-700 font-semibold">
-                            Zip Code
-                        </label>
-                        <input
-                            type="text"
-                            id="zipcode"
-                            className="mt-2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-coral"
-                            placeholder="Enter Zip Code"
-                        />
-                    </div>
-
-                    {/* Range Slider */}
-                    <div className="flex flex-col">
-                        <label htmlFor="range" className="text-gray-700 font-semibold">
-                            Range (Miles)
-                        </label>
-                        <input
-                            type="range"
-                            id="range"
-                            min="1"
-                            max="50"
-                            className="mt-2 w-full focus:outline-none focus:ring-2 focus:ring-coral"
-                        />
-                        <span className="mt-2 text-gray-500">Select range: 0-50 miles</span>
-                    </div>
-                </div>
-            </div>
+            <ServiceFilter />
 
             {/* Service Grid Section */}
-            <div className="container mx-auto">
-                <ServiceGrid isProtected={isProtected} services={services}/>
-            </div>
+            <ServiceGrid
+                onServiceCardClick={(id) => {
+                    setSelectedServiceId(id);
+                    setDetailDialogOpen(true);
+                }}
+            />
+
+            {/* Service Detail Dialog */}
+            <ServiceDetailDialog
+                isOpen={detailDialogOpen}
+                serviceId={selectedServiceId}
+                onClose={() => {
+                    setDetailDialogOpen(false);
+                    setSelectedServiceId(null); // Reset selected service when closing
+                }} // Pass the close handler
+                onBook={() => {
+                    setDetailDialogOpen(false); // Close service detail dialog
+                    setIsAppointmentDialogOpen(true); // Open appointment dialog
+                }} // Pass the book handler
+            />
+
+            {/* Appointment Dialog for booking */}
+            <AppointmentDialog
+                isOpen={isAppointmentDialogOpen}
+                serviceId={selectedServiceId}
+                appointmentId={null}
+                isEditMode={false} // Not edit mode, this is for booking
+                onClose={() => {
+                    setIsAppointmentDialogOpen(false);
+                    setDetailDialogOpen(true); // Open service detail dialog
+                }}
+                onSuccess={() => {
+                    setDetailDialogOpen(false);
+                    setIsAppointmentDialogOpen(false);
+                }}
+                onError={(msg) => console.log(msg)}
+                onNoAccessToken={() => {
+                    setDetailDialogOpen(false);
+                    setIsAppointmentDialogOpen(false);
+                    setShowToast(true);
+                }}
+            />
+
+            {showToast && (
+                <Toast
+                    message="You have to login to use that feature!"
+                    type="error"
+                    duration={3000}
+                    onClose={() => setShowToast(false)}
+                />
+            )}
         </div>
     );
 };

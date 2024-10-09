@@ -1,45 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PortalInfoDialog from "@/components/common/portal-info-dialog";
+import {usePingAzureFunctions} from "@/hooks/common/use-ping-azure-functions";
+import {usePortalInfoDialog} from "@/hooks/common/use-portal-info-dialog";
+import {useAcquireBusinessAccessToken} from "@/hooks/common/use-acquire-access-token";
 
-export default function Home() {
-    const [showPortalInfo, setShowPortalInfo] = useState(false);
+const Home = () => {
 
-    // PING to Wake Up Azure Functions Simultaneously
-    useEffect(() => {
-        (async () => {
-            try {
-                const endpoints = [
-                    process.env.NEXT_PUBLIC_BUSINESS_IDENTITY_BASE_URL || '',
-                    process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL || '',
-                    process.env.NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL || '',
-                    process.env.NEXT_PUBLIC_CLIENT_IDENTITY_BASE_URL || '',
-                    process.env.NEXT_PUBLIC_CLIENT_SERVICE_BASE_URL || ''
-                ];
+    useAcquireBusinessAccessToken();
 
-                // Use Promise.all to send all requests at once
-                await Promise.all(endpoints.map(endpoint => fetch(endpoint)));
+    usePingAzureFunctions();
 
-            } catch (error) {
-                console.error('Error pinging Azure Functions:', error);
-            }
-        })();
-    }, []);
-
-    // Check sessionStorage to see if the dialog has already been shown
-    useEffect(() => {
-        const hasSeenPortalInfo = sessionStorage.getItem('hasSeenPortalInfo');
-        if (!hasSeenPortalInfo) {
-            setShowPortalInfo(true);
-        }
-    }, []);
-
-    // Function to handle closing the dialog
-    const handleClosePortalInfo = () => {
-        sessionStorage.setItem('hasSeenPortalInfo', 'true'); // Set the flag in sessionStorage
-        setShowPortalInfo(false); // Close the dialog
-    };
+    const { showPortalInfo, handleClosePortalInfo } = usePortalInfoDialog();
 
     return (
         <div className="h-full w-full flex items-center justify-center px-6 py-10 bg-gray-100">
@@ -85,3 +58,5 @@ export default function Home() {
         </div>
     );
 }
+
+export default Home;

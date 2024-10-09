@@ -1,9 +1,9 @@
-import EmployeeCard from "@/components/business/store/employee/employee-card";
-import AddCard from "@/components/common/add-card";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
 import React, { useState } from "react";
 import AddEmployeeDialog from "@/components/business/store/employee/add-employee-dialog";
 import Toast from "@/components/common/toast";
+import {useBusinessAccessToken} from "@/msal/use-access-token";
+import EmployeeGrid from "@/components/business/store/employee/employee-grid";
 
 interface EmployeeProps {
     id: number;
@@ -14,12 +14,12 @@ interface EmployeeProps {
     phone: string;
 }
 
-interface EmployeeCardProps {
-    isProtected: boolean;
-    data: EmployeeProps[];
+interface EmployeeTabProps {
+    storeId: number;
 }
 
-const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
+const EmployeeTab: React.FC<EmployeeTabProps> = ({storeId}) => {
+    const accessToken = useBusinessAccessToken();
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
     const [showToast, setShowToast] = useState(false);
     const [targetEmployeeId, setTargetEmployeeId] = useState<number | null>(null); // Track employee to delete
@@ -30,7 +30,7 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
     // Handle adding a new employee
     const handleAddEditEmployee = () => {
         setShowAddDialog(false);
-        if (props.isProtected){
+        if (accessToken){
             // Logic in backend
             setSelectedEmployee(null); // Reset selected employee after adding/editing
             setIsEditMode(false); // Reset mode after completion
@@ -42,15 +42,9 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
         }
     };
 
-    // Show the delete confirmation dialog
-    const triggerDelete = (id: number) => {
-        setTargetEmployeeId(id); // Set the employee ID to delete
-        setShowDialog(true); // Show dialog
-    };
-
     // Handle delete logic after confirmation
     const handleDelete = () => {
-        if (props.isProtected){
+        if (accessToken){
             setShowDialog(false);
         }else {
             setShowDialog(false);
@@ -63,8 +57,14 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
         setTargetEmployeeId(null); // Reset the target employee ID
     };
 
+    // Show the delete confirmation dialog
+    const triggerDelete = (id: number) => {
+        setTargetEmployeeId(id); // Set the employee ID to delete
+        setShowDialog(true); // Show dialog
+    };
+
     // Trigger edit dialog with employee data
-    const handleEdit = (employee: EmployeeProps) => {
+    const triggerEdit = (employee: EmployeeProps) => {
         setSelectedEmployee(employee); // Set the employee to edit
         setIsEditMode(true); // Enable edit mode
         setShowAddDialog(true); // Open the dialog
@@ -72,22 +72,17 @@ const EmployeeTab: React.FC<EmployeeCardProps> = (props) => {
 
     return (
         <div className="w-full h-full">
-            <text className="container mx-auto text-xl font-semibold">Employees of this store</text>
-            <div className="container mx-auto mt-4">
-                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-                    {props.data.map(employee => (
-                        <EmployeeCard
-                            key={employee.id}
-                            {...employee}
-                            onDelete={() => triggerDelete(employee.id)} // Trigger
-                            onEdit={() => handleEdit(employee)} // Trigger edit dialog
-                        />
-                    ))}
-                    <div className="flex items-center justify-center">
-                        <AddCard onClick={() => setShowAddDialog(true)}/>
-                    </div>
-                </div>
-            </div>
+            <text className="container mx-auto text-xl font-semibold">
+                Employees of this store
+            </text>
+
+            {/* Employee Grid */}
+            <EmployeeGrid
+                storeId={storeId}
+                triggerDelete={(id) => triggerDelete(id)}
+                triggerEdit={(employee) => triggerEdit(employee)}
+                onAddEmployee={() => setShowAddDialog(true)}
+            />
 
             {/* Reusable Confirmation Dialog */}
             <ConfirmationDialog

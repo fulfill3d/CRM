@@ -1,109 +1,36 @@
+import React from "react";
 import EmployeeTab from "@/components/business/store/employee/employee-tab";
 import ServiceTab from "@/components/business/store/service/service-tab";
-import AppointmentTab, {StoreAppointmentProps} from "@/components/business/store/appointment/appointment-tab";
+import AppointmentTab from "@/components/business/store/appointment/appointment-tab";
 import CustomTabs from "@/components/common/custom-tabs";
-import useHttp from "@/hooks/common/use-http";
-import React, { useEffect, useState } from "react";
-import { Store, StoreService } from "@/models/business/models";
-import { useAccessToken } from "@/msal/use-access-token";
-import { BusinessManagement } from "@/utils/endpoints";
-import {SkeletonCard} from "@/components/common/skeleton-card";
-import NotFound from "@/app/not-found";
-import ErrorPage from "@/app/error";
-import {mockStoreAppointments, mockStores, mockStoreServices} from "@/mock/business/mock-data";
+import StoreTab from "@/components/business/store/store-tab";
 
 interface StoreDetailProps {
-    isProtected: boolean;
     storeId: number;
 }
 
-const StoreDetail: React.FC<StoreDetailProps> = (params) => {
-    const [store, setStore] = useState<Store | null>(null);
-    const [storeService, setStoreService] = useState<StoreService | null>(null);
-    const [storeAppointments, setStoreAppointments] = useState<StoreAppointmentProps | null>(null);
-    const { loading, error, request } = useHttp();
-
-    const scopes = [
-        process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_READ || "",
-        process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_WRITE || ""
-    ];
-
-    const accessToken = useAccessToken(params.isProtected ? scopes : []);
-
-    useEffect(() => {
-        if (params.isProtected && accessToken && params.storeId) {
-            request(
-                BusinessManagement.GetStore(params.storeId).Uri,
-                BusinessManagement.GetStore(params.storeId).Method,
-                null,
-                undefined,
-                accessToken
-            ).then(response => {
-                const mappedStore = new Store(response);
-                setStore(mappedStore);
-            });
-            request(
-                BusinessManagement.GetServices(params.storeId).Uri,
-                BusinessManagement.GetServices(params.storeId).Method,
-                null,
-                undefined,
-                accessToken
-            ).then(response => {
-                const mappedServices = new StoreService(response);
-                setStoreService(mappedServices);
-            });
-        } else if (!params.isProtected && params.storeId) {
-            const currentStore = mockStores.find(store => store.id === params.storeId);
-            const currentService = mockStoreServices.find(service => service.store_id === params.storeId);
-            const currentAppointments = mockStoreAppointments.find(app => app.store_id === params.storeId);
-            if (currentStore) setStore(new Store(currentStore));
-            if (currentService) setStoreService(new StoreService(currentService));
-            if (currentAppointments) setStoreAppointments(currentAppointments);
-        }
-    }, [accessToken, request, params]);
-
-
-    if (loading) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center">
-                <div className="flex w-full h-full items-center justify-center">
-                    <div className="grid gap-4 md:grid-cols-1 md:gap-8 lg:grid-cols-2">
-                        <SkeletonCard/>
-                        <SkeletonCard/>
-                        <SkeletonCard/>
-                        <SkeletonCard/>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        const err = new Error(error)
-        return (
-            <ErrorPage error={err} reset={() => window.location.reload()}/>
-        );
-    }
-
-    if (!store || !storeService) {
-        return <NotFound />;
-    }
+const StoreDetail: React.FC<StoreDetailProps> = ({ storeId }) => {
 
     const tabsData = [
         {
+            value: "store",
+            label: "Store",
+            tab_content: <StoreTab storeId={storeId} />
+        },
+        {
             value: "employees",
             label: "Employees",
-            tab_content: <EmployeeTab isProtected={params.isProtected} data={store.employees} />
+            tab_content: <EmployeeTab storeId={storeId} />
         },
         {
             value: "services",
             label: "Services",
-            tab_content: <ServiceTab isProtected={params.isProtected} data={storeService} />
+            tab_content: <ServiceTab storeId={storeId}/> // Pass list of services
         },
         {
             value: "appointments",
             label: "Appointments",
-            tab_content: <AppointmentTab isProtected={params.isProtected} data={storeAppointments} />
+            tab_content: <AppointmentTab storeId={storeId} />
         }
     ];
 

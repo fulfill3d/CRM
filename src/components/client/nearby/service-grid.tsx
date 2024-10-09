@@ -1,95 +1,37 @@
+import React from "react";
 import ServiceCard from "@/components/client/nearby/service-card";
-import { Service, ServiceDetail } from "@/models/client/models";
-import React, { useState } from "react";
-import { nearbyServices } from "@/mock/client/mock-data";
-import ServiceDetailDialog from "@/components/client/nearby/service-detail-dialog";
-import AppointmentDialog from "@/components/client/history/appointment-dialog";
-import Toast from "@/components/common/toast"; // Import the AppointmentDialog
+import NoServiceCard from "@/components/client/nearby/no-service-card";
+import {useClientServices} from "@/hooks/client/use-client-services";
+import Loading from "@/app/loading";
+import ErrorPage from "@/app/error";
 
 interface ServiceListProps {
-    services: Service[];
-    isProtected: boolean;
+    onServiceCardClick: (id: number) => void
 }
 
-const ServiceGrid: React.FC<ServiceListProps> = ({ services, isProtected }) => {
-    const [showToast, setShowToast] = useState(false);
-    const [selectedService, setSelectedService] = useState<ServiceDetail | null>(null); // Track selected service for dialog
-    const [isDialogOpen, setIsDialogOpen] = useState(false); // Track ServiceDetailDialog visibility
-    const [isAppointmentDialogOpen, setIsAppointmentDialogOpen] = useState(false); // Track AppointmentDialog visibility
+const ServiceGrid: React.FC<ServiceListProps> = (props) => {
 
-    // Open ServiceDetailDialog with the selected service
-    const handleCardClick = (id: number) => {
-        const serviceDetailJson = nearbyServices.find(service => service.id === id);
-        const serviceDetail = new ServiceDetail(serviceDetailJson?.detail);
-        setSelectedService(serviceDetail);
-        setIsDialogOpen(true);
-    };
+    const { services, loading, error } = useClientServices();
 
-    // Close ServiceDetailDialog
-    const closeServiceDetailDialog = () => {
-        setIsDialogOpen(false);
-        setSelectedService(null); // Reset selected service when closing
-    };
+    if (loading) {return (<Loading/>);}
 
-    // Open AppointmentDialog to book an appointment
-    const handleBookClick = () => {
-        setIsDialogOpen(false); // Close service detail dialog
-        setIsAppointmentDialogOpen(true); // Open appointment dialog
-    };
-
-    // Close AppointmentDialog
-    const closeAppointmentDialog = () => {
-        setIsAppointmentDialogOpen(false);
-    };
-
-    const handleAppointmentSave = (updatedData: { start_date: string; note: string }) => {
-        setIsAppointmentDialogOpen(false); // Close the dialog after saving
-        if (isProtected){
-            console.log('Appointment data:', updatedData);
-        }else {
-            console.log('Appointment data:', updatedData);
-            setShowToast(true);
-        }
-    };
+    if (error) {return (<ErrorPage error={new Error(error)} reset={() => window.location.reload()}/>);}
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-            {services.map((service) => (
-                <ServiceCard
-                    key={service.id}
-                    service={service}
-                    onClick={() => handleCardClick(service.id)} // Pass click handler
-                />
-            ))}
-
-            {/* Service Detail Dialog */}
-            {selectedService && (
-                <ServiceDetailDialog
-                    isOpen={isDialogOpen}
-                    serviceDetail={selectedService} // Pass the selected service
-                    onClose={closeServiceDetailDialog} // Pass the close handler
-                    onBook={handleBookClick} // Pass the book handler
-                />
-            )}
-
-            {/* Appointment Dialog for booking */}
-            {isAppointmentDialogOpen && (
-                <AppointmentDialog
-                    isOpen={isAppointmentDialogOpen}
-                    isEditMode={false} // Not edit mode, this is for booking
-                    onClose={closeAppointmentDialog}
-                    onSave={handleAppointmentSave}
-                />
-            )}
-
-            {showToast && (
-                <Toast
-                    message="You have to login to use that feature!"
-                    type="error"
-                    duration={3000}
-                    onClose={() => setShowToast(false)}
-                />
-            )}
+        <div className="container mx-auto">
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 ">
+                {services.length > 0 ? (
+                    services.map((service) => (
+                        <ServiceCard
+                            key={service.id}
+                            service={service}
+                            onClick={() => props.onServiceCardClick(service.id)} // Pass click handler
+                        />
+                    ))
+                ) : (
+                    <NoServiceCard/>
+                )}
+            </div>
         </div>
     );
 };

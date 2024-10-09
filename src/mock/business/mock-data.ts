@@ -1,11 +1,26 @@
+import {StoreService} from "@/models/business/models";
+import {StoreAppointmentProps} from "@/components/business/store/appointment/appointment-tab";
+import {ServiceCategoriesProps} from "@/components/business/store/service/service-categories-dropdown";
+
 export const mockStores = [
         {
-
             "id": 1,
             "name": "Golden Gate Spa",
             "description": "A relaxing spa experience near the iconic Golden Gate Bridge.",
             "created_at": "2024-08-17T14:30:00.000",
             "updated_at": "2024-08-17T14:30:00.000",
+            "address": {
+                id: 1,
+                location_name: "Golden Gate Spa",
+                first_name: "Alice",
+                last_name: "Smith",
+                street1: "2500 Lombard St",
+                street2: "",
+                city: "San Francisco",
+                state: "CA",
+                country: "US",
+                zip_code: "94123"
+            },
             "location": {
                 "location_id": 1,
                 "address_id": 1,
@@ -82,6 +97,18 @@ export const mockStores = [
             "description": "A downtown retreat for relaxation and rejuvenation.",
             "created_at": "2024-08-17T14:40:00.000",
             "updated_at": "2024-08-17T14:40:00.000",
+            "address": {
+                id: 2,
+                location_name: "Downtown Relaxation Spa",
+                first_name: "Bob",
+                last_name: "Johnson",
+                street1: "789 Market St",
+                street2: "Suite 200",
+                city: "San Francisco",
+                state: "CA",
+                country: "US",
+                zip_code: "94103"
+            },
             "location": {
                 "location_id": 2,
                 "address_id": 2,
@@ -158,6 +185,18 @@ export const mockStores = [
             "description": "A premier wellness center in the heart of Silicon Valley.",
             "created_at": "2024-08-17T14:50:00.000",
             "updated_at": "2024-08-17T14:50:00.000",
+            "address": {
+                id: 3,
+                location_name: "Silicon Valley Wellness Center",
+                first_name: "Charlie",
+                last_name: "Brown",
+                street1: "456 W El Camino Real",
+                street2: "",
+                city: "Mountain View",
+                state: "CA",
+                country: "US",
+                zip_code: "94040"
+            },
             "location": {
                 "location_id": 3,
                 "address_id": 3,
@@ -234,6 +273,18 @@ export const mockStores = [
             "description": "Offering peace and tranquility in the East Bay area.",
             "created_at": "2024-08-17T15:00:00.000",
             "updated_at": "2024-08-17T15:00:00.000",
+            "address": {
+                id: 4,
+                location_name: "East Bay Tranquility Spa",
+                first_name: "Diana",
+                last_name: "Ross",
+                street1: "1234 Broadway",
+                street2: "",
+                city: "Oakland",
+                state: "CA",
+                country: "US",
+                zip_code: "94612"
+            },
             "location": {
                 "location_id": 4,
                 "address_id": 4,
@@ -310,6 +361,18 @@ export const mockStores = [
             "description": "A zen-inspired spa in the tech hub of Palo Alto.",
             "created_at": "2024-08-17T15:10:00.000",
             "updated_at": "2024-08-17T15:10:00.000",
+            "address": {
+                id: 5,
+                location_name: "Palo Alto Zen Spa",
+                first_name: "Eve",
+                last_name: "Adams",
+                street1: "567 University Ave",
+                street2: "",
+                city: "Palo Alto",
+                state: "CA",
+                country: "US",
+                zip_code: "94301"
+            },
             "location": {
                 "location_id": 5,
                 "address_id": 5,
@@ -382,7 +445,7 @@ export const mockStores = [
         }
     ];
 
-export const mockStoreServices = [
+export const mockStoreServices: StoreService[] = [
     {
         "store_id": 1,
         "services": [
@@ -635,7 +698,7 @@ export const mockStoreServices = [
     }
 ];
 
-export const mockStoreAppointments = [
+export const mockStoreAppointments: StoreAppointmentProps[] = [
     {
         "store_id": 1,
         "appointments": [
@@ -1163,7 +1226,7 @@ export const mockStoreAppointments = [
     }
 ];
 
-export const serviceCategories = {
+export const serviceCategories: ServiceCategoriesProps = {
     "categories": [
         {
             "id": 1,

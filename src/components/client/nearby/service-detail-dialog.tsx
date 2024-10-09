@@ -1,18 +1,27 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { ServiceDetail } from "@/models/client/models";
+import {useClientService} from "@/hooks/client/use-client-service";
+import Loading from "@/app/loading";
+import ErrorPage from "@/app/error";
 
 const MapView = dynamic(() => import('@/components/common/map-view'), { ssr: false });
 
 interface ServiceDetailDialogProps {
     isOpen: boolean;
-    serviceDetail: ServiceDetail | null;
+    serviceId: number | null;
     onClose: () => void;
     onBook: () => void; // New prop to handle booking
 }
 
-const ServiceDetailDialog: React.FC<ServiceDetailDialogProps> = ({ isOpen, serviceDetail, onClose, onBook }) => {
+const ServiceDetailDialog: React.FC<ServiceDetailDialogProps> = ({ isOpen, serviceId, onClose, onBook }) => {
+    const {serviceDetail, loading, error} = useClientService(serviceId);
+
     if (!isOpen || !serviceDetail) return null;
+
+    if (loading) {return (<Loading/>);}
+
+    if (error) {return (<ErrorPage error={new Error(error)} reset={() => window.location.reload()}/>);}
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">

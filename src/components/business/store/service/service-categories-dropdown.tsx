@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {serviceCategories} from "@/mock/business/mock-data";
 
 interface Category {
     id: number;
@@ -18,10 +19,9 @@ export interface ServiceCategoriesProps {
 }
 
 interface ServiceCategoriesDropdownProps {
-    data: ServiceCategoriesProps;
 }
 
-const ServiceCategoriesDropdown: React.FC<ServiceCategoriesDropdownProps> = ({ data }) => {
+const ServiceCategoriesDropdown: React.FC<ServiceCategoriesDropdownProps> = () => {
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [isSubCategoriesOpen, setIsSubCategoriesOpen] = useState(false);
 
@@ -47,7 +47,7 @@ const ServiceCategoriesDropdown: React.FC<ServiceCategoriesDropdownProps> = ({ d
                 {isCategoriesOpen && (
                     <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-auto">
                         <ul className="list-disc pl-6 p-4">
-                            {data.categories.map((category) => (
+                            {serviceCategories.categories.map((category) => (
                                 <li key={category.id} className="mb-2">
                                     <h3 className="text-md font-semibold">{category.name}</h3>
                                     <p className="text-gray-600">{category.description}</p>
@@ -70,7 +70,7 @@ const ServiceCategoriesDropdown: React.FC<ServiceCategoriesDropdownProps> = ({ d
                 {isSubCategoriesOpen && (
                     <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-auto">
                         <ul className="list-disc pl-6 p-4">
-                            {data.sub_categories.map((sub_category) => (
+                            {serviceCategories.sub_categories.map((sub_category) => (
                                 <li key={sub_category.id} className="mb-2">
                                     <h3 className="text-md font-semibold">{sub_category.name}</h3>
                                     <p className="text-gray-600">{sub_category.description}</p>

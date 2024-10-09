@@ -1,14 +1,22 @@
 import React from "react";
 import { useMsal } from "@azure/msal-react";
+import { useDispatch } from "react-redux";
+import { clearAccessToken } from "@/store/auth-slice";
 
 // Add isMobile prop to conditionally style the button
 export const LogOut = ({ isMobile }: { isMobile?: boolean }) => {
     const { instance } = useMsal();
+    const dispatch = useDispatch();
 
     const handleLogout = () => {
         const logoutRequest = {
             account: instance.getActiveAccount(),
         };
+
+        // Clear the access token from Redux before triggering logout
+        dispatch(clearAccessToken());
+
+        // Perform MSAL logout (this will redirect the user)
         instance.logout(logoutRequest);
     };
 

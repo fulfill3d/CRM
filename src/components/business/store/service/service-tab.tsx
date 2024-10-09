@@ -1,24 +1,20 @@
-import {serviceCategories,} from "@/mock/business/mock-data";
-import {StoreService} from "@/models/business/models";
-import ServiceAccordionGrid from "@/components/business/store/service/service-accordion-grid";
+import ServiceGrid from "@/components/business/store/service/service-grid";
 import ServiceCategoriesDropdown from "@/components/business/store/service/service-categories-dropdown";
 import React from "react";
 
-interface Props{
-    isProtected: boolean;
-    data: StoreService
+interface ServiceTabProps{
+    storeId: number;
 }
 
-const ServiceTab = (props: Props) => {
-
+const ServiceTab: React.FC<ServiceTabProps> = ({storeId}) => {
     return (
         <div className="w-full h-full">
             <text className="container mx-auto text-xl font-semibold">Services of this store</text>
             <div className="container mx-auto mt-4 md:mt-0">
-                <ServiceCategoriesDropdown data={serviceCategories}/>
+                <ServiceCategoriesDropdown />
             </div>
             <div className="container mx-auto mt-10">
-                <ServiceAccordionGrid isProtected={props.isProtected} services={props.data.services}/>
+                <ServiceGrid storeId={storeId}/>
             </div>
         </div>
     )

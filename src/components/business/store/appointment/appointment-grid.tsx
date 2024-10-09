@@ -1,26 +1,30 @@
 import React, {useState} from 'react';
 import AppointmentCard from "@/components/business/store/appointment/appointment-card";
-import {AppointmentProps} from "@/components/business/store/appointment/appointment-tab";
+import {AppointmentStatus} from "@/components/business/store/appointment/appointment-tab";
 import Toast from "@/components/common/toast";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
+import {useBusinessAccessToken} from "@/msal/use-access-token";
+import {useStoreAppointments} from "@/hooks/business/use-store-appointments";
+import Loading from "@/app/loading";
+import ErrorPage from "@/app/error";
 
 interface AppointmentListProps {
-    appointments?: AppointmentProps[];
-    isProtected: boolean;
+    selectedStatus: AppointmentStatus | 'all';
+    storeId: number;
 }
 
-const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments, isProtected }) => {
+const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStatus }) => {
+    const accessToken = useBusinessAccessToken();
+    const { storeAppointments, loading, error } = useStoreAppointments(storeId, accessToken);
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
     const [showToast, setShowToast] = useState(false);
     const [targetAppointmentId, setTargetAppointmentId] = useState<number | null>(null); // Track employee to delete
 
-    if (!appointments || appointments.length === 0) {
-        return (
-            <div className="text-center p-4">
-                <p className="text-gray-500">No appointments available.</p>
-            </div>
-        );
-    }
+    // Filter appointments based on selected status
+    const filteredAppointments = () => {
+        if (selectedStatus === 'all') return storeAppointments;
+        return storeAppointments.filter(appointment => appointment.status === selectedStatus) || [];
+    };
 
     const handleAppointmentCancel = (id: number) => {
         setTargetAppointmentId(id);
@@ -28,7 +32,7 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments, isProte
     }
 
     const handleDelete = () => {
-        if (isProtected){
+        if (accessToken){
             setShowDialog(false);
         }else {
             setShowDialog(false);
@@ -41,15 +45,25 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ appointments, isProte
         setTargetAppointmentId(null); // Reset the target employee ID
     };
 
+    if (loading) return <Loading />;
+
+    if (error) return (<ErrorPage error={new Error(error || "Unknown error")} reset={() => window.location.reload()}/>);
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {appointments.map((appointment, index) => (
-                <AppointmentCard
-                    key={index}
-                    appointment={appointment}
-                    onCancel={handleAppointmentCancel}
-                />
-            ))}
+            {filteredAppointments().length > 0 ? (
+                filteredAppointments().map((appointment, index) => (
+                    <AppointmentCard
+                        key={index}
+                        appointment={appointment}
+                        onCancel={handleAppointmentCancel}
+                    />
+                ))
+            ) : (
+                <div className="text-center p-4">
+                    <p className="text-gray-500">No appointments available.</p>
+                </div>
+            )}
 
             {/* Reusable Confirmation Dialog */}
             <ConfirmationDialog

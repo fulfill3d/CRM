@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import AppointmentGrid from "@/components/business/store/appointment/appointment-grid";
+import {useBusinessAccessToken} from "@/msal/use-access-token";
+import {useStoreAppointments} from "@/hooks/business/use-store-appointments";
 
 export enum AppointmentStatus {
     SCHEDULED = 1,
@@ -15,6 +17,7 @@ export interface AppointmentProps {
     status: AppointmentStatus;
     date: string;
     duration: string;
+    amount: string;
 }
 
 export interface StoreAppointmentProps {
@@ -22,9 +25,8 @@ export interface StoreAppointmentProps {
     appointments: AppointmentProps[];
 }
 
-interface AppointmentCardProps {
-    data: StoreAppointmentProps | null;
-    isProtected: boolean;
+interface AppointmentTabProps {
+    storeId: number;
 }
 
 // Function to dynamically determine the color based on the status
@@ -41,7 +43,7 @@ const getStatusColor = (status: AppointmentStatus | 'all') => {
     }
 };
 
-const AppointmentTab: React.FC<AppointmentCardProps> = (props) => {
+const AppointmentTab: React.FC<AppointmentTabProps> = ({storeId}) => {
     const [selectedStatus, setSelectedStatus] = useState<AppointmentStatus | 'all'>('all');
 
     // List of filter options including 'all'
@@ -51,12 +53,6 @@ const AppointmentTab: React.FC<AppointmentCardProps> = (props) => {
         { value: AppointmentStatus.CANCELED, label: 'Canceled' },
         { value: AppointmentStatus.COMPLETED, label: 'Completed' }
     ];
-
-    // Filter appointments based on selected status
-    const filteredAppointments = () => {
-        if (selectedStatus === 'all') return props.data?.appointments || [];
-        return props.data?.appointments.filter(appointment => appointment.status === selectedStatus) || [];
-    };
 
     return (
         <div className="w-full h-full">
@@ -81,7 +77,7 @@ const AppointmentTab: React.FC<AppointmentCardProps> = (props) => {
                 </div>
 
                 {/* Appointment Grid */}
-                <AppointmentGrid isProtected={props.isProtected} appointments={filteredAppointments()}/>
+                <AppointmentGrid storeId={storeId} selectedStatus={selectedStatus}/>
             </div>
         </div>
     );

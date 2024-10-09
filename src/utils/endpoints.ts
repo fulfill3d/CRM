@@ -1,4 +1,4 @@
-import {HttpMethod} from "@/hooks/common/use-http";
+import {HttpMethod} from "@/services/common/http-request";
 
 interface Endpoint {
     Uri: string;
@@ -74,11 +74,11 @@ export const ClientAppointment = {
         Method: HttpMethod.POST,
     } as Endpoint,
     UpdateAppointment: {
-        Uri: `${process.env.NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL}/api/appointment/set`,
+        Uri: `${process.env.NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL}/api/appointment/update`,
         Method: HttpMethod.PATCH,
     } as Endpoint,
     CancelAppointment: (appointmentId: number): Endpoint => ({
-        Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/appointment/cancel/${appointmentId}`,
+        Uri: `${process.env.NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL}/api/appointment/cancel/${appointmentId}`,
         Method: HttpMethod.DELETE,
     }) as Endpoint,
 }
