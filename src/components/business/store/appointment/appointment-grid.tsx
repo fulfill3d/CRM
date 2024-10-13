@@ -7,6 +7,7 @@ import {useBusinessAccessToken} from "@/msal/use-access-token";
 import {useGetStoreAppointments} from "@/hooks/business/use-get-store-appointments";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";
+import {useToast} from "@/hooks/common/use-toast";
 
 interface AppointmentListProps {
     selectedStatus: AppointmentStatus | 'all';
@@ -17,7 +18,7 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
     const accessToken = useBusinessAccessToken();
     const { storeAppointments, loading, error } = useGetStoreAppointments(storeId, accessToken);
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
-    const [showToast, setShowToast] = useState(false);
+    const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
     const [targetAppointmentId, setTargetAppointmentId] = useState<number | null>(null); // Track employee to delete
 
     // Filter appointments based on selected status
@@ -36,7 +37,7 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
             setShowDialog(false);
         }else {
             setShowDialog(false);
-            setShowToast(true)
+            showToast('You have to login to cancel an appointment!', 'info');
         }
     };
 
@@ -74,12 +75,11 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
                 onCancel={handleCancel}
             />
 
-            {showToast && (
+            {isToastActive && (
                 <Toast
-                    message="You have to login to use that feature!"
-                    type="error"
-                    duration={3000}
-                    onClose={() => setShowToast(false)}
+                    message={toastMessage}
+                    type={toastType}
+                    onClose={toggleToastActive}
                 />
             )}
         </div>

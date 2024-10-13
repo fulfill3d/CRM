@@ -36,8 +36,14 @@ const StoreTab: React.FC<StoreTabProps> = ({ storeId }) => {
                         router.push('/business');
                     }, 800);
                 },
-                (err) => showToast(`Error deleting store: ${err}`, "error"),
-                () => showToast("You must be logged in to delete a store", "info")
+                (err) => {
+                    setShowConfirmationDialog(false);
+                    showToast(`Error deleting store: ${err}`, "error")
+                },
+                () => {
+                    setShowConfirmationDialog(false);
+                    showToast("You must be logged in to delete a store!", "info");
+                }
             );
         } catch (err) {
             showToast(`Unexpected error: ${err}`, "error");

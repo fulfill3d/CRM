@@ -6,6 +6,7 @@ import Toast from "@/components/common/toast";
 import {AppointmentStatus} from "@/components/business/store/appointment/appointment-tab";
 import {useCancelClientAppointment} from "@/hooks/client/use-cancel-client-appointment";
 import AppointmentGrid from "@/components/client/history/appointment-grid";
+import {useToast} from "@/hooks/common/use-toast";
 
 export interface AppointmentContainerProps {
     selectedAppointmentStatus: AppointmentStatus | 'all'
@@ -14,7 +15,7 @@ export interface AppointmentContainerProps {
 const AppointmentContainer: React.FC<AppointmentContainerProps> = ({ selectedAppointmentStatus }) => {
     const { handleCancelAppointment } = useCancelClientAppointment();
     const [refresh, setRefresh] = useState(false);
-    const [showToast, setShowToast] = useState(false);
+    const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
     const [showConfirmationDialog, setShowConfirmationDialog] = useState(false); // Manage confirmation dialog visibility
     const [showUpdateDialog, setShowUpdateDialog] = useState(false); // Manage update dialog visibility
     const [appointmentId, setAppointmentId] = useState<number | null>(null);
@@ -26,8 +27,14 @@ const AppointmentContainer: React.FC<AppointmentContainerProps> = ({ selectedApp
             await handleCancelAppointment(
                 appointmentId,
                 () => setRefresh(prev => !prev),
-                (err) => console.log(err),
-                () => setShowToast(true),
+                (err) => {
+                    setShowConfirmationDialog(false);
+                    showToast(err, 'error');
+                },
+                () => {
+                    setShowConfirmationDialog(false);
+                    showToast('You have to login to cancel an appointment!', 'info');
+                },
                 )
         }
     }
@@ -73,17 +80,17 @@ const AppointmentContainer: React.FC<AppointmentContainerProps> = ({ selectedApp
                     }}
                     onError={(msg) => console.log(msg)}
                     onNoAccessToken={() => {
-                        setShowToast(true);
+                        setShowUpdateDialog(false);
+                        showToast('You have to login to edit an appointment!', 'info');
                     }}
                 />
             )}
 
-            {showToast && (
+            {isToastActive && (
                 <Toast
-                    message="You have to login to use that feature!"
-                    type="error"
-                    duration={3000}
-                    onClose={() => setShowToast(false)}
+                    message={toastMessage}
+                    type={toastType}
+                    onClose={toggleToastActive}
                 />
             )}
         </div>
