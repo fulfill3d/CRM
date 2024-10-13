@@ -9,10 +9,10 @@ const CustomTabs: React.FC<CustomTabsProp> = ({ tabs }) => {
     const [activeTab, setActiveTab] = useState(tabs[0].value);
 
     return (
-        <div>
+        <div className="w-full h-full">
             {/* Tab Labels */}
             <div className="flex justify-center items-center">
-                <div className="inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1">
+                <div className="inline-flex h-10 items-center justify-center p-1">
                     {tabs.map((tab) => (
                         <button
                             key={tab.value}

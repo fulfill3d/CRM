@@ -55,9 +55,9 @@ const config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "var(--radius, 12px)", // Default to 12px if --radius is not defined
+        md: "calc(var(--radius, 12px) - 2px)", // Adjust as needed
+        sm: "calc(var(--radius, 12px) - 4px)", // Adjust as needed
       },
       keyframes: {
         "accordion-down": {

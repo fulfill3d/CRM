@@ -1,10 +1,25 @@
-export const stores = [
+import {StoreAppointmentProps} from "@/components/business/store/appointment/appointment-tab";
+import {ServiceCategoriesProps} from "@/components/business/store/service/service-categories-dropdown";
+
+export const mockStores = [
         {
             "id": 1,
             "name": "Golden Gate Spa",
             "description": "A relaxing spa experience near the iconic Golden Gate Bridge.",
             "created_at": "2024-08-17T14:30:00.000",
             "updated_at": "2024-08-17T14:30:00.000",
+            "address": {
+                id: 1,
+                location_name: "Golden Gate Spa",
+                first_name: "Alice",
+                last_name: "Smith",
+                street1: "2500 Lombard St",
+                street2: "",
+                city: "San Francisco",
+                state: "CA",
+                country: "US",
+                zip_code: "94123"
+            },
             "location": {
                 "location_id": 1,
                 "address_id": 1,
@@ -81,6 +96,18 @@ export const stores = [
             "description": "A downtown retreat for relaxation and rejuvenation.",
             "created_at": "2024-08-17T14:40:00.000",
             "updated_at": "2024-08-17T14:40:00.000",
+            "address": {
+                id: 2,
+                location_name: "Downtown Relaxation Spa",
+                first_name: "Bob",
+                last_name: "Johnson",
+                street1: "789 Market St",
+                street2: "Suite 200",
+                city: "San Francisco",
+                state: "CA",
+                country: "US",
+                zip_code: "94103"
+            },
             "location": {
                 "location_id": 2,
                 "address_id": 2,
@@ -157,6 +184,18 @@ export const stores = [
             "description": "A premier wellness center in the heart of Silicon Valley.",
             "created_at": "2024-08-17T14:50:00.000",
             "updated_at": "2024-08-17T14:50:00.000",
+            "address": {
+                id: 3,
+                location_name: "Silicon Valley Wellness Center",
+                first_name: "Charlie",
+                last_name: "Brown",
+                street1: "456 W El Camino Real",
+                street2: "",
+                city: "Mountain View",
+                state: "CA",
+                country: "US",
+                zip_code: "94040"
+            },
             "location": {
                 "location_id": 3,
                 "address_id": 3,
@@ -233,6 +272,18 @@ export const stores = [
             "description": "Offering peace and tranquility in the East Bay area.",
             "created_at": "2024-08-17T15:00:00.000",
             "updated_at": "2024-08-17T15:00:00.000",
+            "address": {
+                id: 4,
+                location_name: "East Bay Tranquility Spa",
+                first_name: "Diana",
+                last_name: "Ross",
+                street1: "1234 Broadway",
+                street2: "",
+                city: "Oakland",
+                state: "CA",
+                country: "US",
+                zip_code: "94612"
+            },
             "location": {
                 "location_id": 4,
                 "address_id": 4,
@@ -309,6 +360,18 @@ export const stores = [
             "description": "A zen-inspired spa in the tech hub of Palo Alto.",
             "created_at": "2024-08-17T15:10:00.000",
             "updated_at": "2024-08-17T15:10:00.000",
+            "address": {
+                id: 5,
+                location_name: "Palo Alto Zen Spa",
+                first_name: "Eve",
+                last_name: "Adams",
+                street1: "567 University Ave",
+                street2: "",
+                city: "Palo Alto",
+                state: "CA",
+                country: "US",
+                zip_code: "94301"
+            },
             "location": {
                 "location_id": 5,
                 "address_id": 5,
@@ -381,7 +444,7 @@ export const stores = [
         }
     ];
 
-export const storeServices = [
+export const mockStoreServices = [
     {
         "store_id": 1,
         "services": [
@@ -395,19 +458,19 @@ export const storeServices = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            },
-                            {
-                                "id": 2,
-                                "name": "Therapeutic",
-                                "description": "Therapeutic massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Therapeutic",
+                        "description": "Therapeutic massages"
                     }
                 ]
             },
@@ -421,19 +484,19 @@ export const storeServices = [
                     {
                         "id": 2,
                         "name": "Skincare",
-                        "description": "Skincare category",
-                        "sub_categories": [
-                            {
-                                "id": 3,
-                                "name": "Anti-Aging",
-                                "description": "Anti-aging treatments"
-                            },
-                            {
-                                "id": 4,
-                                "name": "Cleansing",
-                                "description": "Cleansing treatments"
-                            }
-                        ]
+                        "description": "Skincare category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 3,
+                        "name": "Anti-Aging",
+                        "description": "Anti-aging treatments"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Cleansing",
+                        "description": "Cleansing treatments"
                     }
                 ]
             }
@@ -452,14 +515,14 @@ export const storeServices = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 2,
-                                "name": "Therapeutic",
-                                "description": "Therapeutic massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 2,
+                        "name": "Therapeutic",
+                        "description": "Therapeutic massages"
                     }
                 ]
             },
@@ -473,14 +536,14 @@ export const storeServices = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
                     }
                 ]
             }
@@ -499,14 +562,14 @@ export const storeServices = [
                     {
                         "id": 3,
                         "name": "Wellness",
-                        "description": "Wellness category",
-                        "sub_categories": [
-                            {
-                                "id": 5,
-                                "name": "Foot Care",
-                                "description": "Foot care services"
-                            }
-                        ]
+                        "description": "Wellness category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 5,
+                        "name": "Foot Care",
+                        "description": "Foot care services"
                     }
                 ]
             },
@@ -520,14 +583,14 @@ export const storeServices = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
                     }
                 ]
             }
@@ -546,19 +609,19 @@ export const storeServices = [
                     {
                         "id": 4,
                         "name": "Hair",
-                        "description": "Hair category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Women",
-                                "description": "Services provided to women"
-                            },
-                            {
-                                "id": 2,
-                                "name": "Men",
-                                "description": "Services provided to men"
-                            }
-                        ]
+                        "description": "Hair category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Women",
+                        "description": "Services provided to women"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Men",
+                        "description": "Services provided to men"
                     }
                 ]
             },
@@ -572,14 +635,14 @@ export const storeServices = [
                     {
                         "id": 4,
                         "name": "Hair",
-                        "description": "Hair category",
-                        "sub_categories": [
-                            {
-                                "id": 3,
-                                "name": "Color",
-                                "description": "Hair coloring services"
-                            }
-                        ]
+                        "description": "Hair category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 3,
+                        "name": "Color",
+                        "description": "Hair coloring services"
                     }
                 ]
             }
@@ -598,14 +661,14 @@ export const storeServices = [
                     {
                         "id": 5,
                         "name": "Mindfulness",
-                        "description": "Mindfulness category",
-                        "sub_categories": [
-                            {
-                                "id": 6,
-                                "name": "Meditation",
-                                "description": "Meditation services"
-                            }
-                        ]
+                        "description": "Mindfulness category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 6,
+                        "name": "Meditation",
+                        "description": "Meditation services"
                     }
                 ]
             },
@@ -619,14 +682,14 @@ export const storeServices = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
                     }
                 ]
             }
@@ -634,11 +697,12 @@ export const storeServices = [
     }
 ];
 
-export const storeAppointments = [
+export const mockStoreAppointments: StoreAppointmentProps[] = [
     {
         "store_id": 1,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Liam Johnson",
                 "email": "liam.johnson@example.com",
                 "service": "Full Body Massage",
@@ -648,6 +712,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Emma Wilson",
                 "email": "emma.wilson@example.com",
                 "service": "Facial Treatment",
@@ -657,6 +722,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Oliver Brown",
                 "email": "oliver.brown@example.com",
                 "service": "Full Body Massage",
@@ -666,6 +732,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Ava Davis",
                 "email": "ava.davis@example.com",
                 "service": "Facial Treatment",
@@ -675,6 +742,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Ethan Martinez",
                 "email": "ethan.martinez@example.com",
                 "service": "Full Body Massage",
@@ -684,6 +752,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Sophia Garcia",
                 "email": "sophia.garcia@example.com",
                 "service": "Facial Treatment",
@@ -693,6 +762,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Noah Lee",
                 "email": "noah.lee@example.com",
                 "service": "Full Body Massage",
@@ -702,6 +772,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Mia Thomas",
                 "email": "mia.thomas@example.com",
                 "service": "Facial Treatment",
@@ -711,6 +782,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "James Hernandez",
                 "email": "james.hernandez@example.com",
                 "service": "Full Body Massage",
@@ -720,6 +792,7 @@ export const storeAppointments = [
                 "amount": "$100.00"
             },
             {
+                "id": 1,
                 "customer": "Amelia Lewis",
                 "email": "amelia.lewis@example.com",
                 "service": "Facial Treatment",
@@ -734,6 +807,7 @@ export const storeAppointments = [
         "store_id": 2,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Lucas Martinez",
                 "email": "lucas.martinez@example.com",
                 "service": "Deep Tissue Massage",
@@ -743,6 +817,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Isabella Rodriguez",
                 "email": "isabella.rodriguez@example.com",
                 "service": "Hot Stone Massage",
@@ -752,6 +827,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Mason Walker",
                 "email": "mason.walker@example.com",
                 "service": "Deep Tissue Massage",
@@ -761,6 +837,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Harper Hall",
                 "email": "harper.hall@example.com",
                 "service": "Hot Stone Massage",
@@ -770,6 +847,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Elijah Scott",
                 "email": "elijah.scott@example.com",
                 "service": "Deep Tissue Massage",
@@ -779,6 +857,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Emily Young",
                 "email": "emily.young@example.com",
                 "service": "Hot Stone Massage",
@@ -788,6 +867,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Jackson King",
                 "email": "jackson.king@example.com",
                 "service": "Deep Tissue Massage",
@@ -797,6 +877,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Avery Wright",
                 "email": "avery.wright@example.com",
                 "service": "Hot Stone Massage",
@@ -806,6 +887,7 @@ export const storeAppointments = [
                 "amount": "$120.00"
             },
             {
+                "id": 1,
                 "customer": "Aiden Baker",
                 "email": "aiden.baker@example.com",
                 "service": "Deep Tissue Massage",
@@ -815,6 +897,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Scarlett Harris",
                 "email": "scarlett.harris@example.com",
                 "service": "Hot Stone Massage",
@@ -829,6 +912,7 @@ export const storeAppointments = [
         "store_id": 3,
         "appointments": [
             {
+                "id": 1,
                 "customer": "William Robinson",
                 "email": "william.robinson@example.com",
                 "service": "Reflexology",
@@ -838,6 +922,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Mia Clark",
                 "email": "mia.clark@example.com",
                 "service": "Couples Massage",
@@ -847,6 +932,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "James Lewis",
                 "email": "james.lewis@example.com",
                 "service": "Reflexology",
@@ -856,6 +942,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Sophia Perez",
                 "email": "sophia.perez@example.com",
                 "service": "Couples Massage",
@@ -865,6 +952,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "Benjamin Martinez",
                 "email": "benjamin.martinez@example.com",
                 "service": "Reflexology",
@@ -874,6 +962,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Charlotte Walker",
                 "email": "charlotte.walker@example.com",
                 "service": "Couples Massage",
@@ -883,6 +972,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "Henry Hall",
                 "email": "henry.hall@example.com",
                 "service": "Reflexology",
@@ -892,6 +982,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Amelia King",
                 "email": "amelia.king@example.com",
                 "service": "Couples Massage",
@@ -901,6 +992,7 @@ export const storeAppointments = [
                 "amount": "$150.00"
             },
             {
+                "id": 1,
                 "customer": "Liam Robinson",
                 "email": "liam.robinson@example.com",
                 "service": "Reflexology",
@@ -910,6 +1002,7 @@ export const storeAppointments = [
                 "amount": "$75.00"
             },
             {
+                "id": 1,
                 "customer": "Ava Clark",
                 "email": "ava.clark@example.com",
                 "service": "Couples Massage",
@@ -924,6 +1017,7 @@ export const storeAppointments = [
         "store_id": 4,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Lily Martinez",
                 "email": "lily.martinez@example.com",
                 "service": "Haircut",
@@ -933,6 +1027,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Lucas Harris",
                 "email": "lucas.harris@example.com",
                 "service": "Hair Coloring",
@@ -942,6 +1037,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Evelyn White",
                 "email": "evelyn.white@example.com",
                 "service": "Haircut",
@@ -951,6 +1047,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Mason Robinson",
                 "email": "mason.robinson@example.com",
                 "service": "Hair Coloring",
@@ -960,6 +1057,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Ella Lewis",
                 "email": "ella.lewis@example.com",
                 "service": "Haircut",
@@ -969,6 +1067,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Jackson Walker",
                 "email": "jackson.walker@example.com",
                 "service": "Hair Coloring",
@@ -978,6 +1077,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Sofia Young",
                 "email": "sofia.young@example.com",
                 "service": "Haircut",
@@ -987,6 +1087,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Alexander Hall",
                 "email": "alexander.hall@example.com",
                 "service": "Hair Coloring",
@@ -996,6 +1097,7 @@ export const storeAppointments = [
                 "amount": "$90.00"
             },
             {
+                "id": 1,
                 "customer": "Emily Scott",
                 "email": "emily.scott@example.com",
                 "service": "Haircut",
@@ -1005,6 +1107,7 @@ export const storeAppointments = [
                 "amount": "$50.00"
             },
             {
+                "id": 1,
                 "customer": "Henry King",
                 "email": "henry.king@example.com",
                 "service": "Hair Coloring",
@@ -1019,6 +1122,7 @@ export const storeAppointments = [
         "store_id": 5,
         "appointments": [
             {
+                "id": 1,
                 "customer": "Grace White",
                 "email": "grace.white@example.com",
                 "service": "Zen Meditation Session",
@@ -1028,6 +1132,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Benjamin Young",
                 "email": "benjamin.young@example.com",
                 "service": "Aromatherapy Massage",
@@ -1037,6 +1142,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Victoria Martinez",
                 "email": "victoria.martinez@example.com",
                 "service": "Zen Meditation Session",
@@ -1046,6 +1152,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Daniel Hernandez",
                 "email": "daniel.hernandez@example.com",
                 "service": "Aromatherapy Massage",
@@ -1055,6 +1162,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Scarlett Moore",
                 "email": "scarlett.moore@example.com",
                 "service": "Zen Meditation Session",
@@ -1064,6 +1172,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "David Lee",
                 "email": "david.lee@example.com",
                 "service": "Aromatherapy Massage",
@@ -1073,6 +1182,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Ella Wilson",
                 "email": "ella.wilson@example.com",
                 "service": "Zen Meditation Session",
@@ -1082,6 +1192,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Logan Thomas",
                 "email": "logan.thomas@example.com",
                 "service": "Aromatherapy Massage",
@@ -1091,6 +1202,7 @@ export const storeAppointments = [
                 "amount": "$110.00"
             },
             {
+                "id": 1,
                 "customer": "Mia Anderson",
                 "email": "mia.anderson@example.com",
                 "service": "Zen Meditation Session",
@@ -1100,6 +1212,7 @@ export const storeAppointments = [
                 "amount": "$70.00"
             },
             {
+                "id": 1,
                 "customer": "Alexander Robinson",
                 "email": "alexander.robinson@example.com",
                 "service": "Aromatherapy Massage",
@@ -1112,24 +1225,7 @@ export const storeAppointments = [
     }
 ];
 
-export const appointments = {
-    "tabs": [
-        { "value": "week", "label": "Week" },
-        { "value": "month", "label": "Month" },
-        { "value": "year", "label": "Year" }
-    ],
-    "dropdownItems": [
-        { "label": "Scheduled", "checked": true },
-        { "label": "Canceled" },
-        { "label": "Completed" }
-    ],
-    "cardTitle": "Appointments",
-    "cardDescription": "Recent appointments from your store.",
-    "headers": ["Customer", "Type", "Status", "Date", "Duration", "Amount"],
-    "rows": []
-}
-
-export const serviceCategories = {
+export const serviceCategories: ServiceCategoriesProps = {
     "categories": [
         {
             "id": 1,
@@ -1185,40 +1281,3 @@ export const serviceCategories = {
         }
     ]
 };
-
-export const newEmployeeMock = {
-    "nick_name": "Johnny",
-    "first_name": "John",
-    "last_name": "Doe",
-    "e_mail": "john.doe@example.com",
-    "phone": "+1234567890"
-};
-
-export const updateEmployeeMock = {
-    "id": 9,
-    "nick_name": "Johnny",
-    "first_name": "John",
-    "last_name": "Doe",
-    "e_mail": "john.doe@example.com",
-    "phone": "+1234567890"
-};
-
-export const newServiceMock = {
-    "service-name": "Haircut",
-    "description": "A standard haircut.",
-    "duration": 30,
-    "price": 25.00,
-    "categories": [1],
-    "sub-categories": [1, 2]
-};
-
-export const updateServiceMock = {
-    "store-service-id": 4,
-    "service-name": "Haircut",
-    "description": "A standard haircut.",
-    "duration": 30,
-    "price": 27.00,
-    "categories": [1],
-    "sub-categories": [1, 2, 3]
-};
-

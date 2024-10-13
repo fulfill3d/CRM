@@ -6,8 +6,8 @@ import { loginRequest } from "@/msal/config";
 export const LogIn = ({ isMobile }: { isMobile?: boolean }) => {
     const { instance } = useMsal();
 
-    const handleLogin = () => {
-        instance.loginRedirect(loginRequest);
+    const handleLogin = async () => {
+        await instance.loginRedirect(loginRequest);
     };
 
     return (

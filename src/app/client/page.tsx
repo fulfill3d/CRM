@@ -2,17 +2,23 @@
 
 import MsalAuthProvider from "@/msal/auth-provider";
 import React from "react";
-import ClientView1 from "@/components/client/client-view-1";
+import ClientView from "@/components/client/client-view";
+import {useAcquireClientAccessToken} from "@/hooks/common/use-acquire-access-token";
 
-export default function Client(){
+const Client = () => {
+
+    useAcquireClientAccessToken();
+
     return(
         <MsalAuthProvider>
             <MsalAuthProvider.Public>
-                <ClientView1 isProtected={false}/>
+                <ClientView />
             </MsalAuthProvider.Public>
             <MsalAuthProvider.Protected>
-                <ClientView1 isProtected={true}/>
+                <ClientView />
             </MsalAuthProvider.Protected>
         </MsalAuthProvider>
     )
 }
+
+export default Client;
