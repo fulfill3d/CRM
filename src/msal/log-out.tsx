@@ -8,7 +8,7 @@ export const LogOut = ({ isMobile }: { isMobile?: boolean }) => {
     const { instance } = useMsal();
     const dispatch = useDispatch();
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         const logoutRequest = {
             account: instance.getActiveAccount(),
         };
@@ -17,7 +17,7 @@ export const LogOut = ({ isMobile }: { isMobile?: boolean }) => {
         dispatch(clearAccessToken());
 
         // Perform MSAL logout (this will redirect the user)
-        instance.logout(logoutRequest);
+        await instance.logout(logoutRequest);
     };
 
     return (
