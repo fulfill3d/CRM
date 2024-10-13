@@ -1,7 +1,7 @@
 'use client'
 
 import MsalAuthProvider from "@/msal/auth-provider";
-import StoreDetail from "@/components/business/store/store-detail";
+import StoreDetailView from "@/components/business/store/store-detail-view";
 import React from "react";
 import {useAcquireBusinessAccessToken} from "@/hooks/common/use-acquire-access-token";
 
@@ -16,10 +16,10 @@ const Store: React.FC<StoreProps> = (props) => {
     return(
         <MsalAuthProvider>
             <MsalAuthProvider.Public>
-                <StoreDetail storeId={parseInt(props.params.id)}/>
+                <StoreDetailView storeId={parseInt(props.params.id)}/>
             </MsalAuthProvider.Public>
             <MsalAuthProvider.Protected>
-                <StoreDetail storeId={parseInt(props.params.id)}/>
+                <StoreDetailView storeId={parseInt(props.params.id)}/>
             </MsalAuthProvider.Protected>
         </MsalAuthProvider>
     );

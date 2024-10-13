@@ -30,6 +30,10 @@ const BusinessView: React.FC<BusinessViewProps> = () => {
                     showToast("Successful!", 'success');
                     setRefresh(prev => !prev);
                 }}
+                onError={(err) => {
+                    setShowAddStoreDialog(false);
+                    showToast(err, 'error');
+                }}
                 onCancel={() => setShowAddStoreDialog(false)}
                 onNoAccessToken={() => {
                     setShowAddStoreDialog(false);

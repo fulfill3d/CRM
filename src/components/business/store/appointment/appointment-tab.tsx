@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AppointmentGrid from "@/components/business/store/appointment/appointment-grid";
 import {useBusinessAccessToken} from "@/msal/use-access-token";
-import {useStoreAppointments} from "@/hooks/business/use-store-appointments";
+import {useGetStoreAppointments} from "@/hooks/business/use-get-store-appointments";
 
 export enum AppointmentStatus {
     SCHEDULED = 1,

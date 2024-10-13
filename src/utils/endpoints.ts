@@ -26,10 +26,10 @@ export const BusinessManagement = {
         Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/store/delete/${storeId}`,
         Method: HttpMethod.DELETE,
     }) as Endpoint,
-    GetEmployees: {
-        Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/employee/get-all`,
+    GetEmployees: (storeId: number): Endpoint => ({
+        Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/employee/${storeId}/get-all`,
         Method: HttpMethod.GET,
-    } as Endpoint,
+    }) as Endpoint,
     AddEmployee: (storeId: number): Endpoint => ({
         Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/employee/add/${storeId}`,
         Method: HttpMethod.POST,
@@ -56,11 +56,11 @@ export const BusinessManagement = {
     }) as Endpoint,
     EditService: {
         Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/service/edit`,
-        Method: HttpMethod.GET,
+        Method: HttpMethod.PATCH,
     } as Endpoint,
     DeleteService: (serviceId: number): Endpoint => ({
         Uri: `${process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL}/api/service/${serviceId}/delete`,
-        Method: HttpMethod.POST,
+        Method: HttpMethod.DELETE,
     }) as Endpoint,
 };
 

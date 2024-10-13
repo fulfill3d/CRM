@@ -1,81 +1,89 @@
 import React, { useState, useEffect } from 'react';
 import Toast from "@/components/common/toast";
-
-interface EmployeeProps {
-    nick_name: string;
-    first_name: string;
-    last_name: string;
-    e_mail: string;
-    phone: string;
-}
+import {Employee} from "@/models/business/models";
+import {useToast} from "@/hooks/common/use-toast";
 
 interface AddEmployeeDialogProps {
     isOpen: boolean;
-    onAdd: (employee: EmployeeProps) => void;
+    onAdd: (employee: Employee) => void;
     onCancel: () => void;
-    initialValues?: EmployeeProps; // Optional prop to prefill values for editing
+    initialValues?: Employee; // Optional prop to prefill values for editing
     isEditMode?: boolean; // Optional prop to indicate if it's an edit action
 }
 
-const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, onCancel, initialValues, isEditMode }) => {
-    const [showToast, setShowToast] = useState(false);
-    const emptyState = {
-        nick_name: '',
-        first_name: '',
-        last_name: '',
-        e_mail: '',
-        phone: ''
-    }
-    const [formData, setFormData] = useState<EmployeeProps>(emptyState);
+const emptyState = new Employee(
+    null,
+    '',
+    '',
+    '',
+    '',
+    '',
+    null,
+    null
+);
+
+const formFields = [
+    { label: 'Nick Name', name: 'nick_name', type: 'text' },
+    { label: 'First Name', name: 'first_name', type: 'text' },
+    { label: 'Last Name', name: 'last_name', type: 'text' },
+    { label: 'Email', name: 'e_mail', type: 'email' },
+    { label: 'Phone', name: 'phone', type: 'tel' }
+]
+
+const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = (props) => {
+    const [employee, setEmployee] = useState<Employee>(emptyState);
+    const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
 
     // Populate the form with initial values when editing
     useEffect(() => {
-        if (initialValues) {
-            setFormData(initialValues);
+        if (props.initialValues) {
+            setEmployee(props.initialValues);
         }
-    }, [initialValues]);
-
-    const handleCancelClick = () => {
-        onCancel();
-        setFormData(emptyState);
-    }
+    }, [props.initialValues]);
 
     // Generic handler for all input fields
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+
+        // Create a new Employee instance with updated fields
+        setEmployee(prevState => new Employee(
+            prevState.id,
+            name === 'nick_name' ? value : prevState.nick_name,
+            name === 'first_name' ? value : prevState.first_name,
+            name === 'last_name' ? value : prevState.last_name,
+            name === 'e_mail' ? value : prevState.e_mail,
+            name === 'phone' ? value : prevState.phone,
+            prevState.created_at,
+            prevState.updated_at
+        ));
     };
 
     // Handle form submission
     const handleAddEmployee = () => {
-        const { nick_name, first_name, last_name, e_mail, phone } = formData;
-        if (nick_name && first_name && last_name && e_mail && phone) {
-            onAdd(formData);
+        const err = employee.validate()
+        if (err.length == 0) {
+            props.onAdd(employee);
         }
         else {
-            setShowToast(true);
+            showToast(err.join(' '), 'error');
         }
     };
 
-    if (!isOpen) return null;
+    const handleCancelClick = () => {
+        props.onCancel();
+        setEmployee(emptyState);
+    }
+
+    if (!props.isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
                 <h2 className="text-xl font-semibold mb-4">
-                    {isEditMode ? 'Edit Employee' : 'Add New Employee'}
+                    {props.isEditMode ? 'Edit Employee' : 'Add New Employee'}
                 </h2>
                 <form className="space-y-4">
-                    {[
-                        { label: 'Nick Name', name: 'nick_name', type: 'text' },
-                        { label: 'First Name', name: 'first_name', type: 'text' },
-                        { label: 'Last Name', name: 'last_name', type: 'text' },
-                        { label: 'Email', name: 'e_mail', type: 'email' },
-                        { label: 'Phone', name: 'phone', type: 'tel' }
-                    ].map((field) => (
+                    {formFields.map((field) => (
                         <div key={field.name}>
                             <label className="block text-sm font-medium text-gray-700">
                                 {field.label}
@@ -83,7 +91,7 @@ const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, on
                             <input
                                 type={field.type}
                                 name={field.name}
-                                value={formData[field.name as keyof EmployeeProps]} // Access formData dynamically
+                                value={employee[field.name as keyof Employee] as string} // Access formData dynamically
                                 onChange={handleInputChange}
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             />
@@ -101,17 +109,16 @@ const AddEmployeeDialog: React.FC<AddEmployeeDialogProps> = ({ isOpen, onAdd, on
                         className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
                         onClick={handleAddEmployee}
                     >
-                        {isEditMode ? 'Update Employee' : 'Add Employee'}
+                        {props.isEditMode ? 'Update Employee' : 'Add Employee'}
                     </button>
                 </div>
             </div>
 
-            {showToast && (
+            {isToastActive && (
                 <Toast
-                    message="Input values cannot be empty!"
-                    type="error"
-                    duration={3000}
-                    onClose={() => setShowToast(false)}
+                    message={toastMessage}
+                    type={toastType}
+                    onClose={toggleToastActive}
                 />
             )}
         </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { ServiceDetail } from "@/models/client/models";
 import {useClientService} from "@/hooks/client/use-client-service";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";

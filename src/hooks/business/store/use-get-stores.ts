@@ -4,7 +4,7 @@ import {getStores} from "@/services/business/store-service";
 import {mockStores} from "@/mock/business/mock-data";
 import {useBusinessAccessToken} from "@/msal/use-access-token";
 
-export const useStores = (refresh: boolean) => {
+export const useGetStores = (refresh: boolean) => {
     const accessToken = useBusinessAccessToken();
     const [stores, setStores] = useState<Store[]>([]);
     const [loading, setLoading] = useState(false);

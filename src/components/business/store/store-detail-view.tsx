@@ -5,11 +5,11 @@ import AppointmentTab from "@/components/business/store/appointment/appointment-
 import CustomTabs from "@/components/common/custom-tabs";
 import StoreTab from "@/components/business/store/store-tab";
 
-interface StoreDetailProps {
+interface StoreDetailViewProps {
     storeId: number;
 }
 
-const StoreDetail: React.FC<StoreDetailProps> = ({ storeId }) => {
+const StoreDetailView: React.FC<StoreDetailViewProps> = ({ storeId }) => {
 
     const tabsData = [
         {
@@ -41,4 +41,4 @@ const StoreDetail: React.FC<StoreDetailProps> = ({ storeId }) => {
     );
 };
 
-export default StoreDetail;
+export default StoreDetailView;

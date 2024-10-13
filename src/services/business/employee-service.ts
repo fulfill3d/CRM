@@ -5,19 +5,56 @@ import {Employee} from "@/models/business/models";
 export const getEmployees = async (storeId: number, accessToken: string) => {
     try {
         const response = await httpRequest(
-            BusinessManagement.GetStore(storeId).Uri,
-            BusinessManagement.GetStore(storeId).Method,
+            BusinessManagement.GetEmployees(storeId).Uri,
+            BusinessManagement.GetEmployees(storeId).Method,
             null,
             undefined,
             accessToken
         );
-        return response.employees.map((employee: any) => new Employee(employee));
+        return response.map((employee: any) => Employee.fromJSON(employee));
     } catch (error) {
         throw new Error("Failed to fetch store details.");
-    }}
+    }
+}
 
-export const addEmployee = async (accessToken: string) => {}
+export const addEmployee = async (employee: Employee, storeId: number, accessToken: string) => {
+    try {
+        await httpRequest(
+            BusinessManagement.AddEmployee(storeId).Uri,
+            BusinessManagement.AddEmployee(storeId).Method,
+            employee,
+            undefined,
+            accessToken
+        );
+    } catch (error) {
+        throw new Error("Failed to fetch store details.");
+    }
+}
 
-export const editEmployee = async (accessToken: string) => {}
+export const editEmployee = async (employee: Employee, accessToken: string) => {
+    try {
+        await httpRequest(
+            BusinessManagement.EditEmployee.Uri,
+            BusinessManagement.EditEmployee.Method,
+            employee,
+            undefined,
+            accessToken
+        );
+    } catch (error) {
+        throw new Error("Failed to fetch store details.");
+    }
+}
 
-export const deleteEmployee = async (accessToken: string) => {}
+export const deleteEmployee = async (employeeId: number, accessToken: string) => {
+    try {
+        await httpRequest(
+            BusinessManagement.DeleteEmployee(employeeId).Uri,
+            BusinessManagement.DeleteEmployee(employeeId).Method,
+            null,
+            undefined,
+            accessToken
+        );
+    } catch (error) {
+        throw new Error("Failed to fetch store details.");
+    }
+}

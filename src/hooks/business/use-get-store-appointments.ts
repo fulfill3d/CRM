@@ -3,7 +3,7 @@ import { getStoreAppointments } from "@/services/business/appointment-service";
 import { mockStoreAppointments } from "@/mock/business/mock-data";
 import {AppointmentProps} from "@/components/business/store/appointment/appointment-tab";
 
-export const useStoreAppointments = (storeId: number, accessToken: string | null) => {
+export const useGetStoreAppointments = (storeId: number, accessToken: string | null) => {
     const [storeAppointments, setStoreAppointments] = useState<AppointmentProps[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

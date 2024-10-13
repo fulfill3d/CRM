@@ -4,7 +4,7 @@ import { mockStores } from "@/mock/business/mock-data";
 import {getEmployees} from "@/services/business/employee-service";
 import {useBusinessAccessToken} from "@/msal/use-access-token";
 
-export const useStoreEmployees = (storeId: number) => {
+export const useGetStoreEmployees = (storeId: number, refresh: boolean) => {
     const accessToken = useBusinessAccessToken();
     const [employees, setEmployees] = useState<Employee[] >([]);
     const [loading, setLoading] = useState(false);
@@ -20,9 +20,9 @@ export const useStoreEmployees = (storeId: number) => {
         } else {
             // For non-protected mode, fetch from mock data
             const currentStore = mockStores.find(store => store.id === storeId);
-            if (currentStore) setEmployees(currentStore.employees.map((employee: any) => new Employee(employee)));
+            if (currentStore) setEmployees(currentStore.employees.map((employee: any) => Employee.fromJSON(employee)));
         }
-    }, [accessToken, storeId]);
+    }, [accessToken, storeId, refresh]);
 
     return { employees, loading, error };
 };

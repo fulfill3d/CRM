@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Store } from "@/models/business/models";
 import { getStoreById } from "@/services/business/store-service";
 import { mockStores } from "@/mock/business/mock-data";
+import {useBusinessAccessToken} from "@/msal/use-access-token";
 
-export const useStoreDetails = (storeId: number, accessToken: string | null) => {
+export const useGetStoreDetails = (storeId: number) => {
+    const accessToken = useBusinessAccessToken();
     const [store, setStore] = useState<Store | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

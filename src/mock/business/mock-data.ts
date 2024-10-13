@@ -1,4 +1,3 @@
-import {StoreService} from "@/models/business/models";
 import {StoreAppointmentProps} from "@/components/business/store/appointment/appointment-tab";
 import {ServiceCategoriesProps} from "@/components/business/store/service/service-categories-dropdown";
 
@@ -445,7 +444,7 @@ export const mockStores = [
         }
     ];
 
-export const mockStoreServices: StoreService[] = [
+export const mockStoreServices = [
     {
         "store_id": 1,
         "services": [
@@ -459,19 +458,19 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            },
-                            {
-                                "id": 2,
-                                "name": "Therapeutic",
-                                "description": "Therapeutic massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Therapeutic",
+                        "description": "Therapeutic massages"
                     }
                 ]
             },
@@ -485,19 +484,19 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 2,
                         "name": "Skincare",
-                        "description": "Skincare category",
-                        "sub_categories": [
-                            {
-                                "id": 3,
-                                "name": "Anti-Aging",
-                                "description": "Anti-aging treatments"
-                            },
-                            {
-                                "id": 4,
-                                "name": "Cleansing",
-                                "description": "Cleansing treatments"
-                            }
-                        ]
+                        "description": "Skincare category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 3,
+                        "name": "Anti-Aging",
+                        "description": "Anti-aging treatments"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Cleansing",
+                        "description": "Cleansing treatments"
                     }
                 ]
             }
@@ -516,14 +515,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 2,
-                                "name": "Therapeutic",
-                                "description": "Therapeutic massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 2,
+                        "name": "Therapeutic",
+                        "description": "Therapeutic massages"
                     }
                 ]
             },
@@ -537,14 +536,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
                     }
                 ]
             }
@@ -563,14 +562,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 3,
                         "name": "Wellness",
-                        "description": "Wellness category",
-                        "sub_categories": [
-                            {
-                                "id": 5,
-                                "name": "Foot Care",
-                                "description": "Foot care services"
-                            }
-                        ]
+                        "description": "Wellness category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 5,
+                        "name": "Foot Care",
+                        "description": "Foot care services"
                     }
                 ]
             },
@@ -584,14 +583,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
                     }
                 ]
             }
@@ -610,19 +609,19 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 4,
                         "name": "Hair",
-                        "description": "Hair category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Women",
-                                "description": "Services provided to women"
-                            },
-                            {
-                                "id": 2,
-                                "name": "Men",
-                                "description": "Services provided to men"
-                            }
-                        ]
+                        "description": "Hair category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Women",
+                        "description": "Services provided to women"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Men",
+                        "description": "Services provided to men"
                     }
                 ]
             },
@@ -636,14 +635,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 4,
                         "name": "Hair",
-                        "description": "Hair category",
-                        "sub_categories": [
-                            {
-                                "id": 3,
-                                "name": "Color",
-                                "description": "Hair coloring services"
-                            }
-                        ]
+                        "description": "Hair category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 3,
+                        "name": "Color",
+                        "description": "Hair coloring services"
                     }
                 ]
             }
@@ -662,14 +661,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 5,
                         "name": "Mindfulness",
-                        "description": "Mindfulness category",
-                        "sub_categories": [
-                            {
-                                "id": 6,
-                                "name": "Meditation",
-                                "description": "Meditation services"
-                            }
-                        ]
+                        "description": "Mindfulness category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 6,
+                        "name": "Meditation",
+                        "description": "Meditation services"
                     }
                 ]
             },
@@ -683,14 +682,14 @@ export const mockStoreServices: StoreService[] = [
                     {
                         "id": 1,
                         "name": "Massage",
-                        "description": "Massage category",
-                        "sub_categories": [
-                            {
-                                "id": 1,
-                                "name": "Relaxation",
-                                "description": "Relaxation massages"
-                            }
-                        ]
+                        "description": "Massage category"
+                    }
+                ],
+                "sub_categories": [
+                    {
+                        "id": 1,
+                        "name": "Relaxation",
+                        "description": "Relaxation massages"
                     }
                 ]
             }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Toast from "@/components/common/toast";
 import {Address} from "@/models/business/models";
 import {useToast} from "@/hooks/common/use-toast";
@@ -9,36 +9,49 @@ interface AddAddressDialogProps {
     onBack: () => void;
 }
 
-const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSubmit, onBack }) => {
-    const initialState = {
-        location_name: "",
-        first_name: "",
-        last_name: "",
-        street1: "",
-        street2: "",
-        city: "",
-        state: "",
-        country: "",
-        zip_code: "",
-    }
+const initialState: Address = new Address(
+    null,
+    "",
+    "",
+    "",
+    "",
+    null,
+    "",
+    "",
+    "",
+    ""
+);
 
+const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSubmit, onBack }) => {
     const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
-    const [addressData, setAddressData] = useState(initialState);
+    const [address, setAddress] = useState<Address>(initialState);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setAddressData({
-            ...addressData,
-            [name]: value,
+
+        // Create a new instance of Address with updated fields
+        setAddress(prevState => {
+            return new Address(
+                prevState.id,
+                name === 'location_name' ? value : prevState.location_name,
+                name === 'first_name' ? value : prevState.first_name,
+                name === 'last_name' ? value : prevState.last_name,
+                name === 'street1' ? value : prevState.street_1,
+                name === 'street2' ? value : prevState.street_2,
+                name === 'city' ? value : prevState.city,
+                name === 'state' ? value : prevState.state,
+                name === 'country' ? value : prevState.country,
+                name === 'zip_code' ? value : prevState.zip_code
+            );
         });
     };
 
+
     const handleAddAddress = () => {
-        const address = Address.fromJSON(addressData);
         const err = address.validate();
         if (err.length == 0){
             onAddressSubmit(address);
-            setAddressData(initialState);
+            setAddress(initialState);
         }else {
             showToast(err.join(' '), 'error');
         }
@@ -55,7 +68,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="location_name"
-                        value={addressData.location_name}
+                        value={address.location_name}
                         onChange={handleInputChange}
                         placeholder="Location Name"
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -63,7 +76,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="first_name"
-                        value={addressData.first_name}
+                        value={address.first_name}
                         onChange={handleInputChange}
                         placeholder="First Name"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -71,7 +84,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="last_name"
-                        value={addressData.last_name}
+                        value={address.last_name}
                         onChange={handleInputChange}
                         placeholder="Last Name"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -79,7 +92,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="street1"
-                        value={addressData.street1}
+                        value={address.street_1}
                         onChange={handleInputChange}
                         placeholder="Street 1"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -87,7 +100,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="street2"
-                        value={addressData.street2}
+                        value={address.street_2 || ""}
                         onChange={handleInputChange}
                         placeholder="Street 2 (Optional)"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -95,7 +108,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="city"
-                        value={addressData.city}
+                        value={address.city}
                         onChange={handleInputChange}
                         placeholder="City"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -103,7 +116,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="state"
-                        value={addressData.state}
+                        value={address.state}
                         onChange={handleInputChange}
                         placeholder="State"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -111,7 +124,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="country"
-                        value={addressData.country}
+                        value={address.country}
                         onChange={handleInputChange}
                         placeholder="Country"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -119,7 +132,7 @@ const AddAddressDialog: React.FC<AddAddressDialogProps> = ({ isOpen, onAddressSu
                     <input
                         type="text"
                         name="zip_code"
-                        value={addressData.zip_code}
+                        value={address.zip_code}
                         onChange={handleInputChange}
                         placeholder="Zip Code"
                         className="mt-2 block w-full p-2 border border-gray-300 rounded-md shadow-sm"

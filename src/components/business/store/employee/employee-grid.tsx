@@ -2,12 +2,13 @@ import EmployeeCard from "@/components/business/store/employee/employee-card";
 import NoEmployeeCard from "@/components/business/store/employee/no-employee-card";
 import AddCard from "@/components/common/add-card";
 import React from "react";
-import {useStoreEmployees} from "@/hooks/business/use-store-employees";
+import {useGetStoreEmployees} from "@/hooks/business/employee/use-get-store-employees";
 import {Employee} from "@/models/business/models";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";
 
 interface EmployeeGridProps {
+    refresh: boolean;
     storeId: number;
     triggerDelete: (id: number) => void;
     triggerEdit: (employee: Employee) => void;
@@ -15,8 +16,7 @@ interface EmployeeGridProps {
 }
 
 const EmployeeGrid: React.FC<EmployeeGridProps> = (props) => {
-
-    const { employees, loading, error } = useStoreEmployees(props.storeId);
+    const { employees, loading, error } = useGetStoreEmployees(props.storeId, props.refresh);
 
     if (loading) return <Loading />;
 
@@ -29,8 +29,8 @@ const EmployeeGrid: React.FC<EmployeeGridProps> = (props) => {
                     employees.map(employee => (
                         <EmployeeCard
                             key={employee.id}
-                            {...employee}
-                            onDelete={() => props.triggerDelete(employee.id)} // Trigger
+                            employee={employee}
+                            onDelete={() => {if (employee.id) props.triggerDelete(employee.id)}} // Trigger
                             onEdit={() => props.triggerEdit(employee)} // Trigger edit dialog
                         />
                     ))

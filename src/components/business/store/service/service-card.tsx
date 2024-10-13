@@ -1,6 +1,5 @@
 import React from "react";
 import {Service} from "@/models/business/models";
-import CategoryAccordion from "@/components/business/store/service/category-accordion";
 
 const ServiceCard: React.FC<{ service: Service, onDelete: () => void, onEdit: () => void }> = ({ service, onDelete, onEdit }) => {
     return (
@@ -22,11 +21,22 @@ const ServiceCard: React.FC<{ service: Service, onDelete: () => void, onEdit: ()
             {/* Categories Accordion */}
             <div className="mt-4">
                 <h3 className="text-lg font-semibold text-gray-700">Categories</h3>
-                <ul className="mt-2 space-y-4">
-                    {service.categories.map((category) => (
-                        <CategoryAccordion key={category.id} category={category} />
-                    ))}
-                </ul>
+                <p className="text-gray-600 truncate">
+                    {Array.from(
+                        new Set(service.categories.map((cat) => cat.id)) // Create a Set of unique category ids
+                    ).map(
+                        (uniqueId) => service.categories.find((cat) => cat.id === uniqueId)?.name // Find the category name by unique id
+                    ).join(', ')}
+                </p>
+
+                <h3 className="text-lg font-semibold text-gray-700">SubCategories</h3>
+                <p className="text-gray-600 truncate">
+                    {Array.from(
+                        new Set(service.sub_categories.map((sub) => sub.id)) // Create a Set of unique sub-category ids
+                    ).map(
+                        (uniqueId) => service.sub_categories.find((sub) => sub.id === uniqueId)?.name // Find the category name by unique id
+                    ).join(', ')}
+                </p>
             </div>
 
             {/* Buttons */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Toast from "@/components/common/toast";
 import AddAddressDialog from "@/components/business/add-address-dialog";
-import {useAddStore} from "@/hooks/business/use-add-store";
+import {useAddStore} from "@/hooks/business/store/use-add-store";
 import {Store} from "@/models/business/models";
 import {useToast} from "@/hooks/common/use-toast";
 
@@ -9,26 +9,45 @@ interface AddStoreDialogProps {
     isOpen: boolean;
     onCancel: () => void;
     onSuccess: () => void;
+    onError: (message: string) => void,
     onNoAccessToken: () => void;
 }
 
+const initialState: Store = new Store(
+    null, // id
+    "", // name
+    "", // description
+    null, // address
+    "", // created_at
+    "", // updated_at
+    null, // location
+    [] // employees
+);
+
 const AddStoreDialog: React.FC<AddStoreDialogProps> = (props) => {
-    const initialState = { name: "", description: "" };
-    const { handleAddStore, loading, error } = useAddStore();
+    const { handleAddStore } = useAddStore();
     const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
-    const [storeData, setStoreData] = useState(initialState);
     const [isAddressDialogOpen, setIsAddressDialogOpen] = useState(false);
+    const [store, setStore] = useState<Store>(initialState);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setStoreData({
-            ...storeData,
-            [name]: value,
-        });
+
+        // Create a new Store instance with updated fields
+        setStore(prevState => new Store(
+            prevState.id,
+            name === 'name' ? value : prevState.name,
+            name === 'description' ? value : prevState.description,
+            prevState.address,
+            prevState.created_at,
+            prevState.updated_at,
+            prevState.location,
+            prevState.employees
+        ));
     };
 
     const handleProceedToAddress = () => {
-        if (storeData.name && storeData.description) {
+        if (store.name && store.description) {
             setIsAddressDialogOpen(true); // Open the address dialog
         } else {
             showToast("Input values cannot be empty!", 'error'); // Show toast if input is invalid
@@ -51,7 +70,7 @@ const AddStoreDialog: React.FC<AddStoreDialogProps> = (props) => {
                             <input
                                 type="text"
                                 name="name"
-                                value={storeData.name}
+                                value={store.name}
                                 onChange={handleInputChange}
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             />
@@ -62,7 +81,7 @@ const AddStoreDialog: React.FC<AddStoreDialogProps> = (props) => {
                             <label className="block text-sm font-medium text-gray-700">Store Description</label>
                             <textarea
                                 name="description"
-                                value={storeData.description}
+                                value={store.description}
                                 onChange={handleInputChange}
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm resize-none"
                                 rows={3}
@@ -75,7 +94,7 @@ const AddStoreDialog: React.FC<AddStoreDialogProps> = (props) => {
                         <button
                             className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
                             onClick={() => {
-                                setStoreData(initialState);
+                                setStore(initialState);
                                 props.onCancel();
                             }}
                         >
@@ -104,11 +123,10 @@ const AddStoreDialog: React.FC<AddStoreDialogProps> = (props) => {
                 <AddAddressDialog
                     isOpen={isAddressDialogOpen}
                     onAddressSubmit={async (address) => {
-                        const store = Store.fromJSON(storeData);
                         store.address = address;
-                        await handleAddStore(store, props.onSuccess, props.onNoAccessToken)
+                        await handleAddStore(store, props.onSuccess, props.onError, props.onNoAccessToken)
                         setIsAddressDialogOpen(false);
-                        setStoreData(initialState);
+                        setStore(initialState);
                     }}
                     onBack={() => {
                         setIsAddressDialogOpen(false);

@@ -1,25 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import { Category, SubCategory, Service } from "@/models/business/models";
+import {ServiceRequest} from "@/models/business/models";
 import { serviceCategories } from "@/mock/business/mock-data";
-import Toast from "@/components/common/toast"; // Assuming you have serviceCategories available
+import Toast from "@/components/common/toast";
+import {useToast} from "@/hooks/common/use-toast"; // Assuming you have serviceCategories available
 
 interface AddServiceDialogProps {
     isOpen: boolean;
-    onAdd: (newService: Omit<Service, 'id'>) => void;
+    onAdd: (service: ServiceRequest) => void;
     onCancel: () => void;
-    initialValues?: Service; // Optional prop to prefill values for editing
+    initialValues?: ServiceRequest; // Optional prop to prefill values for editing
     isEditMode?: boolean; // Optional prop to indicate if it's an edit action
 }
 
+const emptyState = new ServiceRequest(
+    null,
+    0,
+    0,
+    '',
+    '',
+    [],
+    []
+)
+
 const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCancel, initialValues, isEditMode }) => {
-    const [showToast, setShowToast] = useState(false);
-    const emptyState = new Service({
-        name: '',
-        description: '',
-        duration: '',
-        price: ''
-    });
-    const [formData, setFormData] = useState(emptyState);
+    const [service, setService] = useState(emptyState);
+    const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
     const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
     const [selectedSubCategories, setSelectedSubCategories] = useState<number[]>([]);
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
@@ -27,17 +32,40 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
     // Populate the form with initial values when editing
     useEffect(() => {
         if (initialValues) {
-            setFormData(initialValues);
+            setService(initialValues);
+            setSelectedCategories(initialValues.categories)
+            setSelectedSubCategories(initialValues.sub_categories)
         }
     }, [initialValues]);
+
+    useEffect(() => {
+        const _categories = serviceCategories.categories.filter((cat) => selectedCategories.includes(cat.id));
+        const _sub_categories = serviceCategories.sub_categories.filter((sub) => selectedSubCategories.includes(sub.id));
+        const categories = _categories.map(cat => cat.id);
+        const sub_categories = _sub_categories.map(sub => sub.id);
+        setService(prevState => new ServiceRequest(
+            prevState.id,
+            prevState.duration,
+            prevState.price,
+            prevState.name,
+            prevState.description,
+            categories,
+            sub_categories
+        ));
+    }, [selectedCategories, selectedSubCategories]);
 
     // Handle input changes for text fields
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        setService(prevState => new ServiceRequest(
+            prevState.id,
+            name === 'duration' ? parseInt(value) : prevState.duration,
+            name === 'price' ? parseInt(value) : prevState.price,
+            name === 'name' ? value : prevState.name,
+            name === 'description' ? value : prevState.description,
+            prevState.categories,
+            prevState.sub_categories
+        ));
     };
 
     // Handle category selection
@@ -56,40 +84,22 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
 
     // Handle form submission
     const handleAddService = () => {
-        const { name, description, duration, price } = formData;
-        if (name && description && duration && price && selectedCategories.length > 0) {
-            const newService: Omit<Service, 'id'> = {
-                name,
-                description,
-                duration: duration,
-                price: price,
-                categories: selectedCategories.map(
-                    (catId) =>
-                        new Category({
-                            id: catId,
-                            name: serviceCategories.categories.find((cat) => cat.id === catId)?.name || '',
-                            description: serviceCategories.categories.find((cat) => cat.id === catId)?.description || '',
-                            sub_categories: selectedSubCategories.map((subId) =>
-                                new SubCategory({
-                                    id: subId,
-                                    name: serviceCategories.sub_categories.find((sub) => sub.id === subId)?.name || '',
-                                    description: serviceCategories.sub_categories.find((sub) => sub.id === subId)?.description || ''
-                                })
-                            )
-                        })
-                )
-            };
-            onAdd(newService);
-            setFormData(emptyState);
+        const err = service.validate();
+
+        if (err.length == 0) {
+            onAdd(service);
+            setService(emptyState);
+            setSelectedCategories([]);
+            setSelectedSubCategories([]);
         }
         else {
-            setShowToast(true);
+            showToast(err.join(' '), 'error');
         }
     };
 
     const handleCancelClick = () => {
         onCancel();
-        setFormData(emptyState);
+        setService(emptyState);
     }
 
     if (!isOpen) return null;
@@ -105,7 +115,7 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
                         <input
                             type="text"
                             name="name"
-                            value={formData.name}
+                            value={service.name}
                             onChange={handleInputChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                         />
@@ -116,7 +126,7 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
                         <label className="block text-sm font-medium text-gray-700">Description</label>
                         <textarea
                             name="description"
-                            value={formData.description}
+                            value={service.description}
                             onChange={handleInputChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm resize-none" // Disable resizing
                             rows={3} // Fixed size for 3 rows
@@ -130,7 +140,7 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
                             <input
                                 type="number"
                                 name="price"
-                                value={formData.price}
+                                value={service.price}
                                 onChange={handleInputChange}
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             />
@@ -140,7 +150,7 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
                             <input
                                 type="number"
                                 name="duration"
-                                value={formData.duration}
+                                value={service.duration}
                                 onChange={handleInputChange}
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                             />
@@ -215,12 +225,11 @@ const AddServiceDialog: React.FC<AddServiceDialogProps> = ({ isOpen, onAdd, onCa
                 </div>
             </div>
 
-            {showToast && (
+            {isToastActive && (
                 <Toast
-                    message="Input values cannot be empty!"
-                    type="error"
-                    duration={3000}
-                    onClose={() => setShowToast(false)}
+                    message={toastMessage}
+                    type={toastType}
+                    onClose={toggleToastActive}
                 />
             )}
         </div>

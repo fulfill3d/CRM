@@ -4,7 +4,7 @@ import {AppointmentStatus} from "@/components/business/store/appointment/appoint
 import Toast from "@/components/common/toast";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
 import {useBusinessAccessToken} from "@/msal/use-access-token";
-import {useStoreAppointments} from "@/hooks/business/use-store-appointments";
+import {useGetStoreAppointments} from "@/hooks/business/use-get-store-appointments";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";
 
@@ -15,7 +15,7 @@ interface AppointmentListProps {
 
 const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStatus }) => {
     const accessToken = useBusinessAccessToken();
-    const { storeAppointments, loading, error } = useStoreAppointments(storeId, accessToken);
+    const { storeAppointments, loading, error } = useGetStoreAppointments(storeId, accessToken);
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
     const [showToast, setShowToast] = useState(false);
     const [targetAppointmentId, setTargetAppointmentId] = useState<number | null>(null); // Track employee to delete

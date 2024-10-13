@@ -2,7 +2,7 @@ import StoreCard from "@/components/business/store-card";
 import NoStoreCard from "@/components/business/no-store-card";
 import AddCard from "@/components/common/add-card";
 import React from "react";
-import {useStores} from "@/hooks/business/use-stores";
+import {useGetStores} from "@/hooks/business/store/use-get-stores";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";
 
@@ -13,16 +13,16 @@ interface StoreGridProps{
 }
 
 const StoreGrid: React.FC<StoreGridProps> = (props) => {
-    const { stores, loading, error } = useStores(props.refresh);
+    const { stores, loading, error } = useGetStores(props.refresh);
 
     if (loading) return <Loading />;
     if (error) return <ErrorPage error={new Error(error)} reset={() => window.location.reload()} />;
 
     return (
         <div className="container mx-auto mt-10">
-            <text className="text-xl font-semibold">
+            <h2 className="text-xl font-semibold">
                 Select a store to manage
-            </text>
+            </h2>
             <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 mt-4 mb-8 md:mb-0">
                 {stores.length > 0 ? (
                     stores.map((store) => (
@@ -31,7 +31,7 @@ const StoreGrid: React.FC<StoreGridProps> = (props) => {
                             key={store.id}
                             title={store.name}
                             content={store.description}
-                            created_at={store.created_at}
+                            created_at={store.created_at || ""}
                         />
                     ))
                 ) : (

@@ -49,4 +49,16 @@ export const addStore = async (newStore: Store, accessToken: string) => {
 
 export const editStore = async (accessToken: string) => {}
 
-export const deleteStore = async (accessToken: string) => {}
+export const deleteStore = async (storeId: number, accessToken: string) => {
+    try {
+        await httpRequest(
+            BusinessManagement.DeleteStore(storeId).Uri,
+            BusinessManagement.DeleteStore(storeId).Method,
+            null,
+            undefined,
+            accessToken
+        );
+    } catch (error) {
+        throw new Error("Failed to delete store.");
+    }
+}
