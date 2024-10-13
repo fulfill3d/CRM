@@ -17,3 +17,15 @@ export const loginRequest = {
         process.env.NEXT_PUBLIC_B2C_SCOPE_OFFLINE_ACCESS || "",
     ]
 };
+
+export const businessScopes = [
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_WRITE || ""
+]
+
+export const clientScopes = [
+    process.env.NEXT_PUBLIC_B2C_SCOPE_CLIENT_SERVICE_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_CLIENT_SERVICE_WRITE || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_CLIENT_APPOINTMENT_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_CLIENT_APPOINTMENT_WRITE || ""
+]

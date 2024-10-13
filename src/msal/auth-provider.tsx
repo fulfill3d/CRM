@@ -1,8 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, ReactNode, ReactElement } from "react";
+import React, { createContext, useEffect, ReactNode, ReactElement } from "react";
 import { initializeMsal, msalInstance } from "@/msal/msal";
-import {AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate} from "@azure/msal-react";
+import { AuthenticatedTemplate, MsalProvider, UnauthenticatedTemplate } from "@azure/msal-react";
 
 interface MsalAuthProviderProps {
     children: ReactNode;
@@ -39,14 +39,12 @@ export default function MsalAuthProvider({ children }: MsalAuthProviderProps) {
 
     return (
         <MsalProvider instance={msalInstance}>
-            <MsalAuthContext.Provider value={{ publicContent, protectedContent }}>
-                <AuthenticatedTemplate>
-                    {protectedContent}
-                </AuthenticatedTemplate>
-                <UnauthenticatedTemplate>
-                    {publicContent}
-                </UnauthenticatedTemplate>
-            </MsalAuthContext.Provider>
+            <AuthenticatedTemplate>
+                {protectedContent}
+            </AuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+                {publicContent}
+            </UnauthenticatedTemplate>
         </MsalProvider>
     );
 }

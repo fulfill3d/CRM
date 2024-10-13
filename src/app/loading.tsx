@@ -29,7 +29,9 @@ const Loading: React.FC = () => {
                 </svg>
 
                 {/* Loading Text */}
-                <p className="mt-4 text-lg font-medium text-gray-700">Loading, please wait...</p>
+                <p className="mt-4 text-lg font-medium text-gray-700">
+                    Loading, please wait...
+                </p>
             </div>
         </div>
     );

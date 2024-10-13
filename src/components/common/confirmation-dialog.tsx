@@ -12,7 +12,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ isOpen, title, 
     if (!isOpen) return null; // Do not render if not open
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[500]">
             <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
                 <h2 className="text-xl font-semibold mb-4">{title}</h2>
                 <p className="mb-6">{message}</p>

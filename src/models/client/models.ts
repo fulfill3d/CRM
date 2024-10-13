@@ -153,3 +153,22 @@ export class ServiceDetail {
         this.store_employees = data.store_employees.map((employee: any) => new Employee(employee));
     }
 }
+
+export class AppointmentRequest {
+    appointment_id: number | null;
+    store_service_id: number | null;
+    start_date: string;
+    note: string;
+
+    constructor(
+        start_date: string,
+        note: string,
+        appointment_id: number | null,
+        store_service_id: number | null,
+    ) {
+        this.appointment_id = appointment_id;
+        this.store_service_id = store_service_id;
+        this.start_date = start_date;
+        this.note = note;
+    }
+}
