@@ -5,19 +5,14 @@ import DeleteConfirmationModal from "@/components/business/store/service/delete-
 import Toast from "@/components/common/toast";
 import {useToast} from "@/hooks/common/use-toast";
 import { ServiceRequest} from "@/models/business/models";
-import {useDeleteStoreService} from "@/hooks/business/service/use-delete-store-service";
 import AddServiceDialog from "@/components/business/store/service/add-service-dialog";
-import {useAddStoreService} from "@/hooks/business/service/use-add-store-service";
-import {useEditStoreService} from "@/hooks/business/service/use-edit-store-service";
+import {useManageService} from "@/hooks/business/service/use-manage-service";
 
 interface ServiceTabProps{
     storeId: number;
 }
 
 const ServiceTab: React.FC<ServiceTabProps> = ({storeId}) => {
-    const { handleAddStoreService } = useAddStoreService();
-    const { handleEditStoreService } = useEditStoreService();
-    const { handleDeleteStoreService } = useDeleteStoreService();
     const [refresh, setRefresh] = useState<boolean>(false);
     const [showAddServiceDialog, setShowAddServiceDialog] = useState(false);
     const [selectedService, setSelectedService] = useState<ServiceRequest | null>(null);
@@ -25,6 +20,14 @@ const ServiceTab: React.FC<ServiceTabProps> = ({storeId}) => {
     const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [targetServiceId, setTargetServiceId] = useState<number | null>(null);
+
+    const { handleSaveService, confirmDelete } = useManageService(
+        isEditMode,
+        storeId,
+        targetServiceId,
+        showToast,
+        setRefresh
+    );
 
     const openAddDialog = () => {
         setShowAddServiceDialog(true);
@@ -42,33 +45,6 @@ const ServiceTab: React.FC<ServiceTabProps> = ({storeId}) => {
         setIsEditMode(false);
     };
 
-    const handleSaveService = async (service: ServiceRequest) => {
-        if (isEditMode){
-            await handleEditStoreService(
-                service,
-                () => {
-                    closeDialog();
-                    showToast("Service edited successfully!", "success");
-                    setRefresh(prev => !prev);
-                },
-                (err) => showToast(`Error editing service: ${err}`, "error"),
-                () => showToast("You must be logged in to edit a service", "info")
-            );
-        }else {
-            await handleAddStoreService(
-                service,
-                storeId,
-                () => {
-                    closeDialog();
-                    showToast("Service added successfully!", "success");
-                    setRefresh(prev => !prev);
-                },
-                (err) => showToast(`Error adding service: ${err}`, "error"),
-                () => showToast("You must be logged in to add a service", "info")
-            );
-        }
-    }
-
     /// DELETE
 
     const triggerDelete = (id: number) => {
@@ -76,22 +52,7 @@ const ServiceTab: React.FC<ServiceTabProps> = ({storeId}) => {
         setShowDeleteDialog(true);
     };
 
-    const confirmDelete = async () => {
-        setShowDeleteDialog(false);
-        if (targetServiceId){
-            await handleDeleteStoreService(
-                targetServiceId,
-                () => {
-                    showToast("Service deleted successfully!", "success");
-                    setRefresh(prev => !prev);
-                },
-                (err) => showToast(`Error deleting service: ${err}`, "error"),
-                () => showToast("You must be logged in to delete a service", "info"));
-        }
-        setTargetServiceId(null);
-    };
-
-    const cancelDelete = () => {
+    const closeConfirmation = () => {
         setShowDeleteDialog(false);
         setTargetServiceId(null);
     };
@@ -115,14 +76,20 @@ const ServiceTab: React.FC<ServiceTabProps> = ({storeId}) => {
                 isOpen={showAddServiceDialog}
                 initialValues={selectedService || undefined}
                 isEditMode={isEditMode}
-                onAdd={handleSaveService}
+                onAdd={async (service)=>{
+                    await handleSaveService(service);
+                    closeDialog();
+                }}
                 onCancel={closeDialog}
             />
 
             <DeleteConfirmationModal
                 isOpen={showDeleteDialog}
-                onConfirm={confirmDelete}
-                onCancel={cancelDelete}
+                onConfirm={async ()=>{
+                    await confirmDelete();
+                    closeConfirmation();
+                }}
+                onCancel={closeConfirmation}
             />
 
             {isToastActive && (

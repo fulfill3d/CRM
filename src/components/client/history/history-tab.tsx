@@ -10,9 +10,9 @@ const HistoryTab: React.FC<HistoryTabProps> = () => {
 
     return (
         <div className="w-full h-full">
-            <text className="container mx-auto text-xl font-semibold">
+            <h2 className="container mx-auto text-xl font-semibold">
                 Your appointment history
-            </text>
+            </h2>
 
             {/* AppointmentFilter to Filter by Status */}
             <AppointmentFilter

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Service} from "@/models/business/models";
+import {Service} from "@/models/client/models";
 
 interface ServiceProps {
     service: Service;
