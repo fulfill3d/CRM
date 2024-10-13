@@ -23,7 +23,7 @@ const PortalInfoDialog: React.FC<PortalInfoDialogProps> = ({ onClose }) => {
                         For simplicity in this demo, both portals are combined into a single app using the same Azure B2C tenant.
                     </p>
                     <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-4">
-                        If you remain anonymous without signing in, mock data will be used for demonstration purposes. Any changes, such as managing stores, employees, or appointments, will be temporarily stored in the app’s state (via Redux) and will not persist if the page is reloaded or closed.
+                        If you remain anonymous without signing in, mock data will be used for demonstration purposes.
                     </p>
                     <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-4">
                         By signing up or logging in, you gain full access to the CRM system and can interact with the real backend services.
