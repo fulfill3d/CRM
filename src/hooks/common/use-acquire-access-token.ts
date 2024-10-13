@@ -26,9 +26,9 @@ export const useAcquireBusinessAccessToken = () => {
                     dispatch(setBusinessAccessToken(response.accessToken));
                 }
             })
-            .catch((error) => {
+            .catch(async (error) => {
                 if (error instanceof InteractionRequiredAuthError) {
-                    instance.acquireTokenRedirect(request);
+                    await instance.acquireTokenRedirect(request);
                 } else {
                     console.error("Error acquiring access token:", error);
                 }
@@ -58,9 +58,9 @@ export const useAcquireClientAccessToken = () => {
                     dispatch(setClientAccessToken(response.accessToken));
                 }
             })
-            .catch((error) => {
+            .catch(async (error) => {
                 if (error instanceof InteractionRequiredAuthError) {
-                    instance.acquireTokenRedirect(request);
+                    await instance.acquireTokenRedirect(request);
                 } else {
                     console.error("Error acquiring access token:", error);
                 }
