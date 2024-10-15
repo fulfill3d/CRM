@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { getStoreAppointments } from "@/services/business/appointment-service";
 import { mockStoreAppointments } from "@/mock/business/mock-data";
-import {AppointmentProps} from "@/components/business/store/appointment/appointment-tab";
+import {useBusinessAccessToken} from "@/msal/use-access-token";
+import {Appointment} from "@/models/business/models";
 
-export const useGetStoreAppointments = (storeId: number, accessToken: string | null) => {
-    const [storeAppointments, setStoreAppointments] = useState<AppointmentProps[]>([]);
+export const useGetStoreAppointments = (storeId: number, refresh: boolean) => {
+    const accessToken = useBusinessAccessToken();
+    const [storeAppointments, setStoreAppointments] = useState<Appointment[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (accessToken && storeId) {
             setLoading(true);
-            getStoreAppointments(storeId)
-                .then(fetchedAppointments => {
-                    if (fetchedAppointments) setStoreAppointments(fetchedAppointments.appointments)
-                })
+            getStoreAppointments(storeId, accessToken)
+                .then(appointments => setStoreAppointments(appointments))
                 .catch(err => setError(err.message))
                 .finally(() => setLoading(false));
         } else {
@@ -22,7 +22,7 @@ export const useGetStoreAppointments = (storeId: number, accessToken: string | n
             const currentAppointments = mockStoreAppointments.find(app => app.store_id === storeId);
             if (currentAppointments) setStoreAppointments(currentAppointments.appointments);
         }
-    }, [accessToken, storeId]);
+    }, [accessToken, storeId, refresh]);
 
     return { storeAppointments, loading, error };
 };

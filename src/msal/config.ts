@@ -19,8 +19,14 @@ export const loginRequest = {
 };
 
 export const businessScopes = [
-    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_READ || "",
-    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_MANAGEMENT_WRITE || ""
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_APPOINTMENT_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_APPOINTMENT_WRITE || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_EMPLOYEE_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_EMPLOYEE_WRITE || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_SERVICE_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_SERVICE_WRITE || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_STORE_READ || "",
+    process.env.NEXT_PUBLIC_B2C_SCOPE_BUSINESS_STORE_WRITE || "",
 ]
 
 export const clientScopes = [

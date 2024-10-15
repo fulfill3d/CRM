@@ -1,5 +1,5 @@
 import {httpRequest} from "@/services/common/http-request";
-import {BusinessManagement} from "@/utils/endpoints";
+import {BusinessService} from "@/utils/endpoints";
 import {Service, ServiceRequest} from "@/models/business/models";
 
 export const getServiceCategories = async (accessToken: string) => {}
@@ -7,8 +7,8 @@ export const getServiceCategories = async (accessToken: string) => {}
 export const getStoreServices = async (storeId: number, accessToken: string) => {
     try {
         const response = await httpRequest(
-            BusinessManagement.GetServices(storeId).Uri,
-            BusinessManagement.GetServices(storeId).Method,
+            BusinessService.GetServices(storeId).Uri,
+            BusinessService.GetServices(storeId).Method,
             null,
             undefined,
             accessToken
@@ -22,8 +22,8 @@ export const getStoreServices = async (storeId: number, accessToken: string) => 
 export const addStoreService = async (service: ServiceRequest, storeId: number, accessToken: string) => {
     try {
         await httpRequest(
-            BusinessManagement.AddServices(storeId).Uri,
-            BusinessManagement.AddServices(storeId).Method,
+            BusinessService.AddServices(storeId).Uri,
+            BusinessService.AddServices(storeId).Method,
             service,
             undefined,
             accessToken
@@ -36,8 +36,8 @@ export const addStoreService = async (service: ServiceRequest, storeId: number, 
 export const editStoreService = async (service: ServiceRequest, accessToken: string) => {
     try {
         await httpRequest(
-            BusinessManagement.EditService.Uri,
-            BusinessManagement.EditService.Method,
+            BusinessService.EditService.Uri,
+            BusinessService.EditService.Method,
             service,
             undefined,
             accessToken
@@ -50,8 +50,8 @@ export const editStoreService = async (service: ServiceRequest, accessToken: str
 export const deleteStoreService = async (serviceId: number, accessToken: string) => {
     try {
         await httpRequest(
-            BusinessManagement.DeleteService(serviceId).Uri,
-            BusinessManagement.DeleteService(serviceId).Method,
+            BusinessService.DeleteService(serviceId).Uri,
+            BusinessService.DeleteService(serviceId).Method,
             null,
             undefined,
             accessToken

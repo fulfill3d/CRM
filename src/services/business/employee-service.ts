@@ -1,12 +1,12 @@
 import {httpRequest} from "@/services/common/http-request";
-import {BusinessManagement} from "@/utils/endpoints";
+import {BusinessEmployee} from "@/utils/endpoints";
 import {Employee} from "@/models/business/models";
 
 export const getEmployees = async (storeId: number, accessToken: string) => {
     try {
         const response = await httpRequest(
-            BusinessManagement.GetEmployees(storeId).Uri,
-            BusinessManagement.GetEmployees(storeId).Method,
+            BusinessEmployee.GetEmployees(storeId).Uri,
+            BusinessEmployee.GetEmployees(storeId).Method,
             null,
             undefined,
             accessToken
@@ -20,8 +20,8 @@ export const getEmployees = async (storeId: number, accessToken: string) => {
 export const addEmployee = async (employee: Employee, storeId: number, accessToken: string) => {
     try {
         await httpRequest(
-            BusinessManagement.AddEmployee(storeId).Uri,
-            BusinessManagement.AddEmployee(storeId).Method,
+            BusinessEmployee.AddEmployee(storeId).Uri,
+            BusinessEmployee.AddEmployee(storeId).Method,
             employee,
             undefined,
             accessToken
@@ -34,8 +34,8 @@ export const addEmployee = async (employee: Employee, storeId: number, accessTok
 export const editEmployee = async (employee: Employee, accessToken: string) => {
     try {
         await httpRequest(
-            BusinessManagement.EditEmployee.Uri,
-            BusinessManagement.EditEmployee.Method,
+            BusinessEmployee.EditEmployee.Uri,
+            BusinessEmployee.EditEmployee.Method,
             employee,
             undefined,
             accessToken
@@ -48,8 +48,8 @@ export const editEmployee = async (employee: Employee, accessToken: string) => {
 export const deleteEmployee = async (employeeId: number, accessToken: string) => {
     try {
         await httpRequest(
-            BusinessManagement.DeleteEmployee(employeeId).Uri,
-            BusinessManagement.DeleteEmployee(employeeId).Method,
+            BusinessEmployee.DeleteEmployee(employeeId).Uri,
+            BusinessEmployee.DeleteEmployee(employeeId).Method,
             null,
             undefined,
             accessToken

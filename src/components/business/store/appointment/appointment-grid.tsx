@@ -3,11 +3,11 @@ import AppointmentCard from "@/components/business/store/appointment/appointment
 import {AppointmentStatus} from "@/components/business/store/appointment/appointment-tab";
 import Toast from "@/components/common/toast";
 import ConfirmationDialog from "@/components/common/confirmation-dialog";
-import {useBusinessAccessToken} from "@/msal/use-access-token";
-import {useGetStoreAppointments} from "@/hooks/business/use-get-store-appointments";
+import {useGetStoreAppointments} from "@/hooks/business/appointment/use-get-store-appointments";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";
 import {useToast} from "@/hooks/common/use-toast";
+import {useDeleteStoreAppointment} from "@/hooks/business/appointment/use-delete-store-appointment";
 
 interface AppointmentListProps {
     selectedStatus: AppointmentStatus | 'all';
@@ -15,8 +15,9 @@ interface AppointmentListProps {
 }
 
 const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStatus }) => {
-    const accessToken = useBusinessAccessToken();
-    const { storeAppointments, loading, error } = useGetStoreAppointments(storeId, accessToken);
+    const [refresh, setRefresh] = useState<boolean>(false);
+    const { storeAppointments, loading, error } = useGetStoreAppointments(storeId, refresh);
+    const { handleCancelStoreAppointment } = useDeleteStoreAppointment();
     const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
     const { isToastActive, toastMessage, toastType, showToast, toggleToastActive } = useToast();
     const [targetAppointmentId, setTargetAppointmentId] = useState<number | null>(null); // Track employee to delete
@@ -24,7 +25,7 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
     // Filter appointments based on selected status
     const filteredAppointments = () => {
         if (selectedStatus === 'all') return storeAppointments;
-        return storeAppointments.filter(appointment => appointment.status === selectedStatus) || [];
+        return storeAppointments.filter(appointment => appointment.appointment_status === selectedStatus) || [];
     };
 
     const handleAppointmentCancel = (id: number) => {
@@ -32,16 +33,26 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
         setShowDialog(true);
     }
 
-    const handleDelete = () => {
-        if (accessToken){
-            setShowDialog(false);
-        }else {
-            setShowDialog(false);
-            showToast('You have to login to cancel an appointment!', 'info');
+    const handleDelete = async () => {
+        if (targetAppointmentId){
+            try {
+                await handleCancelStoreAppointment(
+                    targetAppointmentId,
+                    () => {
+                        resetConfirm();
+                        showToast("Appointment canceled successfully!", "success");
+                        setRefresh(prev => !prev);
+                    },
+                    (err) => showToast(`Error canceling appointment: ${err}`, "error"),
+                    () => showToast("You must be logged in to cancel an appointment", "info")
+                );
+            } catch (err) {
+                showToast(`Unexpected error: ${err}`, "error");
+            }
         }
     };
 
-    const handleCancel = () => {
+    const resetConfirm = () => {
         setShowDialog(false); // Close dialog without deleting
         setTargetAppointmentId(null); // Reset the target employee ID
     };
@@ -52,7 +63,7 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredAppointments().length > 0 ? (
+            {filteredAppointments().length !== 0 ? (
                 filteredAppointments().map((appointment, index) => (
                     <AppointmentCard
                         key={index}
@@ -72,7 +83,7 @@ const AppointmentGrid: React.FC<AppointmentListProps> = ({ storeId, selectedStat
                 title="Confirm Deletion"
                 message="Are you sure you want to delete this appointment?"
                 onConfirm={handleDelete}
-                onCancel={handleCancel}
+                onCancel={resetConfirm}
             />
 
             {isToastActive && (

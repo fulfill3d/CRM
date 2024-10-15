@@ -6,7 +6,10 @@ export const usePingAzureFunctions = () => {
             try {
                 const endpoints = [
                     process.env.NEXT_PUBLIC_BUSINESS_IDENTITY_BASE_URL || '',
-                    process.env.NEXT_PUBLIC_BUSINESS_MANAGEMENT_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_BUSINESS_APPOINTMENT_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_BUSINESS_EMPLOYEE_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_BUSINESS_STORE_BASE_URL || '',
+                    process.env.NEXT_PUBLIC_BUSINESS_SERVICE_BASE_URL || '',
                     process.env.NEXT_PUBLIC_CLIENT_APPOINTMENT_BASE_URL || '',
                     process.env.NEXT_PUBLIC_CLIENT_IDENTITY_BASE_URL || '',
                     process.env.NEXT_PUBLIC_CLIENT_SERVICE_BASE_URL || ''
