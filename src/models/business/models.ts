@@ -1,3 +1,71 @@
+export class AppointmentService {
+    service_id: number;
+    service_duration: number;
+    service_price: number;
+    service_currency: string;
+    service_name: string;
+    service_description: string;
+
+    constructor(
+        service_id: number,
+        service_duration: number,
+        service_price: number,
+        service_currency: string,
+        service_name: string,
+        service_description: string
+    ) {
+        this.service_id = service_id;
+        this.service_duration = service_duration;
+        this.service_price = service_price;
+        this.service_currency = service_currency;
+        this.service_name = service_name;
+        this.service_description = service_description;
+    }
+
+    static fromJSON(data: any): AppointmentService {
+        return new AppointmentService(
+            data.service_id,
+            data.service_duration,
+            data.service_price,
+            data.service_currency,
+            data.service_name,
+            data.service_description
+        );
+    }
+}
+
+export class Appointment {
+    appointment_id: number;
+    appointment_notes: string;
+    appointment_start_date: string;
+    appointment_status: number;
+    appointment_service: AppointmentService;
+
+    constructor(
+        appointment_id: number,
+        appointment_notes: string,
+        appointment_start_date: string,
+        appointment_status: number,
+        appointment_service: AppointmentService
+    ) {
+        this.appointment_id = appointment_id;
+        this.appointment_notes = appointment_notes;
+        this.appointment_start_date = appointment_start_date;
+        this.appointment_status = appointment_status;
+        this.appointment_service = appointment_service;
+    }
+
+    static fromJSON(data: any): Appointment {
+        return new Appointment(
+            data.appointment_id,
+            data.appointment_notes,
+            data.appointment_start_date,
+            data.appointment_status,
+            AppointmentService.fromJSON(data.appointment_service)
+        );
+    }
+}
+
 export class Location {
     location_id: number;
     address_id: number;

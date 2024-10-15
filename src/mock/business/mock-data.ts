@@ -1,5 +1,5 @@
-import {StoreAppointmentProps} from "@/components/business/store/appointment/appointment-tab";
 import {ServiceCategoriesProps} from "@/components/business/store/service/service-categories-dropdown";
+import {Appointment, AppointmentService} from "@/models/business/models";
 
 export const mockStores = [
         {
@@ -697,533 +697,734 @@ export const mockStoreServices = [
     }
 ];
 
-export const mockStoreAppointments: StoreAppointmentProps[] = [
+export const mockStoreAppointments = [
     {
         "store_id": 1,
         "appointments": [
-            {
-                "id": 1,
-                "customer": "Liam Johnson",
-                "email": "liam.johnson@example.com",
-                "service": "Full Body Massage",
-                "status": 3, // Completed
-                "date": "2023-06-23 14:30",
-                "duration": "60 min",
-                "amount": "$100.00"
-            },
-            {
-                "id": 1,
-                "customer": "Emma Wilson",
-                "email": "emma.wilson@example.com",
-                "service": "Facial Treatment",
-                "status": 1, // Scheduled
-                "date": "2023-07-02 10:00",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Oliver Brown",
-                "email": "oliver.brown@example.com",
-                "service": "Full Body Massage",
-                "status": 2, // Canceled
-                "date": "2023-07-05 16:00",
-                "duration": "60 min",
-                "amount": "$100.00"
-            },
-            {
-                "id": 1,
-                "customer": "Ava Davis",
-                "email": "ava.davis@example.com",
-                "service": "Facial Treatment",
-                "status": 3, // Completed
-                "date": "2023-07-07 11:30",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Ethan Martinez",
-                "email": "ethan.martinez@example.com",
-                "service": "Full Body Massage",
-                "status": 1, // Scheduled
-                "date": "2023-07-10 14:00",
-                "duration": "60 min",
-                "amount": "$100.00"
-            },
-            {
-                "id": 1,
-                "customer": "Sophia Garcia",
-                "email": "sophia.garcia@example.com",
-                "service": "Facial Treatment",
-                "status": 3, // Completed
-                "date": "2023-07-15 09:30",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Noah Lee",
-                "email": "noah.lee@example.com",
-                "service": "Full Body Massage",
-                "status": 3, // Completed
-                "date": "2023-07-18 12:00",
-                "duration": "60 min",
-                "amount": "$100.00"
-            },
-            {
-                "id": 1,
-                "customer": "Mia Thomas",
-                "email": "mia.thomas@example.com",
-                "service": "Facial Treatment",
-                "status": 1, // Scheduled
-                "date": "2023-07-20 15:30",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "James Hernandez",
-                "email": "james.hernandez@example.com",
-                "service": "Full Body Massage",
-                "status": 2, // Canceled
-                "date": "2023-07-22 14:00",
-                "duration": "60 min",
-                "amount": "$100.00"
-            },
-            {
-                "id": 1,
-                "customer": "Amelia Lewis",
-                "email": "amelia.lewis@example.com",
-                "service": "Facial Treatment",
-                "status": 3, // Completed
-                "date": "2023-07-25 13:00",
-                "duration": "30 min",
-                "amount": "$50.00"
-            }
+            new Appointment(
+                1, // appointment_id
+                "", // appointment_notes
+                "2023-06-23 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    1, // service_id
+                    60, // service_duration (min)
+                    100, // service_price
+                    "USD", // service_currency
+                    "Full Body Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                2, // appointment_id
+                "", // appointment_notes
+                "2023-07-02 10:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    2, // service_id
+                    30, // service_duration (min)
+                    50, // service_price
+                    "USD", // service_currency
+                    "Facial Treatment", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                3, // appointment_id
+                "", // appointment_notes
+                "2023-07-05 16:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    3, // service_id
+                    60, // service_duration (min)
+                    100, // service_price
+                    "USD", // service_currency
+                    "Full Body Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                4, // appointment_id
+                "", // appointment_notes
+                "2023-07-07 11:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    4, // service_id
+                    30, // service_duration (min)
+                    50, // service_price
+                    "USD", // service_currency
+                    "Facial Treatment", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                5, // appointment_id
+                "", // appointment_notes
+                "2023-07-10 14:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    5, // service_id
+                    60, // service_duration (min)
+                    100, // service_price
+                    "USD", // service_currency
+                    "Full Body Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                6, // appointment_id
+                "", // appointment_notes
+                "2023-07-15 09:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    6, // service_id
+                    30, // service_duration (min)
+                    50, // service_price
+                    "USD", // service_currency
+                    "Facial Treatment", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                7, // appointment_id
+                "", // appointment_notes
+                "2023-07-18 12:00", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    7, // service_id
+                    60, // service_duration (min)
+                    100, // service_price
+                    "USD", // service_currency
+                    "Full Body Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                8, // appointment_id
+                "", // appointment_notes
+                "2023-07-20 15:30", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    8, // service_id
+                    30, // service_duration (min)
+                    50, // service_price
+                    "USD", // service_currency
+                    "Facial Treatment", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                9, // appointment_id
+                "", // appointment_notes
+                "2023-07-22 14:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    9, // service_id
+                    60, // service_duration (min)
+                    100, // service_price
+                    "USD", // service_currency
+                    "Full Body Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                10, // appointment_id
+                "", // appointment_notes
+                "2023-07-25 13:00", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    10, // service_id
+                    30, // service_duration (min)
+                    50, // service_price
+                    "USD", // service_currency
+                    "Facial Treatment", // service_name
+                    "" // service_description
+                )
+            )
         ]
     },
     {
         "store_id": 2,
         "appointments": [
-            {
-                "id": 1,
-                "customer": "Lucas Martinez",
-                "email": "lucas.martinez@example.com",
-                "service": "Deep Tissue Massage",
-                "status": 3, // Completed
-                "date": "2023-06-20 10:00",
-                "duration": "45 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Isabella Rodriguez",
-                "email": "isabella.rodriguez@example.com",
-                "service": "Hot Stone Massage",
-                "status": 1, // Scheduled
-                "date": "2023-06-25 12:00",
-                "duration": "60 min",
-                "amount": "$120.00"
-            },
-            {
-                "id": 1,
-                "customer": "Mason Walker",
-                "email": "mason.walker@example.com",
-                "service": "Deep Tissue Massage",
-                "status": 2, // Canceled
-                "date": "2023-06-30 15:00",
-                "duration": "45 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Harper Hall",
-                "email": "harper.hall@example.com",
-                "service": "Hot Stone Massage",
-                "status": 3, // Completed
-                "date": "2023-07-03 14:30",
-                "duration": "60 min",
-                "amount": "$120.00"
-            },
-            {
-                "id": 1,
-                "customer": "Elijah Scott",
-                "email": "elijah.scott@example.com",
-                "service": "Deep Tissue Massage",
-                "status": 1, // Scheduled
-                "date": "2023-07-05 11:00",
-                "duration": "45 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Emily Young",
-                "email": "emily.young@example.com",
-                "service": "Hot Stone Massage",
-                "status": 3, // Completed
-                "date": "2023-07-08 09:30",
-                "duration": "60 min",
-                "amount": "$120.00"
-            },
-            {
-                "id": 1,
-                "customer": "Jackson King",
-                "email": "jackson.king@example.com",
-                "service": "Deep Tissue Massage",
-                "status": 3, // Completed
-                "date": "2023-07-10 14:30",
-                "duration": "45 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Avery Wright",
-                "email": "avery.wright@example.com",
-                "service": "Hot Stone Massage",
-                "status": 1, // Scheduled
-                "date": "2023-07-12 13:00",
-                "duration": "60 min",
-                "amount": "$120.00"
-            },
-            {
-                "id": 1,
-                "customer": "Aiden Baker",
-                "email": "aiden.baker@example.com",
-                "service": "Deep Tissue Massage",
-                "status": 2, // Canceled
-                "date": "2023-07-15 16:00",
-                "duration": "45 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Scarlett Harris",
-                "email": "scarlett.harris@example.com",
-                "service": "Hot Stone Massage",
-                "status": 3, // Completed
-                "date": "2023-07-18 10:30",
-                "duration": "60 min",
-                "amount": "$120.00"
-            }
+            new Appointment(
+                11, // appointment_id
+                "", // appointment_notes
+                "2023-06-20 10:00", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    11, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                12, // appointment_id
+                "", // appointment_notes
+                "2023-06-25 12:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    12, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                13, // appointment_id
+                "", // appointment_notes
+                "2023-06-30 15:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    13, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                14, // appointment_id
+                "", // appointment_notes
+                "2023-07-03 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    14, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                15, // appointment_id
+                "", // appointment_notes
+                "2023-07-05 11:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    15, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                16, // appointment_id
+                "", // appointment_notes
+                "2023-07-08 09:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    16, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                17, // appointment_id
+                "", // appointment_notes
+                "2023-07-10 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    17, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                18, // appointment_id
+                "", // appointment_notes
+                "2023-07-12 13:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    18, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                19, // appointment_id
+                "", // appointment_notes
+                "2023-07-15 16:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    19, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                20, // appointment_id
+                "", // appointment_notes
+                "2023-07-18 10:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    20, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            )
         ]
     },
     {
         "store_id": 3,
         "appointments": [
-            {
-                "id": 1,
-                "customer": "William Robinson",
-                "email": "william.robinson@example.com",
-                "service": "Reflexology",
-                "status": 3, // Completed
-                "date": "2023-06-19 14:00",
-                "duration": "30 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Mia Clark",
-                "email": "mia.clark@example.com",
-                "service": "Couples Massage",
-                "status": 1, // Scheduled
-                "date": "2023-06-22 11:30",
-                "duration": "90 min",
-                "amount": "$150.00"
-            },
-            {
-                "id": 1,
-                "customer": "James Lewis",
-                "email": "james.lewis@example.com",
-                "service": "Reflexology",
-                "status": 2, // Canceled
-                "date": "2023-06-24 10:00",
-                "duration": "30 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Sophia Perez",
-                "email": "sophia.perez@example.com",
-                "service": "Couples Massage",
-                "status": 3, // Completed
-                "date": "2023-06-26 16:00",
-                "duration": "90 min",
-                "amount": "$150.00"
-            },
-            {
-                "id": 1,
-                "customer": "Benjamin Martinez",
-                "email": "benjamin.martinez@example.com",
-                "service": "Reflexology",
-                "status": 1, // Scheduled
-                "date": "2023-06-28 13:30",
-                "duration": "30 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Charlotte Walker",
-                "email": "charlotte.walker@example.com",
-                "service": "Couples Massage",
-                "status": 3, // Completed
-                "date": "2023-07-01 09:00",
-                "duration": "90 min",
-                "amount": "$150.00"
-            },
-            {
-                "id": 1,
-                "customer": "Henry Hall",
-                "email": "henry.hall@example.com",
-                "service": "Reflexology",
-                "status": 3, // Completed
-                "date": "2023-07-04 15:00",
-                "duration": "30 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Amelia King",
-                "email": "amelia.king@example.com",
-                "service": "Couples Massage",
-                "status": 1, // Scheduled
-                "date": "2023-07-07 12:30",
-                "duration": "90 min",
-                "amount": "$150.00"
-            },
-            {
-                "id": 1,
-                "customer": "Liam Robinson",
-                "email": "liam.robinson@example.com",
-                "service": "Reflexology",
-                "status": 2, // Canceled
-                "date": "2023-07-10 14:30",
-                "duration": "30 min",
-                "amount": "$75.00"
-            },
-            {
-                "id": 1,
-                "customer": "Ava Clark",
-                "email": "ava.clark@example.com",
-                "service": "Couples Massage",
-                "status": 3, // Completed
-                "date": "2023-07-13 11:00",
-                "duration": "90 min",
-                "amount": "$150.00"
-            }
+            new Appointment(
+                11, // appointment_id
+                "", // appointment_notes
+                "2023-06-20 10:00", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    11, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                12, // appointment_id
+                "", // appointment_notes
+                "2023-06-25 12:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    12, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                13, // appointment_id
+                "", // appointment_notes
+                "2023-06-30 15:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    13, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                14, // appointment_id
+                "", // appointment_notes
+                "2023-07-03 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    14, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                15, // appointment_id
+                "", // appointment_notes
+                "2023-07-05 11:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    15, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                16, // appointment_id
+                "", // appointment_notes
+                "2023-07-08 09:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    16, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                17, // appointment_id
+                "", // appointment_notes
+                "2023-07-10 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    17, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                18, // appointment_id
+                "", // appointment_notes
+                "2023-07-12 13:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    18, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                19, // appointment_id
+                "", // appointment_notes
+                "2023-07-15 16:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    19, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                20, // appointment_id
+                "", // appointment_notes
+                "2023-07-18 10:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    20, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            )
         ]
     },
     {
         "store_id": 4,
         "appointments": [
-            {
-                "id": 1,
-                "customer": "Lily Martinez",
-                "email": "lily.martinez@example.com",
-                "service": "Haircut",
-                "status": 3, // Completed
-                "date": "2023-06-20 09:30",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Lucas Harris",
-                "email": "lucas.harris@example.com",
-                "service": "Hair Coloring",
-                "status": 1, // Scheduled
-                "date": "2023-06-22 14:00",
-                "duration": "60 min",
-                "amount": "$90.00"
-            },
-            {
-                "id": 1,
-                "customer": "Evelyn White",
-                "email": "evelyn.white@example.com",
-                "service": "Haircut",
-                "status": 2, // Canceled
-                "date": "2023-06-25 13:00",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Mason Robinson",
-                "email": "mason.robinson@example.com",
-                "service": "Hair Coloring",
-                "status": 3, // Completed
-                "date": "2023-06-28 16:00",
-                "duration": "60 min",
-                "amount": "$90.00"
-            },
-            {
-                "id": 1,
-                "customer": "Ella Lewis",
-                "email": "ella.lewis@example.com",
-                "service": "Haircut",
-                "status": 1, // Scheduled
-                "date": "2023-07-01 10:30",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Jackson Walker",
-                "email": "jackson.walker@example.com",
-                "service": "Hair Coloring",
-                "status": 3, // Completed
-                "date": "2023-07-03 12:00",
-                "duration": "60 min",
-                "amount": "$90.00"
-            },
-            {
-                "id": 1,
-                "customer": "Sofia Young",
-                "email": "sofia.young@example.com",
-                "service": "Haircut",
-                "status": 3, // Completed
-                "date": "2023-07-05 14:30",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Alexander Hall",
-                "email": "alexander.hall@example.com",
-                "service": "Hair Coloring",
-                "status": 1, // Scheduled
-                "date": "2023-07-08 09:00",
-                "duration": "60 min",
-                "amount": "$90.00"
-            },
-            {
-                "id": 1,
-                "customer": "Emily Scott",
-                "email": "emily.scott@example.com",
-                "service": "Haircut",
-                "status": 2, // Canceled
-                "date": "2023-07-10 11:00",
-                "duration": "30 min",
-                "amount": "$50.00"
-            },
-            {
-                "id": 1,
-                "customer": "Henry King",
-                "email": "henry.king@example.com",
-                "service": "Hair Coloring",
-                "status": 3, // Completed
-                "date": "2023-07-12 13:30",
-                "duration": "60 min",
-                "amount": "$90.00"
-            }
+            new Appointment(
+                11, // appointment_id
+                "", // appointment_notes
+                "2023-06-20 10:00", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    11, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                12, // appointment_id
+                "", // appointment_notes
+                "2023-06-25 12:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    12, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                13, // appointment_id
+                "", // appointment_notes
+                "2023-06-30 15:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    13, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                14, // appointment_id
+                "", // appointment_notes
+                "2023-07-03 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    14, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                15, // appointment_id
+                "", // appointment_notes
+                "2023-07-05 11:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    15, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                16, // appointment_id
+                "", // appointment_notes
+                "2023-07-08 09:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    16, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                17, // appointment_id
+                "", // appointment_notes
+                "2023-07-10 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    17, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                18, // appointment_id
+                "", // appointment_notes
+                "2023-07-12 13:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    18, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                19, // appointment_id
+                "", // appointment_notes
+                "2023-07-15 16:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    19, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                20, // appointment_id
+                "", // appointment_notes
+                "2023-07-18 10:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    20, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            )
         ]
     },
     {
         "store_id": 5,
         "appointments": [
-            {
-                "id": 1,
-                "customer": "Grace White",
-                "email": "grace.white@example.com",
-                "service": "Zen Meditation Session",
-                "status": 3, // Completed
-                "date": "2023-06-21 09:00",
-                "duration": "30 min",
-                "amount": "$70.00"
-            },
-            {
-                "id": 1,
-                "customer": "Benjamin Young",
-                "email": "benjamin.young@example.com",
-                "service": "Aromatherapy Massage",
-                "status": 1, // Scheduled
-                "date": "2023-06-23 14:30",
-                "duration": "60 min",
-                "amount": "$110.00"
-            },
-            {
-                "id": 1,
-                "customer": "Victoria Martinez",
-                "email": "victoria.martinez@example.com",
-                "service": "Zen Meditation Session",
-                "status": 2, // Canceled
-                "date": "2023-06-25 10:00",
-                "duration": "30 min",
-                "amount": "$70.00"
-            },
-            {
-                "id": 1,
-                "customer": "Daniel Hernandez",
-                "email": "daniel.hernandez@example.com",
-                "service": "Aromatherapy Massage",
-                "status": 3, // Completed
-                "date": "2023-06-27 16:00",
-                "duration": "60 min",
-                "amount": "$110.00"
-            },
-            {
-                "id": 1,
-                "customer": "Scarlett Moore",
-                "email": "scarlett.moore@example.com",
-                "service": "Zen Meditation Session",
-                "status": 1, // Scheduled
-                "date": "2023-06-29 13:30",
-                "duration": "30 min",
-                "amount": "$70.00"
-            },
-            {
-                "id": 1,
-                "customer": "David Lee",
-                "email": "david.lee@example.com",
-                "service": "Aromatherapy Massage",
-                "status": 3, // Completed
-                "date": "2023-07-01 11:00",
-                "duration": "60 min",
-                "amount": "$110.00"
-            },
-            {
-                "id": 1,
-                "customer": "Ella Wilson",
-                "email": "ella.wilson@example.com",
-                "service": "Zen Meditation Session",
-                "status": 3, // Completed
-                "date": "2023-07-03 15:00",
-                "duration": "30 min",
-                "amount": "$70.00"
-            },
-            {
-                "id": 1,
-                "customer": "Logan Thomas",
-                "email": "logan.thomas@example.com",
-                "service": "Aromatherapy Massage",
-                "status": 1, // Scheduled
-                "date": "2023-07-05 09:00",
-                "duration": "60 min",
-                "amount": "$110.00"
-            },
-            {
-                "id": 1,
-                "customer": "Mia Anderson",
-                "email": "mia.anderson@example.com",
-                "service": "Zen Meditation Session",
-                "status": 2, // Canceled
-                "date": "2023-07-07 12:30",
-                "duration": "30 min",
-                "amount": "$70.00"
-            },
-            {
-                "id": 1,
-                "customer": "Alexander Robinson",
-                "email": "alexander.robinson@example.com",
-                "service": "Aromatherapy Massage",
-                "status": 3, // Completed
-                "date": "2023-07-10 14:00",
-                "duration": "60 min",
-                "amount": "$110.00"
-            }
+            new Appointment(
+                11, // appointment_id
+                "", // appointment_notes
+                "2023-06-20 10:00", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    11, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                12, // appointment_id
+                "", // appointment_notes
+                "2023-06-25 12:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    12, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                13, // appointment_id
+                "", // appointment_notes
+                "2023-06-30 15:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    13, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                14, // appointment_id
+                "", // appointment_notes
+                "2023-07-03 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    14, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                15, // appointment_id
+                "", // appointment_notes
+                "2023-07-05 11:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    15, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                16, // appointment_id
+                "", // appointment_notes
+                "2023-07-08 09:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    16, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                17, // appointment_id
+                "", // appointment_notes
+                "2023-07-10 14:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    17, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                18, // appointment_id
+                "", // appointment_notes
+                "2023-07-12 13:00", // appointment_start_date
+                1, // appointment_status (Scheduled)
+                new AppointmentService(
+                    18, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                19, // appointment_id
+                "", // appointment_notes
+                "2023-07-15 16:00", // appointment_start_date
+                2, // appointment_status (Canceled)
+                new AppointmentService(
+                    19, // service_id
+                    45, // service_duration (min)
+                    75, // service_price
+                    "USD", // service_currency
+                    "Deep Tissue Massage", // service_name
+                    "" // service_description
+                )
+            ),
+            new Appointment(
+                20, // appointment_id
+                "", // appointment_notes
+                "2023-07-18 10:30", // appointment_start_date
+                3, // appointment_status (Completed)
+                new AppointmentService(
+                    20, // service_id
+                    60, // service_duration (min)
+                    120, // service_price
+                    "USD", // service_currency
+                    "Hot Stone Massage", // service_name
+                    "" // service_description
+                )
+            )
         ]
-    }
+    },
 ];
+
 
 export const serviceCategories: ServiceCategoriesProps = {
     "categories": [

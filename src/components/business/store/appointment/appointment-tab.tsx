@@ -1,28 +1,10 @@
 import React, { useState } from "react";
 import AppointmentGrid from "@/components/business/store/appointment/appointment-grid";
-import {useBusinessAccessToken} from "@/msal/use-access-token";
-import {useGetStoreAppointments} from "@/hooks/business/use-get-store-appointments";
 
 export enum AppointmentStatus {
     SCHEDULED = 1,
     CANCELED = 2,
     COMPLETED = 3,
-}
-
-export interface AppointmentProps {
-    id: number
-    customer: string;
-    email: string;
-    service: string;
-    status: AppointmentStatus;
-    date: string;
-    duration: string;
-    amount: string;
-}
-
-export interface StoreAppointmentProps {
-    store_id: number;
-    appointments: AppointmentProps[];
 }
 
 interface AppointmentTabProps {
