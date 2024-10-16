@@ -1,8 +1,12 @@
 'use client'
 
 import React from "react";
+import {useLoadingStateMessage} from "@/hooks/common/use-loading-state-message";
 
 const Loading: React.FC = () => {
+
+    const message = useLoadingStateMessage();
+
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="flex flex-col items-center">
@@ -28,9 +32,9 @@ const Loading: React.FC = () => {
                     ></path>
                 </svg>
 
-                {/* Loading Text */}
+                {/* Animated Loading Text */}
                 <p className="mt-4 text-lg font-medium text-gray-700">
-                    Loading, please wait...
+                    {message}
                 </p>
             </div>
         </div>
