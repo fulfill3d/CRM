@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'backend/API/Business/Store/*'
+      - 'backend/Common/Services/*'
+      - 'backend/Common/Database/*'
+      - 'backend/Integrations/GoogleMapsClient/*'
+
+variables:
+  vmImageName: 'windows-latest'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/API/Business/Store/Function'
+  packageName: 'Store'
+
+steps:
+  - template: ../../../../../DevOps/ci-dotNet8-AzureFunction-template.yml
